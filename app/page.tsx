@@ -371,7 +371,7 @@ export default async function HomePage() {
                   alt="Rand Refinery gold bars and gold coins at Levant Gold & Silver"
                   fill
                   loading="eager"
-                  className="object-cover object-center rotate-90 scale-[1.45]"
+                  className="object-cover object-center -rotate-90 scale-[1.45] rounded-[2rem]"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
