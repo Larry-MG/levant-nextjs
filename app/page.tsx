@@ -365,7 +365,7 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="px-6 pt-8 pb-6 lg:px-0 lg:pl-8 lg:py-8">
-              <div className="relative h-[380px] overflow-hidden rounded-[2rem] transform-gpu">
+              <div className="relative h-[380px] [clip-path:inset(0_round_2rem)]">
                 <Image
                   src="/images/store/gold-rand-refinery.webp"
                   alt="Rand Refinery gold bars and gold coins at Levant Gold & Silver"
