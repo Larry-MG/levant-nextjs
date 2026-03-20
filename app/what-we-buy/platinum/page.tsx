@@ -4,6 +4,7 @@ import Link from 'next/link'
 import FadeIn from '@/components/ui/FadeIn'
 import SpotPriceTicker from '@/components/home/SpotPriceTicker'
 import GoldCalculator from '@/components/home/GoldCalculator'
+import StatsStrip from '@/components/what-we-buy/StatsStrip'
 
 export const metadata: Metadata = {
   title: 'Sell Platinum, Palladium & Rhodium | Best Prices in Southern California',
@@ -88,6 +89,48 @@ const steps = [
   { step: '03', title: 'Get Paid On the Spot', body: 'Accept the offer and receive payment immediately — cash, check, wire, Zelle, or CashApp. Large transactions handled securely.' },
 ]
 
+const rareMetals = [
+  {
+    name: 'Platinum',
+    accent: '#C0C0E0',
+    accentBorder: '#C0C0E0',
+    description: 'Rings, coins, bullion bars, industrial platinum. We pay for exact purity via XRF.',
+    image: '/images/products/platinum-bar.png',
+    gradient: null,
+  },
+  {
+    name: 'Palladium',
+    accent: '#C0B8D8',
+    accentBorder: '#C0B8D8',
+    description: 'Palladium coins, bars, catalytic converters, and scrap palladium accepted.',
+    image: null,
+    gradient: 'linear-gradient(135deg, #2D2840 0%, #3A3254 50%, #28211E 100%)',
+  },
+  {
+    name: 'Rhodium',
+    accent: '#E8E8F0',
+    accentBorder: '#E8E8F0',
+    description: 'One of the world\'s most valuable metals. We buy rhodium in any form — plating scrap, catalysts, sponge.',
+    image: null,
+    gradient: 'linear-gradient(135deg, #2A2A35 0%, #38384A 50%, #28211E 100%)',
+  },
+]
+
+const testimonials = [
+  {
+    quote: 'I had platinum jewelry from an old ring set. They tested everything right in front of me and gave me a fair offer based on the actual platinum content.',
+    author: 'Sarah L., Southern California',
+  },
+  {
+    quote: 'Brought in old palladium catalytic converters. Levant was one of the only buyers who knew exactly what they were worth. Very knowledgeable team.',
+    author: 'David M., Orange',
+  },
+  {
+    quote: 'I inherited some unusual pieces including what turned out to be rhodium-plated items. They explained everything clearly and paid accordingly.',
+    author: 'Christine W., San Bernardino',
+  },
+]
+
 export default function PlatinumPage() {
   return (
     <>
@@ -118,10 +161,13 @@ export default function PlatinumPage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                  href="/contact"
-                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm"
+                  href="tel:7142134785"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm flex items-center gap-2"
                 >
-                  Get a Free Quote
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
+                    <path fillRule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 8.25V5.999A3 3 0 0 1 1.5 4.5z" clipRule="evenodd" />
+                  </svg>
+                  Call Now
                 </Link>
                 <Link
                   href="/locations"
@@ -157,6 +203,58 @@ export default function PlatinumPage() {
         <SpotPriceTicker />
       </div>
 
+      {/* ── Rare Metals We Buy — 3 Cards ── */}
+      <section className="py-20 bg-charcoal">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="mb-12 text-center">
+            <p className="text-xs font-bold tracking-[0.2em] uppercase mb-3" style={{ color: '#C0C0E0' }}>
+              Platinum Group Metals
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-cream">
+              Rare Metals We Buy
+            </h2>
+            <p className="mt-4 text-cream/60 max-w-2xl mx-auto leading-relaxed text-sm">
+              Beyond gold and silver, we specialize in the entire platinum group — purchasing all
+              forms at competitive live-spot prices.
+            </p>
+          </FadeIn>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {rareMetals.map((metal, i) => (
+              <FadeIn key={metal.name} delay={i * 0.1}>
+                <div
+                  className="bg-charcoal-soft border border-white/10 rounded-2xl p-7 flex flex-col items-start h-full border-t-2"
+                  style={{ borderTopColor: metal.accentBorder }}
+                >
+                  {metal.image ? (
+                    <div className="mb-5 w-[120px] h-[120px] relative flex items-center justify-center">
+                      <Image
+                        src={metal.image}
+                        alt={`${metal.name} bar`}
+                        width={120}
+                        height={120}
+                        className="object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className="mb-5 w-[120px] h-[120px] rounded-xl"
+                      style={{ background: metal.gradient ?? undefined }}
+                    />
+                  )}
+                  <p
+                    className="text-xs font-bold tracking-[0.2em] uppercase mb-2"
+                    style={{ color: metal.accent }}
+                  >
+                    {metal.name}
+                  </p>
+                  <p className="text-cream/70 text-sm leading-relaxed">{metal.description}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── What We Buy ── */}
       <section className="py-20 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -184,6 +282,49 @@ export default function PlatinumPage() {
                 </div>
               </FadeIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Why Rare Metals Hold Value — Photo Split ── */}
+      <section className="bg-cream overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            <FadeIn direction="right" className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16 order-2 lg:order-1">
+              <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Investment-Grade Metals</p>
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-charcoal mb-5 leading-tight">
+                Rare Metals Hold<br />Real-World Value
+              </h2>
+              <p className="text-muted leading-relaxed mb-6 text-sm">
+                Platinum, palladium, and rhodium are used in catalytic converters, medical devices,
+                and industrial applications worldwide — demand is driven by industry, not speculation.
+                When you bring these metals in, we test exact composition and pay based on real-time
+                spot prices, not estimates.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  'Platinum: jewelry, investment bars, lab equipment',
+                  'Palladium: automotive catalysts, electronics',
+                  'Rhodium: catalytic coating, glass manufacturing',
+                ].map((point) => (
+                  <li key={point} className="flex items-start gap-3 text-sm text-charcoal">
+                    <span className="mt-1.5 w-2 h-2 rounded-full bg-gold flex-shrink-0" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </FadeIn>
+            <FadeIn direction="left" delay={0.15} className="relative min-h-[400px] order-1 lg:order-2 bg-cream flex items-center justify-center p-8">
+              <div className="relative w-full max-w-[460px] h-[420px]">
+                <Image
+                  src="/images/what-we-buy/Precious-metals.webp"
+                  alt="Platinum and precious metals — investment-grade metals we buy at Levant"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -245,19 +386,29 @@ export default function PlatinumPage() {
         </div>
       </section>
 
-      {/* ── Testimonial ── */}
-      <section className="py-14 bg-cream-dark">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn>
-            <blockquote className="bg-white border border-border rounded-2xl p-8 sm:p-10 text-center">
-              <p className="text-gold text-2xl mb-4">&ldquo;</p>
-              <p className="text-charcoal text-lg leading-relaxed font-medium mb-5">
-                I sold my platinum jewelry at Levant and was impressed with how quick and
-                transparent the process was.
-              </p>
-              <footer className="text-muted text-sm font-semibold">— Sarah L., Southern California</footer>
-            </blockquote>
+      {/* ── Stats Strip ── */}
+      <StatsStrip />
+
+      {/* ── Testimonials ── */}
+      <section className="py-20 bg-charcoal">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-12">
+            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Customer Reviews</p>
+            <h2 className="text-3xl font-heading font-bold text-cream">
+              Trusted Across Southern California
+            </h2>
           </FadeIn>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <FadeIn key={t.author} delay={i * 0.1}>
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-7 h-full flex flex-col">
+                  <p className="text-gold text-3xl leading-none mb-4">&ldquo;</p>
+                  <p className="text-cream/80 text-sm leading-relaxed flex-1 mb-5">{t.quote}</p>
+                  <footer className="text-muted text-xs font-semibold">— {t.author}</footer>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -292,6 +443,51 @@ export default function PlatinumPage() {
                 </div>
               </FadeIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── All Quantities — Photo Split ── */}
+      <section className="bg-cream-dark overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            <FadeIn direction="right" className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16 order-2 lg:order-1">
+              <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">All Quantities Welcome</p>
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-charcoal mb-5 leading-tight">
+                From a Single Piece<br />to Industrial Lots
+              </h2>
+              <p className="text-muted leading-relaxed mb-7 text-sm">
+                Whether you have a platinum wedding band or industrial platinum scrap, we handle
+                both with the same professionalism. Large quantities and bulk industrial transactions
+                are especially welcome.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="tel:7142134785"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-6 py-3 rounded-lg transition-colors text-sm flex items-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
+                    <path fillRule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 8.25V5.999A3 3 0 0 1 1.5 4.5z" clipRule="evenodd" />
+                  </svg>
+                  Call Now
+                </Link>
+                <Link
+                  href="/contact"
+                  className="border border-charcoal/20 hover:border-charcoal/50 text-charcoal font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
+                >
+                  Request a Quote
+                </Link>
+              </div>
+            </FadeIn>
+            <FadeIn direction="left" delay={0.15} className="relative min-h-[400px] order-1 lg:order-2">
+              <Image
+                src="/images/store/DSC03302.jpg"
+                alt="Coins, bars, and precious metals at Levant Gold & Silver"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -340,8 +536,11 @@ export default function PlatinumPage() {
               or contact us online for large or confidential transactions.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/contact" className="bg-charcoal hover:bg-charcoal/80 text-cream font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm">
-                Get a Free Quote
+              <Link href="tel:7142134785" className="bg-charcoal hover:bg-charcoal/80 text-cream font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
+                  <path fillRule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 8.25V5.999A3 3 0 0 1 1.5 4.5z" clipRule="evenodd" />
+                </svg>
+                Call Now
               </Link>
               <Link href="/locations" className="border border-charcoal/30 hover:border-charcoal text-charcoal font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm">
                 Find a Location

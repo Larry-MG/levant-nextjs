@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import FadeIn from '@/components/ui/FadeIn'
+import StatsStrip from '@/components/what-we-buy/StatsStrip'
 
 export const metadata: Metadata = {
   title: 'What We Buy | Gold, Silver & Precious Metals — Best Prices in Southern California',
@@ -190,10 +192,13 @@ export default function WhatWeBuyPage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
-                href="/contact"
-                className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm"
+                href="tel:7142134785"
+                className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm flex items-center gap-2"
               >
-                Get a Free Quote
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
+                  <path fillRule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 8.25V5.999A3 3 0 0 1 1.5 4.5z" clipRule="evenodd" />
+                </svg>
+                Call Now
               </Link>
               <Link
                 href="/locations"
@@ -216,6 +221,44 @@ export default function WhatWeBuyPage() {
                 {item}
               </span>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Photo Mosaic ── */}
+      <section className="bg-cream-dark py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 gap-2" style={{ gridTemplateRows: 'auto auto', maxHeight: '440px' }}>
+            {/* Left column — spans 2 rows */}
+            <div className="relative rounded-xl overflow-hidden row-span-2 min-h-[300px] sm:min-h-[420px]">
+              <Image
+                src="/images/store/DSC03344.jpg"
+                alt="PAMP Suisse gold bars at Levant Gold & Silver"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 50vw, 40vw"
+              />
+            </div>
+            {/* Right top */}
+            <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
+              <Image
+                src="/images/store/DSC03302.jpg"
+                alt="Mixed coins, bars, and slabs at Levant Gold & Silver"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 50vw, 40vw"
+              />
+            </div>
+            {/* Right bottom */}
+            <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
+              <Image
+                src="/images/store/DSC03395.jpg"
+                alt="Jewelry on velvet tray at Levant Gold & Silver"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 50vw, 40vw"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -275,6 +318,30 @@ export default function WhatWeBuyPage() {
         </div>
       </section>
 
+      {/* ── Photo Gallery ── */}
+      <section className="py-8 bg-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {[
+              { src: '/images/store/DSC03344.jpg', alt: 'PAMP Suisse gold bars at Levant' },
+              { src: '/images/store/DSC03302.jpg', alt: 'Coins, bars, and slabs at Levant' },
+              { src: '/images/store/DSC03395.jpg', alt: 'Jewelry on velvet tray at Levant' },
+              { src: '/images/store/DSC03256.jpg', alt: 'Silver collectibles at Levant' },
+            ].map((photo) => (
+              <div key={photo.src} className="relative aspect-[4/3] rounded-xl overflow-hidden group">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 640px) 50vw, 25vw"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── How It Works ── */}
       <section className="py-20 bg-charcoal">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -305,6 +372,9 @@ export default function WhatWeBuyPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Stats Strip ── */}
+      <StatsStrip />
 
       {/* ── XRF Callout ── */}
       <section className="py-16 bg-cream-dark">
@@ -342,6 +412,29 @@ export default function WhatWeBuyPage() {
               Learn more about our technology →
             </Link>
           </FadeIn>
+        </div>
+      </section>
+
+      {/* ── Photo Strip ── */}
+      <section className="bg-charcoal py-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              { src: '/images/store/DSC03256.jpg', alt: 'Silver collectibles at Levant Gold & Silver' },
+              { src: '/images/store/DSC03307.jpg', alt: 'Silver dollars and coins at Levant Gold & Silver' },
+              { src: '/images/store/DSC03411.jpg', alt: 'XRF testing at Levant Gold & Silver' },
+            ].map((photo) => (
+              <div key={photo.src} className="relative aspect-[4/3] rounded-xl overflow-hidden group">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 768px) 33vw, 25vw"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import FadeIn from '@/components/ui/FadeIn'
 import SpotPriceTicker from '@/components/home/SpotPriceTicker'
+import StatsStrip from '@/components/what-we-buy/StatsStrip'
 
 export const metadata: Metadata = {
   title: 'Sell Sterling Silverware & Flatware | Best Prices in Southern California',
@@ -75,6 +76,37 @@ const whySell = [
   { title: 'Expert Identification', body: 'We identify genuine sterling from silver-plated ware instantly, so you always know exactly what you\'re being paid for.' },
 ]
 
+const testimonials = [
+  {
+    quote: 'I had my grandmother\'s sterling silver set — 12 place settings plus serving pieces. Levant tested everything and gave me a fair price based on the actual silver content. Very satisfied.',
+    name: 'Linda M.',
+    location: 'Orange',
+  },
+  {
+    quote: 'I didn\'t realize my old silverware was valuable. Brought it in thinking it was silver-plated and it turned out to be sterling. They paid well and explained everything.',
+    name: 'Robert S.',
+    location: 'San Bernardino',
+  },
+  {
+    quote: 'Estate sale included a full tea service in sterling. Levant handled it professionally and paid same day. No games, no pressure.',
+    name: 'Eleanor H.',
+    location: 'Pomona',
+  },
+]
+
+const xrfSteps = [
+  'Bring in your silverware',
+  'We test each piece with XRF',
+  'Genuine sterling gets a full melt offer',
+  'Get paid same visit',
+]
+
+const silverwareHighlights = [
+  '.925 Sterling always bought at full melt value',
+  'Tarnished, monogrammed, or mismatched — all accepted',
+  'Complete sets and individual pieces welcome',
+]
+
 export default function SilverwarePage() {
   return (
     <>
@@ -95,10 +127,13 @@ export default function SilverwarePage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                  href="/contact"
-                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm"
+                  href="tel:7142134785"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm flex items-center gap-2"
                 >
-                  Get a Free Quote
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
+                    <path fillRule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 8.25V5.999A3 3 0 0 1 1.5 4.5z" clipRule="evenodd" />
+                  </svg>
+                  Call Now
                 </Link>
                 <Link
                   href="/locations"
@@ -133,6 +168,43 @@ export default function SilverwarePage() {
         </div>
         <SpotPriceTicker />
       </div>
+
+      {/* ── Estate Silver Split ── */}
+      <section className="bg-charcoal overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            <FadeIn direction="right" className="relative min-h-[440px]">
+              <Image
+                src="/images/store/DSC03256.jpg"
+                alt="Silver collectibles and estate silverware at Levant Gold & Silver"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </FadeIn>
+            <FadeIn direction="left" delay={0.15} className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16">
+              <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Estate &amp; Sterling Silver</p>
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-cream mb-5 leading-tight">
+                Your Silverware Has<br />Real Metal Value
+              </h2>
+              <p className="text-cream/70 text-sm leading-relaxed mb-6">
+                Sterling silver (.925) flatware, tea sets, candlesticks, and serving pieces contain
+                substantial precious metal content. That set gathering dust in your cabinet could be
+                worth hundreds or thousands. We buy by weight and purity — tarnish, monograms, and
+                missing pieces don&apos;t reduce your metal payout.
+              </p>
+              <ul className="space-y-3">
+                {silverwareHighlights.map((h) => (
+                  <li key={h} className="flex items-start gap-3">
+                    <span className="text-gold flex-shrink-0 mt-0.5">&#10003;</span>
+                    <span className="text-cream/80 text-sm">{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
 
       {/* ── What We Buy ── */}
       <section className="py-20 bg-cream">
@@ -184,6 +256,45 @@ export default function SilverwarePage() {
               </p>
             </div>
           </FadeIn>
+        </div>
+      </section>
+
+      {/* ── Testing Split: Sterling vs. Silver-Plated ── */}
+      <section className="bg-cream-dark overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            <FadeIn direction="left" delay={0.15} className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16 order-2 lg:order-1">
+              <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Sterling vs. Silver-Plated</p>
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-charcoal mb-5 leading-tight">
+                We Can Tell the<br />Difference Instantly
+              </h2>
+              <p className="text-muted text-sm leading-relaxed mb-6">
+                Our XRF machine distinguishes genuine sterling silver (.925) from silver-plated items
+                in seconds. You&apos;ll know exactly what you have before making any decisions. Sterling
+                gets paid at melt value; plated items have little metal value but we&apos;ll give you an
+                honest assessment either way.
+              </p>
+              <ol className="space-y-3">
+                {xrfSteps.map((step, i) => (
+                  <li key={step} className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-gold text-charcoal text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                      {i + 1}
+                    </span>
+                    <span className="text-charcoal text-sm font-medium">{step}</span>
+                  </li>
+                ))}
+              </ol>
+            </FadeIn>
+            <FadeIn direction="right" className="relative min-h-[440px] order-1 lg:order-2">
+              <Image
+                src="/images/store/DSC03307.jpg"
+                alt="Silver coins and collectibles tested at Levant Gold & Silver"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </FadeIn>
+          </div>
         </div>
       </section>
 
@@ -241,6 +352,62 @@ export default function SilverwarePage() {
         </div>
       </section>
 
+      {/* ── Photo Strip ── */}
+      <section className="py-4 bg-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-3 gap-3">
+            {[
+              { src: '/images/store/DSC03256.jpg', alt: 'Silver collectibles display at Levant Gold & Silver' },
+              { src: '/images/store/DSC03302.jpg', alt: 'Mixed coins, bars, and slabs at Levant Gold & Silver' },
+              { src: '/images/store/DSC03395.jpg', alt: 'Jewelry on velvet tray at Levant Gold & Silver' },
+            ].map((photo) => (
+              <div key={photo.src} className="relative aspect-[4/3] rounded-xl overflow-hidden group">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 768px) 33vw, 25vw"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Stats Strip ── */}
+      <StatsStrip />
+
+      {/* ── Testimonials ── */}
+      <section className="py-20 bg-charcoal">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-12">
+            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Customer Stories</p>
+            <h2 className="text-3xl font-heading font-bold text-cream">What Our Customers Say</h2>
+          </FadeIn>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <FadeIn key={t.name} delay={i * 0.1}>
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-7 h-full flex flex-col">
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(5)].map((_, s) => (
+                      <svg key={s} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-gold">
+                        <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
+                      </svg>
+                    ))}
+                  </div>
+                  <p className="text-cream/75 text-sm leading-relaxed italic flex-1">&ldquo;{t.quote}&rdquo;</p>
+                  <div className="mt-5 pt-4 border-t border-white/10">
+                    <p className="text-cream font-semibold text-sm">{t.name}</p>
+                    <p className="text-muted text-xs">{t.location}</p>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── How It Works ── */}
       <section className="py-20 bg-charcoal">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -262,6 +429,51 @@ export default function SilverwarePage() {
                 </div>
               </FadeIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Large Estate Collection Split ── */}
+      <section className="bg-cream-dark overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            <FadeIn direction="right" className="relative min-h-[400px]">
+              <Image
+                src="/images/store/DSC03302.jpg"
+                alt="Mixed coins, bars, and sterling silver estate collection at Levant"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </FadeIn>
+            <FadeIn direction="left" delay={0.15} className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16">
+              <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Complete Estate Collections</p>
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-charcoal mb-5 leading-tight">
+                Selling a Full<br />Silver Estate?
+              </h2>
+              <p className="text-muted text-sm leading-relaxed mb-8">
+                Inherited a full dining set, complete tea service, or mixed lot of sterling pieces?
+                We evaluate everything in one visit, no pre-sorting required. Discreet, professional
+                service for estate and family collection sales.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href="tel:7142134785"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm flex items-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
+                    <path fillRule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 8.25V5.999A3 3 0 0 1 1.5 4.5z" clipRule="evenodd" />
+                  </svg>
+                  Call Now
+                </Link>
+                <Link
+                  href="/contact"
+                  className="border border-charcoal/20 hover:border-charcoal/40 text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm"
+                >
+                  Request a Quote
+                </Link>
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>

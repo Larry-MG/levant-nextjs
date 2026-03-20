@@ -4,6 +4,7 @@ import Link from 'next/link'
 import FadeIn from '@/components/ui/FadeIn'
 import SpotPriceTicker from '@/components/home/SpotPriceTicker'
 import GoldCalculator from '@/components/home/GoldCalculator'
+import StatsStrip from '@/components/what-we-buy/StatsStrip'
 
 export const metadata: Metadata = {
   title: 'Sell Silver Coins, Jewelry & Bullion | Best Prices in Southern California',
@@ -67,15 +68,69 @@ const whySell = [
 ]
 
 const testingPoints = [
-  { title: 'XRF Analysis', body: 'Our X-Ray Fluorescence machine determines exact silver purity in seconds — no acid tests, no guesswork.' },
-  { title: 'Certified Weighing', body: 'Every item is weighed on calibrated scales to ensure you\'re paid for the exact silver content.' },
-  { title: 'Live Spot Calculation', body: 'Your offer is calculated from the current silver spot price at the moment of your visit, with full transparency.' },
+  { step: '01', title: 'XRF Analysis', body: 'Our X-Ray Fluorescence machine determines exact silver purity in seconds — no acid tests, no guesswork. Results are displayed live so you see exactly what we see.' },
+  { step: '02', title: 'Certified Weighing', body: 'Every item is weighed on calibrated scales to ensure you\'re paid for the exact silver content. Our scales are certified and accurate to fractions of a gram.' },
+  { step: '03', title: 'Live Spot Calculation', body: 'Your offer is calculated from the current silver spot price at the moment of your visit, with full transparency. We show you the math — no hidden deductions.' },
 ]
 
 const steps = [
   { step: '01', title: 'Visit Our Store', body: 'Walk in to any of our four Southern California locations during business hours — no appointment needed.' },
   { step: '02', title: 'Free Evaluation', body: 'We test purity with our XRF machine, weigh on certified scales, and calculate your offer at live spot pricing.' },
   { step: '03', title: 'Get Paid On the Spot', body: 'Cash, check, wire transfer, Zelle, or CashApp — your choice. Payment the same visit, every time.' },
+]
+
+const showcaseClaims = [
+  'Pre-1965 junk silver at full melt value',
+  'All silver coins — U.S. and foreign',
+  'Sterling flatware, tea sets, candlesticks',
+  'Bullion rounds and bars (1 oz to 100 oz kilo)',
+  'Estate lots and inherited collections welcome',
+]
+
+const productGrid = [
+  {
+    src: '/images/products/silver-morgan.png',
+    alt: 'Morgan Silver Dollar coin',
+    label: 'Morgan Dollars',
+    desc: 'Classic U.S. numismatic coins valued for metal and collectibility',
+    isPng: true,
+  },
+  {
+    src: '/images/products/silver-buffalo.png',
+    alt: 'Silver Buffalo round',
+    label: 'Silver Rounds',
+    desc: 'Generic and branded .999 fine silver rounds of any size',
+    isPng: true,
+  },
+  {
+    src: '/images/store/DSC03307.jpg',
+    alt: 'Junk silver coins — quarters and dimes laid out',
+    label: 'Junk Silver Coins',
+    desc: 'Pre-1965 dimes, quarters, and half-dollars at full melt value',
+    isPng: false,
+  },
+  {
+    src: '/images/store/DSC03256.jpg',
+    alt: 'Sterling silverware and collectibles display',
+    label: 'Sterling Silverware',
+    desc: 'Flatware sets, tea services, candlesticks, and trays',
+    isPng: false,
+  },
+]
+
+const testimonials = [
+  {
+    quote: 'I had a large collection of old silver coins and flatware from my mother\'s estate. Levant gave me a fair offer and handled everything professionally.',
+    author: 'Anna M., Southern California',
+  },
+  {
+    quote: 'Brought in 90% junk silver — quarters and dimes. They weighed it all out and explained exactly how they calculated my offer. No surprises.',
+    author: 'Tom R., San Bernardino',
+  },
+  {
+    quote: 'I didn\'t know sterling silverware had real value. They tested it right in front of me and paid well above what a pawn shop offered.',
+    author: 'Patricia G., Pomona',
+  },
 ]
 
 export default function SilverPage() {
@@ -107,10 +162,13 @@ export default function SilverPage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                  href="/contact"
-                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm"
+                  href="tel:7142134785"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm flex items-center gap-2"
                 >
-                  Get a Free Quote
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
+                    <path fillRule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 8.25V5.999A3 3 0 0 1 1.5 4.5z" clipRule="evenodd" />
+                  </svg>
+                  Call Now
                 </Link>
                 <Link
                   href="/locations"
@@ -146,6 +204,57 @@ export default function SilverPage() {
         <SpotPriceTicker />
       </div>
 
+      {/* ── Silver Showcase Split Panel ── */}
+      <section className="bg-charcoal overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            {/* Left — coin image */}
+            <FadeIn direction="right" className="relative min-h-[400px] bg-charcoal flex items-center justify-center py-10 lg:py-0">
+              <div className="relative w-full max-w-[480px] mx-auto h-[420px]">
+                <Image
+                  src="/images/what-we-buy/LEVANT-Silver-Coins.webp"
+                  alt="Silver coins and rounds accepted at Levant Gold & Silver"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </FadeIn>
+            {/* Right — claims */}
+            <FadeIn direction="left" delay={0.15} className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16 lg:py-20">
+              <p className="text-xs font-bold tracking-[0.2em] uppercase mb-3" style={{ color: '#A0A0A0' }}>
+                Southern California&apos;s Silver Buyer
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-heading font-bold text-cream mb-6 leading-tight">
+                More Silver Items Accepted Than Anyone Else
+              </h2>
+              <ul className="space-y-4">
+                {showcaseClaims.map((claim) => (
+                  <li key={claim} className="flex items-start gap-3">
+                    <span className="text-gold mt-0.5 flex-shrink-0 text-lg leading-none">&#10003;</span>
+                    <span className="text-cream/80 text-sm leading-relaxed">{claim}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Link
+                  href="tel:7142134785"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
+                >
+                  Call Now
+                </Link>
+                <Link
+                  href="/locations"
+                  className="border border-white/20 hover:border-white/40 text-cream font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
+                >
+                  Find a Location
+                </Link>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
       {/* ── What Silver Items We Buy ── */}
       <section className="py-20 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -176,24 +285,95 @@ export default function SilverPage() {
         </div>
       </section>
 
-      {/* ── Testing & Valuing ── */}
-      <section className="py-16 bg-charcoal">
+      {/* ── Product Visual Grid ── */}
+      <section className="py-20 bg-cream-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="text-center mb-10">
-            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Accurate &amp; Transparent</p>
-            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-cream">
-              Testing &amp; Valuing Your Silver
+          <FadeIn className="mb-12 text-center">
+            <p className="text-xs font-bold tracking-[0.2em] uppercase mb-3" style={{ color: '#A0A0A0' }}>
+              What We Accept
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-charcoal">
+              Popular Silver Items We Buy
             </h2>
+            <p className="mt-4 text-muted max-w-xl mx-auto leading-relaxed">
+              Recognise something you own? Bring it in for a free, no-obligation appraisal.
+            </p>
           </FadeIn>
-          <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {testingPoints.map((pt, i) => (
-              <FadeIn key={pt.title} delay={i * 0.08}>
-                <div className="bg-white/5 border border-white/10 rounded-xl p-6 text-center h-full">
-                  <h3 className="font-heading font-bold text-cream mb-2">{pt.title}</h3>
-                  <p className="text-cream/60 text-sm leading-relaxed">{pt.body}</p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+            {productGrid.map((card, i) => (
+              <FadeIn key={card.label} delay={i * 0.08}>
+                <div className="bg-white border border-border rounded-2xl overflow-hidden flex flex-col h-full">
+                  {card.isPng ? (
+                    <div className="relative aspect-square bg-cream flex items-center justify-center p-4">
+                      <Image
+                        src={card.src}
+                        alt={card.alt}
+                        width={240}
+                        height={240}
+                        className="object-contain w-full h-full"
+                      />
+                    </div>
+                  ) : (
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      <Image
+                        src={card.src}
+                        alt={card.alt}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                      />
+                    </div>
+                  )}
+                  <div className="p-4 flex flex-col gap-1 flex-1">
+                    <p className="font-heading font-bold text-charcoal text-sm" style={{ color: '#6B7280' }}>
+                      {card.label}
+                    </p>
+                    <p className="text-xs text-muted leading-relaxed">{card.desc}</p>
+                  </div>
                 </div>
               </FadeIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Testing & Valuing — Split Panel ── */}
+      <section className="bg-charcoal overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            {/* Left — store photo */}
+            <FadeIn direction="right" className="relative min-h-[420px] order-2 lg:order-1">
+              <Image
+                src="/images/store/DSC03307.jpg"
+                alt="Silver dollars and coins laid out at Levant Gold & Silver"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
+            </FadeIn>
+            {/* Right — numbered steps */}
+            <FadeIn direction="left" delay={0.15} className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16 lg:py-20 order-1 lg:order-2">
+              <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Accurate &amp; Transparent</p>
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-cream mb-8 leading-tight">
+                Testing &amp; Valuing Your Silver
+              </h2>
+              <div className="space-y-8">
+                {testingPoints.map((pt, i) => (
+                  <FadeIn key={pt.title} delay={0.2 + i * 0.1}>
+                    <div className="flex items-start gap-5">
+                      <span className="text-4xl font-heading font-bold text-gold/20 leading-none select-none flex-shrink-0 w-10">
+                        {pt.step}
+                      </span>
+                      <div>
+                        <h3 className="font-heading font-bold text-cream text-base mb-1">{pt.title}</h3>
+                        <p className="text-cream/60 text-sm leading-relaxed">{pt.body}</p>
+                      </div>
+                    </div>
+                  </FadeIn>
+                ))}
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -232,19 +412,54 @@ export default function SilverPage() {
         </div>
       </section>
 
-      {/* ── Testimonial ── */}
-      <section className="py-14 bg-cream-dark">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn>
-            <blockquote className="bg-white border border-border rounded-2xl p-8 sm:p-10 text-center">
-              <p className="text-gold text-2xl mb-4">&ldquo;</p>
-              <p className="text-charcoal text-lg leading-relaxed font-medium mb-5">
-                I had a great experience selling a couple of silver items at Levant. They offered
-                a good price and the process was simple and hassle-free.
-              </p>
-              <footer className="text-muted text-sm font-semibold">— Anna M., Southern California</footer>
-            </blockquote>
+      {/* ── Stats Strip ── */}
+      <StatsStrip />
+
+      {/* ── Photo Mosaic Row ── */}
+      <section className="py-2 bg-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-3 gap-3">
+            {[
+              { src: '/images/store/DSC03256.jpg', alt: 'Silver collectibles display at Levant Gold & Silver' },
+              { src: '/images/store/DSC03302.jpg', alt: 'Mixed coins, bars, and slabs at Levant Gold & Silver' },
+              { src: '/images/store/DSC03307.jpg', alt: 'Silver dollars and coins laid out at Levant Gold & Silver' },
+            ].map((photo) => (
+              <div key={photo.src} className="relative aspect-[4/3] rounded-xl overflow-hidden hover:scale-105 transition-transform duration-500">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 25vw"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Testimonials ── */}
+      <section className="py-16 bg-charcoal">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-12">
+            <p className="text-xs font-bold tracking-[0.2em] uppercase mb-3" style={{ color: '#A0A0A0' }}>
+              5-Star Reviews
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-cream">
+              Trusted by Silver Sellers Across Southern California
+            </h2>
           </FadeIn>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <FadeIn key={t.author} delay={i * 0.1}>
+                <div className="bg-charcoal-soft border border-white/10 rounded-2xl p-7 h-full flex flex-col">
+                  <p className="text-gold text-2xl mb-3 leading-none">&ldquo;</p>
+                  <p className="text-cream/80 text-sm leading-relaxed flex-1">{t.quote}</p>
+                  <footer className="mt-5 text-muted text-xs font-semibold">— {t.author}</footer>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -279,6 +494,50 @@ export default function SilverPage() {
                 </div>
               </FadeIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Silver Collection Split Panel ── */}
+      <section className="bg-cream-dark overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            {/* Left — text */}
+            <FadeIn direction="right" className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16 lg:py-20 order-2 lg:order-1">
+              <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Estate &amp; Bulk Silver</p>
+              <h2 className="text-3xl font-heading font-bold text-charcoal mb-4 leading-tight">
+                Selling a Silver Collection?
+              </h2>
+              <p className="text-muted leading-relaxed mb-6 text-sm">
+                Whether it&apos;s a single Morgan dollar or 200 pieces of sterling flatware, we have the
+                expertise and capacity to evaluate everything in a single visit. Estate lots and inherited
+                collections handled with care and discretion.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href="tel:7142134785"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
+                >
+                  Call Now
+                </Link>
+                <Link
+                  href="/contact"
+                  className="border border-charcoal/20 hover:border-charcoal/50 text-charcoal font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
+                >
+                  Request a Quote
+                </Link>
+              </div>
+            </FadeIn>
+            {/* Right — photo */}
+            <FadeIn direction="left" delay={0.15} className="relative min-h-[420px] order-1 lg:order-2">
+              <Image
+                src="/images/store/DSC03302.jpg"
+                alt="Mixed coins, bars, and slabs — estate silver collection at Levant Gold & Silver"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </FadeIn>
           </div>
         </div>
       </section>

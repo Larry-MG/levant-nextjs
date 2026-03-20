@@ -4,6 +4,7 @@ import Link from 'next/link'
 import FadeIn from '@/components/ui/FadeIn'
 import SpotPriceTicker from '@/components/home/SpotPriceTicker'
 import GoldCalculator from '@/components/home/GoldCalculator'
+import StatsStrip from '@/components/what-we-buy/StatsStrip'
 
 export const metadata: Metadata = {
   title: 'Sell Gold & Silver Coins | Bullion, Junk Silver & Numismatic — Southern California',
@@ -92,6 +93,44 @@ const steps = [
   { step: '03', title: 'Get Paid On the Spot', body: 'Accept the offer and receive payment immediately — cash, check, wire, Zelle, or CashApp.' },
 ]
 
+const coinShowcase = [
+  {
+    image: '/images/products/gold-eagle-1oz.png',
+    name: 'American Gold Eagle',
+    descriptor: '1 oz | ¼ oz | ½ oz sizes',
+  },
+  {
+    image: '/images/products/silver-morgan.png',
+    name: 'Morgan Silver Dollar',
+    descriptor: 'Pre-1921 key dates get premium',
+  },
+  {
+    image: '/images/products/silver-buffalo.png',
+    name: 'Silver Buffalo Round',
+    descriptor: '.999 fine silver',
+  },
+  {
+    image: '/images/products/gold-eagle-quarter.png',
+    name: 'Gold Eagle Quarter Oz',
+    descriptor: 'Fractional gold coins',
+  },
+]
+
+const testimonials = [
+  {
+    quote: 'I brought in a large collection of Morgan dollars and Peace dollars. They identified several key dates and paid numismatic value, not just melt price. Outstanding.',
+    author: 'M.R., Southern California',
+  },
+  {
+    quote: 'Excellent process — they weighed my junk silver, calculated at live spot, and paid cash immediately. No drama, no waiting.',
+    author: 'Kevin T., Walnut',
+  },
+  {
+    quote: 'I had mixed coins from three generations of family collecting. They sorted, evaluated, and explained every piece. I left with fair value and full confidence.',
+    author: 'Sandra H., Riverside',
+  },
+]
+
 export default function CoinsPage() {
   return (
     <>
@@ -111,10 +150,13 @@ export default function CoinsPage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                  href="/contact"
-                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm"
+                  href="tel:7142134785"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm flex items-center gap-2"
                 >
-                  Get a Free Quote
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
+                    <path fillRule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 8.25V5.999A3 3 0 0 1 1.5 4.5z" clipRule="evenodd" />
+                  </svg>
+                  Call Now
                 </Link>
                 <Link
                   href="/locations"
@@ -149,6 +191,41 @@ export default function CoinsPage() {
         </div>
         <SpotPriceTicker />
       </div>
+
+      {/* ── Coin Showcase Grid ── */}
+      <section className="py-20 bg-charcoal">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="mb-12 text-center">
+            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Popular Coins</p>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-cream">
+              Coins We Buy Every Day
+            </h2>
+            <p className="mt-4 text-cream/60 max-w-2xl mx-auto leading-relaxed text-sm">
+              From classic American Eagles to vintage Morgan dollars — we know exactly what your
+              coins are worth and pay accordingly.
+            </p>
+          </FadeIn>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+            {coinShowcase.map((coin, i) => (
+              <FadeIn key={coin.name} delay={i * 0.08}>
+                <div className="bg-charcoal-soft rounded-2xl p-5 flex flex-col items-center text-center group hover:border hover:border-gold/40 border border-white/0 transition-all duration-300">
+                  <div className="mb-4 w-[140px] h-[140px] relative flex items-center justify-center">
+                    <Image
+                      src={coin.image}
+                      alt={coin.name}
+                      width={140}
+                      height={140}
+                      className="object-contain"
+                    />
+                  </div>
+                  <p className="text-white font-semibold text-sm mb-1">{coin.name}</p>
+                  <p className="text-muted text-xs">{coin.descriptor}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── Coin Categories ── */}
       <section className="py-20 bg-cream">
@@ -185,6 +262,47 @@ export default function CoinsPage() {
         </div>
       </section>
 
+      {/* ── Numismatic Value — Photo Split ── */}
+      <section className="bg-cream overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            <FadeIn direction="right" className="relative min-h-[420px]">
+              <Image
+                src="/images/store/DSC03302.jpg"
+                alt="Coins, bars, and slabs in a display case at Levant Gold & Silver"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </FadeIn>
+            <FadeIn direction="left" delay={0.15} className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16">
+              <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Collector Coins</p>
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-charcoal mb-5 leading-tight">
+                We Pay for Numismatic Value,<br />Not Just Melt
+              </h2>
+              <p className="text-muted leading-relaxed mb-6 text-sm">
+                A PCGS or NGC graded Morgan dollar can be worth far more than its silver content.
+                Our team recognizes key dates, mint marks, and condition grades — so you always get
+                the full value of collectible coins.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  'PCGS & NGC certified coins evaluated at grade',
+                  'Key dates (1895-O, 1893-S, etc.) get special attention',
+                  'Pre-1933 U.S. gold coins assessed for collector premium',
+                  'Foreign rarities and error coins welcome',
+                ].map((point) => (
+                  <li key={point} className="flex items-start gap-3 text-sm text-charcoal">
+                    <span className="mt-1.5 w-2 h-2 rounded-full bg-gold flex-shrink-0" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
       {/* ── How We Evaluate ── */}
       <section className="py-16 bg-charcoal">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -209,14 +327,17 @@ export default function CoinsPage() {
         </div>
       </section>
 
+      {/* ── Stats Strip ── */}
+      <StatsStrip />
+
       {/* ── Why Sell ── */}
       <section className="bg-cream overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="relative min-h-[360px]">
               <Image
-                src="/images/store/DSC03302.jpg"
-                alt="Coin collection at Levant Gold & Silver"
+                src="/images/store/DSC03344.jpg"
+                alt="PAMP Suisse gold bars and coins at Levant Gold & Silver"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -243,19 +364,26 @@ export default function CoinsPage() {
         </div>
       </section>
 
-      {/* ── Testimonial ── */}
-      <section className="py-14 bg-cream-dark">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn>
-            <blockquote className="bg-white border border-border rounded-2xl p-8 sm:p-10 text-center">
-              <p className="text-gold text-2xl mb-4">&ldquo;</p>
-              <p className="text-charcoal text-lg leading-relaxed font-medium mb-5">
-                I sold a few silver coins I had lying around at a fair price. The staff was
-                friendly and professional.
-              </p>
-              <footer className="text-muted text-sm font-semibold">— M.R., Southern California</footer>
-            </blockquote>
+      {/* ── Testimonials ── */}
+      <section className="py-20 bg-charcoal">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-12">
+            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Verified Reviews</p>
+            <h2 className="text-3xl font-heading font-bold text-cream">
+              What Coin Sellers Say
+            </h2>
           </FadeIn>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <FadeIn key={t.author} delay={i * 0.1}>
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-7 h-full flex flex-col">
+                  <p className="text-gold text-3xl leading-none mb-4">&ldquo;</p>
+                  <p className="text-cream/80 text-sm leading-relaxed flex-1 mb-5">{t.quote}</p>
+                  <footer className="text-muted text-xs font-semibold">— {t.author}</footer>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -290,6 +418,51 @@ export default function CoinsPage() {
                 </div>
               </FadeIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Large Collection — Photo Split ── */}
+      <section className="bg-cream-dark overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            <FadeIn direction="right" className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16 order-2 lg:order-1">
+              <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Bulk &amp; Estate Coins</p>
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-charcoal mb-5 leading-tight">
+                Selling a Coin Collection?
+              </h2>
+              <p className="text-muted leading-relaxed mb-7 text-sm">
+                We buy complete coin sets, estate lots, rolls, boxes, and entire collections. No
+                need to sort or grade beforehand — bring everything in and our team will evaluate
+                it all in a single visit.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="tel:7142134785"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-6 py-3 rounded-lg transition-colors text-sm flex items-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
+                    <path fillRule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 8.25V5.999A3 3 0 0 1 1.5 4.5z" clipRule="evenodd" />
+                  </svg>
+                  Call Now
+                </Link>
+                <Link
+                  href="/contact"
+                  className="border border-charcoal/20 hover:border-charcoal/50 text-charcoal font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
+                >
+                  Request a Quote
+                </Link>
+              </div>
+            </FadeIn>
+            <FadeIn direction="left" delay={0.15} className="relative min-h-[400px] order-1 lg:order-2">
+              <Image
+                src="/images/store/DSC03302.jpg"
+                alt="Large coin collection, bars, and slabs at Levant Gold & Silver"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -336,8 +509,11 @@ export default function CoinsPage() {
               pieces or full collections — for a free, no-pressure evaluation.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/contact" className="bg-charcoal hover:bg-charcoal/80 text-cream font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm">
-                Get a Free Quote
+              <Link href="tel:7142134785" className="bg-charcoal hover:bg-charcoal/80 text-cream font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
+                  <path fillRule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 8.25V5.999A3 3 0 0 1 1.5 4.5z" clipRule="evenodd" />
+                </svg>
+                Call Now
               </Link>
               <Link href="/locations" className="border border-charcoal/30 hover:border-charcoal text-charcoal font-semibold px-8 py-3.5 rounded-lg transition-colors text-sm">
                 Find a Location

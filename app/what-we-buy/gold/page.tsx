@@ -2,8 +2,11 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import FadeIn from '@/components/ui/FadeIn'
+import StaggerChildren from '@/components/ui/StaggerChildren'
+import MotionItem from '@/components/ui/MotionItem'
 import SpotPriceTicker from '@/components/home/SpotPriceTicker'
 import GoldCalculator from '@/components/home/GoldCalculator'
+import StatsStrip from '@/components/what-we-buy/StatsStrip'
 
 export const metadata: Metadata = {
   title: 'Sell Gold Jewelry, Coins & Bullion | Best Prices in Southern California',
@@ -68,6 +71,50 @@ const steps = [
   { step: '03', title: 'Get Paid On the Spot', body: 'Accept the offer and choose your payment method: cash, check, wire transfer, Zelle, or CashApp. Done in minutes.' },
 ]
 
+const karats = [
+  { karat: '10K', purity: '41.7%' },
+  { karat: '14K', purity: '58.3%' },
+  { karat: '18K', purity: '75.0%' },
+  { karat: '22K', purity: '91.7%' },
+  { karat: '24K', purity: '99.9%' },
+]
+
+const testimonials = [
+  {
+    quote: 'I brought in some old gold jewelry and walked out with $500 in minutes. The team was professional and honest about pricing.',
+    author: 'Jane D., Orange CA',
+  },
+  {
+    quote: 'Best gold prices I found in all of Orange County. They explained everything clearly and paid me on the spot.',
+    author: 'Robert K., Anaheim CA',
+  },
+  {
+    quote: "I was nervous selling my grandmother's jewelry but they made the process comfortable and transparent. Fair offer, no pressure.",
+    author: 'Maria L., Pomona CA',
+  },
+]
+
+const showcaseCards = [
+  {
+    src: '/images/store/DSC03344.jpg',
+    alt: 'PAMP Suisse gold bars at Levant Gold & Silver',
+    label: 'Bullion & Bars',
+    objectFit: 'object-cover',
+  },
+  {
+    src: '/images/products/gold-eagle-1oz.png',
+    alt: 'American Gold Eagle 1 oz coin',
+    label: 'Gold Coins',
+    objectFit: 'object-contain',
+  },
+  {
+    src: '/images/store/DSC03395.jpg',
+    alt: 'Gold jewelry on velvet tray at Levant Gold & Silver',
+    label: 'Gold Jewelry',
+    objectFit: 'object-cover',
+  },
+]
+
 export default function GoldPage() {
   return (
     <>
@@ -97,10 +144,13 @@ export default function GoldPage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                  href="/contact"
-                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm"
+                  href="tel:7142134785"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm flex items-center gap-2"
                 >
-                  Get a Free Quote
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
+                    <path fillRule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 8.25V5.999A3 3 0 0 1 1.5 4.5z" clipRule="evenodd" />
+                  </svg>
+                  Call Now
                 </Link>
                 <Link
                   href="/locations"
@@ -136,6 +186,43 @@ export default function GoldPage() {
         <SpotPriceTicker />
       </div>
 
+      {/* ── Product Showcase ── */}
+      <section className="py-20 bg-charcoal">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-12">
+            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">
+              What We Accept
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-cream">
+              Gold We Purchase Every Day
+            </h2>
+          </FadeIn>
+          <StaggerChildren className="grid sm:grid-cols-3 gap-5" staggerDelay={0.12}>
+            {showcaseCards.map((card) => (
+              <MotionItem
+                key={card.label}
+                className="relative overflow-hidden rounded-2xl h-72 group cursor-default"
+              >
+                {/* dark bg for coin so object-contain looks clean */}
+                <div className="absolute inset-0 bg-charcoal-mid" />
+                <Image
+                  src={card.src}
+                  alt={card.alt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                  className={`${card.objectFit} transition-transform duration-500 group-hover:scale-105`}
+                />
+                {/* gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 px-5 pb-5">
+                  <p className="text-gold text-xs font-bold tracking-[0.18em] uppercase mb-1">{card.label}</p>
+                </div>
+              </MotionItem>
+            ))}
+          </StaggerChildren>
+        </div>
+      </section>
+
       {/* ── What Gold Items We Buy ── */}
       <section className="py-20 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -161,6 +248,44 @@ export default function GoldPage() {
                 </div>
               </FadeIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Photo Mosaic Row ── */}
+      <section className="bg-cream-dark py-3 px-3 sm:px-4 lg:px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-3 gap-2 h-[320px] sm:h-[420px]">
+            {/* Left — tall */}
+            <div className="col-span-1 row-span-2 relative overflow-hidden rounded-xl">
+              <Image
+                src="/images/store/DSC03360.jpg"
+                alt="Gold bars angled display at Levant Gold & Silver"
+                fill
+                sizes="(max-width: 768px) 33vw, 25vw"
+                className="object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            {/* Top right */}
+            <div className="col-span-2 relative overflow-hidden rounded-xl">
+              <Image
+                src="/images/store/DSC03344.jpg"
+                alt="PAMP Suisse gold bars collection"
+                fill
+                sizes="(max-width: 768px) 66vw, 50vw"
+                className="object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            {/* Bottom right */}
+            <div className="col-span-2 relative overflow-hidden rounded-xl">
+              <Image
+                src="/images/store/DSC03302.jpg"
+                alt="Mixed gold coins, bars, and slabs"
+                fill
+                sizes="(max-width: 768px) 66vw, 50vw"
+                className="object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -199,19 +324,63 @@ export default function GoldPage() {
         </div>
       </section>
 
-      {/* ── Testimonial ── */}
-      <section className="py-14 bg-cream-dark">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn>
-            <blockquote className="bg-white border border-border rounded-2xl p-8 sm:p-10 text-center">
-              <p className="text-gold text-2xl mb-4">&ldquo;</p>
-              <p className="text-charcoal text-lg leading-relaxed font-medium mb-5">
-                I brought in some old gold jewelry and walked out with $500 in minutes. The team
-                was professional and honest about pricing.
+      {/* ── Karats Split Panel ── */}
+      <section className="bg-cream-dark overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            <FadeIn direction="right" delay={0.1} className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16 lg:py-20 order-2 lg:order-1">
+              <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Purity &amp; Value</p>
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-charcoal mb-4 leading-tight">
+                We Buy All Karats —<br />10K to 24K
+              </h2>
+              <p className="text-muted text-sm leading-relaxed mb-7 max-w-md">
+                From everyday 10K and 14K jewelry to high-purity 18K, 22K, and 24K investment pieces — every karat has value. Our XRF machine reads exact purity in seconds, so you&rsquo;re always paid for exactly what you bring in, not an estimate.
               </p>
-              <footer className="text-muted text-sm font-semibold">— Jane D., Orange CA</footer>
-            </blockquote>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
+                {karats.map((k) => (
+                  <div key={k.karat} className="flex items-center gap-2.5">
+                    <span className="w-2 h-2 rounded-full bg-gold flex-shrink-0" />
+                    <span className="text-sm font-semibold text-charcoal w-10">{k.karat}</span>
+                    <span className="text-sm text-muted">{k.purity} pure gold</span>
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
+            <FadeIn direction="left" className="relative min-h-[380px] order-1 lg:order-2">
+              <Image
+                src="/images/store/DSC03395.jpg"
+                alt="Gold jewelry on velvet tray showing various karats"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Stats Strip ── */}
+      <StatsStrip />
+
+      {/* ── Testimonials ── */}
+      <section className="py-20 bg-charcoal">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-12">
+            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">5-Star Reviews</p>
+            <h2 className="text-3xl font-heading font-bold text-cream">What Our Customers Say</h2>
           </FadeIn>
+          <StaggerChildren className="grid sm:grid-cols-3 gap-6" staggerDelay={0.12}>
+            {testimonials.map((t) => (
+              <MotionItem
+                key={t.author}
+                className="bg-charcoal-soft border border-white/10 rounded-2xl p-7 flex flex-col gap-5"
+              >
+                <p className="text-gold text-3xl leading-none">&ldquo;</p>
+                <p className="text-cream/80 text-sm leading-relaxed flex-1">{t.quote}</p>
+                <footer className="text-muted text-xs font-semibold">— {t.author}</footer>
+              </MotionItem>
+            ))}
+          </StaggerChildren>
         </div>
       </section>
 
@@ -249,6 +418,46 @@ export default function GoldPage() {
                 </div>
               </FadeIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Large Collection Split ── */}
+      <section className="bg-cream overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            <FadeIn direction="right" className="relative min-h-[380px]">
+              <Image
+                src="/images/store/DSC03302.jpg"
+                alt="Mixed coins, bars, and slabs — large gold collection"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </FadeIn>
+            <FadeIn direction="left" delay={0.15} className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16">
+              <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Large Collections Welcome</p>
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-charcoal mb-4 leading-tight">
+                Selling a Large<br />Gold Collection?
+              </h2>
+              <p className="text-muted text-sm leading-relaxed mb-7 max-w-md">
+                We specialize in estate lots, inherited collections, and bulk transactions. Whether you have 5 pieces or 500, our team handles everything with discretion and efficiency — all in a single visit.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="tel:7142134785"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
+                >
+                  Call Us First
+                </Link>
+                <Link
+                  href="/contact"
+                  className="border border-charcoal/25 hover:border-charcoal/60 text-charcoal font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
+                >
+                  Request a Quote
+                </Link>
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>

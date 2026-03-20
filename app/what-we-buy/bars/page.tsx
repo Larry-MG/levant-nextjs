@@ -4,6 +4,7 @@ import Link from 'next/link'
 import FadeIn from '@/components/ui/FadeIn'
 import SpotPriceTicker from '@/components/home/SpotPriceTicker'
 import GoldCalculator from '@/components/home/GoldCalculator'
+import StatsStrip from '@/components/what-we-buy/StatsStrip'
 
 export const metadata: Metadata = {
   title: 'Sell Gold & Silver Bars | Best Bullion Prices in Southern California',
@@ -87,6 +88,55 @@ const whySell = [
   { title: 'Secure & Confidential', body: 'Large bullion transactions are handled with complete discretion. Your privacy is respected at every step.' },
 ]
 
+const barsShowcase = [
+  {
+    label: 'Gold Bars',
+    sub: '1g — 1kg, all major refiners',
+    img: '/images/store/DSC03344.jpg',
+    alt: 'PAMP Suisse gold bars at Levant Gold & Silver',
+    type: 'photo',
+  },
+  {
+    label: 'Silver Bars',
+    sub: '1 oz — 100 oz kilo bars',
+    img: '/images/store/DSC03360.jpg',
+    alt: 'Gold and silver bars angled display',
+    type: 'photo',
+  },
+  {
+    label: 'Platinum Bars',
+    sub: 'All assay cards accepted',
+    img: '/images/products/platinum-bar.png',
+    alt: 'Platinum bar on dark background',
+    type: 'contain',
+  },
+]
+
+const testimonials = [
+  {
+    quote: 'I had a small collection of PAMP Suisse gold bars. They verified the assay cards, tested the bars, and paid top dollar. Seamless transaction.',
+    name: 'James P.',
+    location: 'Orange',
+  },
+  {
+    quote: 'Sold 10 oz of silver bars to them. Good prices, honest process. Will definitely come back with more.',
+    name: 'Barbara T.',
+    location: 'Pomona',
+  },
+  {
+    quote: 'I had a platinum bar from an old investment account. They tested it, explained the spot price math, and paid same day. Very professional.',
+    name: 'Michael R.',
+    location: 'Walnut',
+  },
+]
+
+const refiners = [
+  'PAMP Suisse / Credit Suisse',
+  'Perth Mint / Valcambi',
+  'Johnson Matthey / Engelhard',
+  'Royal Canadian Mint / Others',
+]
+
 export default function BarsPage() {
   return (
     <>
@@ -107,10 +157,13 @@ export default function BarsPage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                  href="/contact"
-                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm"
+                  href="tel:7142134785"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm flex items-center gap-2"
                 >
-                  Get a Free Quote
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
+                    <path fillRule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 8.25V5.999A3 3 0 0 1 1.5 4.5z" clipRule="evenodd" />
+                  </svg>
+                  Call Now
                 </Link>
                 <Link
                   href="/locations"
@@ -146,6 +199,48 @@ export default function BarsPage() {
         <SpotPriceTicker />
       </div>
 
+      {/* ── Bars Showcase ── */}
+      <section className="py-20 bg-charcoal">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-12">
+            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">In Stock Daily</p>
+            <h2 className="text-3xl font-heading font-bold text-cream">Bars We Buy Daily</h2>
+          </FadeIn>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {barsShowcase.map((card, i) => (
+              <FadeIn key={card.label} delay={i * 0.1}>
+                <div className="relative rounded-2xl overflow-hidden h-72 group cursor-default transition-transform duration-300 hover:scale-[1.02]">
+                  {card.type === 'photo' ? (
+                    <Image
+                      src={card.img}
+                      alt={card.alt}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width: 640px) 100vw, 33vw"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-charcoal-soft flex items-center justify-center">
+                      <Image
+                        src={card.img}
+                        alt={card.alt}
+                        width={220}
+                        height={160}
+                        className="object-contain"
+                      />
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <p className="font-heading font-bold text-white text-xl mb-1">{card.label}</p>
+                    <p className="text-white/70 text-sm">{card.sub}</p>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── What We Buy ── */}
       <section className="py-20 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -176,6 +271,45 @@ export default function BarsPage() {
         </div>
       </section>
 
+      {/* ── Major Refinery Brands Photo Split ── */}
+      <section className="bg-cream overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            <FadeIn direction="right" className="relative min-h-[440px]">
+              <Image
+                src="/images/store/DSC03344.jpg"
+                alt="PAMP Suisse gold bars — major refinery brands accepted at Levant"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </FadeIn>
+            <FadeIn direction="left" delay={0.15} className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16 bg-cream-dark">
+              <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Major Refinery Brands</p>
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-charcoal mb-5 leading-tight">
+                We Accept All Major<br />Refinery Brands
+              </h2>
+              <p className="text-muted text-sm leading-relaxed mb-6">
+                PAMP Suisse, Credit Suisse, Perth Mint, Valcambi, Scotiabank, Johnson Matthey,
+                Engelhard, Royal Canadian Mint — if it came from a reputable refinery, we&apos;ll buy
+                it at full melt value. Assay cards, serial numbers, and sealed packaging all verified.
+              </p>
+              <ul className="space-y-2">
+                {refiners.map((r) => (
+                  <li key={r} className="flex items-center gap-3">
+                    <span className="text-gold flex-shrink-0">&#10003;</span>
+                    <span className="text-sm font-semibold text-charcoal">{r}</span>
+                  </li>
+                ))}
+              </ul>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Stats Strip ── */}
+      <StatsStrip />
+
       {/* ── Evaluation Process ── */}
       <section className="py-16 bg-charcoal">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -190,6 +324,36 @@ export default function BarsPage() {
                   <p className="text-5xl font-heading font-bold text-white/8 leading-none mb-4 select-none">{e.step}</p>
                   <h3 className="font-heading font-bold text-cream text-lg mb-2">{e.title}</h3>
                   <p className="text-cream/60 text-sm leading-relaxed">{e.body}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Testimonials ── */}
+      <section className="py-20 bg-charcoal">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-12">
+            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Customer Stories</p>
+            <h2 className="text-3xl font-heading font-bold text-cream">What Our Customers Say</h2>
+          </FadeIn>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <FadeIn key={t.name} delay={i * 0.1}>
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-7 h-full flex flex-col">
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(5)].map((_, s) => (
+                      <svg key={s} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-gold">
+                        <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
+                      </svg>
+                    ))}
+                  </div>
+                  <p className="text-cream/75 text-sm leading-relaxed italic flex-1">&ldquo;{t.quote}&rdquo;</p>
+                  <div className="mt-5 pt-4 border-t border-white/10">
+                    <p className="text-cream font-semibold text-sm">{t.name}</p>
+                    <p className="text-muted text-xs">{t.location}</p>
+                  </div>
                 </div>
               </FadeIn>
             ))}
@@ -266,6 +430,51 @@ export default function BarsPage() {
                 </div>
               </FadeIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Bulk & Large Transactions Split ── */}
+      <section className="bg-cream-dark overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            <FadeIn direction="left" delay={0.15} className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16 order-2 lg:order-1">
+              <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Bulk &amp; Large Transactions</p>
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-charcoal mb-5 leading-tight">
+                Buying or Selling<br />Large Quantities?
+              </h2>
+              <p className="text-muted text-sm leading-relaxed mb-8">
+                We handle large bar transactions — from investors liquidating positions to estate sales
+                involving multiple kilobars. Discreet, efficient, and competitively priced on all
+                large orders.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href="tel:7142134785"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm flex items-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
+                    <path fillRule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 8.25V5.999A3 3 0 0 1 1.5 4.5z" clipRule="evenodd" />
+                  </svg>
+                  Call Now
+                </Link>
+                <Link
+                  href="/contact"
+                  className="border border-charcoal/20 hover:border-charcoal/40 text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm"
+                >
+                  Request a Quote
+                </Link>
+              </div>
+            </FadeIn>
+            <FadeIn direction="right" className="relative min-h-[400px] order-1 lg:order-2">
+              <Image
+                src="/images/store/DSC03360.jpg"
+                alt="Gold and silver bars — bulk bar transactions at Levant Gold & Silver"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </FadeIn>
           </div>
         </div>
       </section>
