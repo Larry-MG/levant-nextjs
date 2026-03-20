@@ -8,8 +8,8 @@ const whatWeBuy = [
   {
     title: 'Gold',
     desc: 'Coins, rings, necklaces, bracelets, earrings, watches, dental gold, and all gold items.',
-    img: '/images/store/DSC03344.jpg',
-    imgAlt: 'Gold bars in PAMP Suisse packaging',
+    img: '/images/store/gold-rand-refinery.jpg',
+    imgAlt: 'Rand Refinery gold bars and coins',
     href: '/what-we-buy/gold',
   },
   {
@@ -29,8 +29,8 @@ const whatWeBuy = [
   {
     title: 'Coins',
     desc: 'U.S. and foreign collectible coins, rare coins, silver dollars, full coin collections.',
-    img: '/images/store/DSC03302.jpg',
-    imgAlt: 'Coins, bars, and slabs on green felt table',
+    img: '/images/store/DSC03344.jpg',
+    imgAlt: 'Gold bars in PAMP Suisse packaging',
     href: '/what-we-buy/coins',
   },
   {
