@@ -165,10 +165,6 @@ export default async function ProductPage({ params }: { params: Promise<{ code: 
                 )}
               </div>
 
-              <div className="border-t border-black/6 pt-4 flex justify-between items-center">
-                <span className="text-xs text-muted/60 uppercase tracking-wider font-semibold">We Buy</span>
-                <span className="font-mono font-semibold text-base text-muted">{formatUSD(product.bid)}</span>
-              </div>
             </div>
 
             {/* Add to cart */}

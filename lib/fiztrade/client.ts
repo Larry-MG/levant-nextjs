@@ -69,10 +69,10 @@ export async function getSpotPrices(): Promise<SpotPrice[]> {
     change > 0 ? 'up' : change < 0 ? 'down' : 'flat'
 
   const data: SpotPrice[] = [
-    { metal: 'gold',      bid: d.goldBid      * MARGIN.gold,      ask: d.goldAsk      * MARGIN.gold,      change: d.goldChange,      changePercent: d.goldChangePercent,      direction: dir(d.goldChange) },
-    { metal: 'silver',    bid: d.silverBid    * MARGIN.silver,    ask: d.silverAsk    * MARGIN.silver,    change: d.silverChange,    changePercent: d.silverChangePercent,    direction: dir(d.silverChange) },
-    { metal: 'platinum',  bid: d.platinumBid  * MARGIN.platinum,  ask: d.platinumAsk  * MARGIN.platinum,  change: d.platinumChange,  changePercent: d.platinumChangePercent,  direction: dir(d.platinumChange) },
-    { metal: 'palladium', bid: d.palladiumBid * MARGIN.palladium, ask: d.palladiumAsk * MARGIN.palladium, change: d.palladiumChange, changePercent: d.palladiumChangePercent, direction: dir(d.palladiumChange) },
+    { metal: 'gold',      bid: d.goldBid,      ask: d.goldAsk      * MARGIN.gold,      change: d.goldChange,      changePercent: d.goldChangePercent,      direction: dir(d.goldChange) },
+    { metal: 'silver',    bid: d.silverBid,    ask: d.silverAsk    * MARGIN.silver,    change: d.silverChange,    changePercent: d.silverChangePercent,    direction: dir(d.silverChange) },
+    { metal: 'platinum',  bid: d.platinumBid,  ask: d.platinumAsk  * MARGIN.platinum,  change: d.platinumChange,  changePercent: d.platinumChangePercent,  direction: dir(d.platinumChange) },
+    { metal: 'palladium', bid: d.palladiumBid, ask: d.palladiumAsk * MARGIN.palladium, change: d.palladiumChange, changePercent: d.palladiumChangePercent, direction: dir(d.palladiumChange) },
   ]
 
   cache.spotPrices = { data, expiresAt: Date.now() + TTL_PRICES }
@@ -183,7 +183,7 @@ export function mergeShopProducts(
       isActiveSell: price.isActiveSell === 'Y',
       isActiveBuy:  price.isActiveBuy  === 'Y',
       ask:          tier1.ask * (MARGIN[metal] ?? 1.10),
-      bid:          tier1.bid * (MARGIN[metal] ?? 1.10),
+      bid:          tier1.bid,
       imageUrl:     pickImage(item.images, ['obv250', 'obverse', 'default']),
       thumbUrl:     pickImage(item.images, ['small', 'obv100', 'default']),
     }]
