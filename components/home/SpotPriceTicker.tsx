@@ -54,9 +54,9 @@ export function SpotPriceBar() {
   }
 
   return (
-    <div className="bg-charcoal-soft border-b border-white/5 py-2">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex gap-x-6 gap-y-1 items-center overflow-x-auto scrollbar-none sm:flex-wrap">
+    <div className="bg-charcoal-soft border-b border-white/5 py-2 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="flex w-full min-w-0 gap-x-6 gap-y-1 items-center overflow-x-auto scrollbar-none sm:flex-wrap">
           {prices.map((p) => (
             <div key={p.metal} className="flex items-center gap-2 text-xs flex-shrink-0">
               <span className="text-gold font-semibold uppercase tracking-wider">{metalLabels[p.metal]}</span>
