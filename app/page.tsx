@@ -232,7 +232,7 @@ export default async function HomePage() {
           <FadeIn className="flex items-end justify-between mb-8">
             <div>
               <p className="text-gold text-[10px] font-bold tracking-[0.2em] uppercase mb-1.5">
-                Live FizTrade Pricing
+                Live Pricing
               </p>
               <h2 className="text-2xl font-heading font-bold text-cream">Popular Products</h2>
             </div>
