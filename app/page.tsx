@@ -191,8 +191,8 @@ export default async function HomePage() {
             <div className="py-24 lg:py-28">
               <HeroText />
             </div>
-            <FadeIn direction="left" delay={0.15} className="hidden lg:flex justify-center items-end self-end">
-              <div className="relative w-full max-w-[520px] h-[440px]">
+            <FadeIn direction="left" delay={0.15} className="hidden lg:flex justify-center items-center">
+              <div className="relative w-full max-w-[520px] h-[420px]">
                 <div className="absolute inset-x-12 bottom-8 h-24 rounded-full bg-gold/25 blur-3xl" />
                 <Image
                   src="/images/what-we-buy/Group-1000008359-1.webp"
@@ -265,15 +265,17 @@ export default async function HomePage() {
               </div>
             </FadeIn>
             {/* Photo */}
-            <FadeIn direction="left" delay={0.2} className="relative min-h-[360px] lg:min-h-0">
-              <Image
-                src="/images/store/DSC03302.jpg"
-                alt="Coins, bars, and precious metals at Levant Gold & Silver"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-cream/30 via-transparent to-transparent lg:block hidden" />
+            <FadeIn direction="left" delay={0.2} className="px-6 pb-6 lg:px-0 lg:pr-8 lg:py-8">
+              <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] lg:h-full">
+                <Image
+                  src="/images/store/DSC03302.jpg"
+                  alt="Coins, bars, and precious metals at Levant Gold & Silver"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-cream/30 via-transparent to-transparent lg:block hidden" />
+              </div>
             </FadeIn>
           </div>
         </div>
@@ -315,8 +317,8 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 items-stretch">
             {/* Photo */}
-            <FadeIn direction="right" className="order-2 lg:order-1 px-6 pb-6 lg:px-0 lg:pb-0 lg:pl-6 lg:py-6">
-              <div className="relative min-h-[400px] overflow-hidden rounded-[2rem] lg:min-h-full">
+            <FadeIn direction="right" className="order-2 lg:order-1 px-6 pb-8 lg:px-0 lg:pl-8 lg:py-8">
+              <div className="relative min-h-[400px] overflow-hidden rounded-[2rem] lg:h-full">
                 <Image
                   src="/images/store/DSC03411.jpg"
                   alt="XRF testing machine at Levant Gold & Silver"
