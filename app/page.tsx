@@ -149,7 +149,16 @@ const homeJsonLd = [
   },
 ]
 
-const POPULAR_CODES = ['1EAGLE', 'SE', '1B', '1MAP', '1PE', '1PAL']
+const POPULAR_CODES = ['1G', '1EAGLE', '90MH', 'SE', '1SEMSB', '1VALPLAT']
+
+const POPULAR_LABEL_OVERRIDES: Record<string, string> = {
+  '1G': '1 oz Gold Bar',
+  '1EAGLE': '1 oz American Gold Eagle',
+  '90MH': '90% American Silver Coins - Minted Halves',
+  'SE': '2026 1 oz American Silver Eagle',
+  '1SEMSB': '1 oz American Silver Eagle Mint Sealed Box',
+  '1VALPLAT': '1 oz Platinum Bar Valcambi',
+}
 
 async function loadPopularProducts() {
   try {
@@ -222,7 +231,11 @@ export default async function HomePage() {
               Shop all &rarr;
             </Link>
           </FadeIn>
-          <PopularProductsGrid products={popularProducts} fallbackCodes={POPULAR_CODES} />
+          <PopularProductsGrid
+            products={popularProducts}
+            fallbackCodes={POPULAR_CODES}
+            labelOverrides={POPULAR_LABEL_OVERRIDES}
+          />
         </div>
       </section>
 

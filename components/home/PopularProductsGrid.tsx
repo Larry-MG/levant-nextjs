@@ -15,6 +15,7 @@ interface Product {
 interface PopularProductsGridProps {
   products: Product[]
   fallbackCodes: string[]
+  labelOverrides?: Record<string, string>
 }
 
 const METAL_ACCENT: Record<string, { badge: string; glow: string; label: string }> = {
@@ -40,7 +41,7 @@ function SkeletonCard() {
   )
 }
 
-export default function PopularProductsGrid({ products, fallbackCodes }: PopularProductsGridProps) {
+export default function PopularProductsGrid({ products, fallbackCodes, labelOverrides }: PopularProductsGridProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
@@ -115,6 +116,7 @@ export default function PopularProductsGrid({ products, fallbackCodes }: Popular
           ? fallbackCodes.map((code) => <SkeletonCard key={code} />)
           : items.slice(0, 8).map((p) => {
               const accent = METAL_ACCENT[p.metal] ?? METAL_ACCENT.gold
+              const displayName = labelOverrides?.[p.code] ?? p.name
               return (
                 <div key={p.code} className="flex-none w-52 sm:w-60 snap-start">
                   <Link
@@ -132,7 +134,7 @@ export default function PopularProductsGrid({ products, fallbackCodes }: Popular
                         <div className="relative w-28 h-28 group-hover:scale-[1.07] transition-transform duration-500 ease-out">
                           <Image
                             src={p.imageUrl}
-                            alt={p.name}
+                            alt={displayName}
                             fill
                             className="object-contain drop-shadow-[0_6px_20px_rgba(0,0,0,0.5)]"
                             sizes="112px"
@@ -154,7 +156,7 @@ export default function PopularProductsGrid({ products, fallbackCodes }: Popular
                     {/* Info */}
                     <div className="px-4 pt-3.5 pb-4">
                       <p className="text-cream/80 text-[13px] font-semibold leading-snug line-clamp-2 group-hover:text-cream transition-colors mb-2.5 h-9">
-                        {p.name}
+                        {displayName}
                       </p>
                       <div className="flex items-end justify-between">
                         <div>

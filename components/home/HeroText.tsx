@@ -39,10 +39,10 @@ export default function HeroText() {
         className="flex flex-wrap gap-3"
       >
         <Link
-          href="/contact"
+          href="tel:7142134785"
           className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-7 py-3.5 rounded-lg transition-colors text-sm"
         >
-          Get a Free Quote
+          Call Now
         </Link>
         <Link
           href="/shop"
