@@ -202,7 +202,7 @@ export default async function HomePage() {
           className="object-cover object-center"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/45" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/25" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(201,168,76,0.28),transparent_36%)]" />
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid min-h-[580px] items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,520px)]">
