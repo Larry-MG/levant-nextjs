@@ -56,16 +56,13 @@ export function SpotPriceBar() {
   return (
     <div className="bg-charcoal-soft border-b border-white/5 py-2 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="flex gap-3 overflow-x-auto pb-1 -mb-1 snap-x snap-mandatory scrollbar-none sm:w-full sm:min-w-0 sm:flex-wrap sm:items-center sm:justify-start sm:gap-x-6 sm:gap-y-1 sm:overflow-visible sm:pb-0 sm:mb-0">
+        <div className="flex w-full min-w-0 items-center gap-x-6 gap-y-1 overflow-x-auto scrollbar-none sm:flex-wrap">
           {prices.map((p) => (
-            <div
-              key={p.metal}
-              className="flex min-w-[158px] snap-start items-center gap-1.5 rounded-full border border-white/8 bg-white/4 px-3 py-1.5 text-[11px] sm:min-w-0 sm:rounded-none sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:text-xs sm:flex-shrink-0"
-            >
-              <span className="shrink-0 text-gold font-semibold uppercase tracking-[0.18em] sm:tracking-wider">
+            <div key={p.metal} className="flex items-center gap-2 text-xs flex-shrink-0">
+              <span className="text-gold font-semibold uppercase tracking-wider">
                 {metalLabels[p.metal]}
               </span>
-              <span className="min-w-0 truncate font-mono text-cream/90">{formatUSD(p.ask)}</span>
+              <span className="font-mono text-cream/90">{formatUSD(p.ask)}</span>
               <span className={`font-mono ${p.direction === 'up' ? 'text-green-400' : p.direction === 'down' ? 'text-red-400' : 'text-cream/30'}`}>
                 {p.direction === 'up' ? '▲' : p.direction === 'down' ? '▼' : '—'}{' '}
                 {formatChange(p.change)}
