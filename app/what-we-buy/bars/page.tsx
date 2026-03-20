@@ -189,16 +189,6 @@ export default function BarsPage() {
         </div>
       </section>
 
-      {/* ── Live Prices ── */}
-      <div>
-        <div className="bg-charcoal pt-4 pb-2">
-          <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase text-center">
-            Live Gold, Silver, &amp; Platinum Prices
-          </p>
-        </div>
-        <SpotPriceTicker />
-      </div>
-
       {/* ── Bars Showcase ── */}
       <section className="py-20 bg-charcoal">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -240,6 +230,16 @@ export default function BarsPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Live Prices ── */}
+      <div>
+        <div className="bg-charcoal pt-4 pb-2">
+          <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase text-center">
+            Live Gold, Silver, &amp; Platinum Prices
+          </p>
+        </div>
+        <SpotPriceTicker />
+      </div>
 
       {/* ── What We Buy ── */}
       <section className="py-20 bg-cream">

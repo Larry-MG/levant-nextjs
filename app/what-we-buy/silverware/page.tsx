@@ -159,16 +159,6 @@ export default function SilverwarePage() {
         </div>
       </section>
 
-      {/* ── Live Prices ── */}
-      <div>
-        <div className="bg-charcoal pt-4 pb-2">
-          <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase text-center">
-            Live Gold, Silver, &amp; Platinum Prices
-          </p>
-        </div>
-        <SpotPriceTicker />
-      </div>
-
       {/* ── Estate Silver Split ── */}
       <section className="bg-charcoal overflow-hidden">
         <div className="max-w-7xl mx-auto">
@@ -205,6 +195,16 @@ export default function SilverwarePage() {
           </div>
         </div>
       </section>
+
+      {/* ── Live Prices ── */}
+      <div>
+        <div className="bg-charcoal pt-4 pb-2">
+          <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase text-center">
+            Live Gold, Silver, &amp; Platinum Prices
+          </p>
+        </div>
+        <SpotPriceTicker />
+      </div>
 
       {/* ── What We Buy ── */}
       <section className="py-20 bg-cream">
