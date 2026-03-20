@@ -172,7 +172,7 @@ const POPULAR_LABEL_OVERRIDES: Record<string, string> = {
 async function loadPopularProducts() {
   try {
     const timeout = new Promise<never>((_, reject) =>
-      setTimeout(() => reject(new Error('Live pricing timeout')), 4000)
+      setTimeout(() => reject(new Error('FizTrade timeout')), 4000)
     )
     const [catalog, prices] = await Promise.race([
       Promise.all([
@@ -232,7 +232,7 @@ export default async function HomePage() {
           <FadeIn className="flex items-end justify-between mb-8">
             <div>
               <p className="text-gold text-[10px] font-bold tracking-[0.2em] uppercase mb-1.5">
-                Live Pricing
+                Live FizTrade Pricing
               </p>
               <h2 className="text-2xl font-heading font-bold text-cream">Popular Products</h2>
             </div>
@@ -286,27 +286,17 @@ export default async function HomePage() {
                 </Link>
               </div>
             </FadeIn>
-            {/* Photos — side by side */}
-            <FadeIn direction="left" delay={0.2} className="px-6 pb-6 lg:px-0 lg:pr-8 lg:py-8 flex items-stretch">
-              <div className="grid grid-cols-2 gap-3 w-full">
-                <div className="relative min-h-[360px] overflow-hidden rounded-[1.5rem] lg:h-full">
-                  <Image
-                    src="/images/store/levant-outside.jpg"
-                    alt="Levant Gold & Silver storefront"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 50vw, 25vw"
-                  />
-                </div>
-                <div className="relative min-h-[360px] overflow-hidden rounded-[1.5rem] lg:h-full mt-6">
-                  <Image
-                    src="/images/store/xrf-machine.jpg"
-                    alt="XRF testing machine at Levant Gold & Silver"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 50vw, 25vw"
-                  />
-                </div>
+            {/* Photo */}
+            <FadeIn direction="left" delay={0.2} className="px-6 pb-6 lg:px-0 lg:pr-8 lg:py-8">
+              <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] lg:h-full">
+                <Image
+                  src="/images/store/levant-outside.jpg"
+                  alt="Levant Gold & Silver storefront in Southern California"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-cream/30 via-transparent to-transparent lg:block hidden" />
               </div>
             </FadeIn>
           </div>
@@ -348,16 +338,30 @@ export default async function HomePage() {
       <section className="bg-cream overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 items-stretch">
-            {/* Photo */}
+            {/* Photos — diagonal stacked */}
             <FadeIn direction="right" className="order-2 lg:order-1 px-6 pb-8 lg:px-0 lg:pl-8 lg:py-8">
-              <div className="relative min-h-[400px] overflow-hidden rounded-[2rem] lg:h-full">
-                <Image
-                  src="/images/store/DSC03411.jpg"
-                  alt="XRF testing machine at Levant Gold & Silver"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
+              <div className="relative min-h-[460px] lg:h-full">
+                {/* Back photo — storefront, shifted up-right */}
+                <div className="absolute inset-0 translate-x-6 -translate-y-4 overflow-hidden rounded-[2rem] shadow-xl">
+                  <Image
+                    src="/images/store/levant-outside.jpg"
+                    alt="Levant Gold & Silver storefront"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-charcoal/20" />
+                </div>
+                {/* Front photo — XRF machine, shifted down-left */}
+                <div className="absolute inset-0 -translate-x-4 translate-y-6 overflow-hidden rounded-[2rem] shadow-2xl ring-4 ring-cream">
+                  <Image
+                    src="/images/store/xrf-machine.jpg"
+                    alt="XRF testing machine at Levant Gold & Silver"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </div>
               </div>
             </FadeIn>
             {/* Text */}
