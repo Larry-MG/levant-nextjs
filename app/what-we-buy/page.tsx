@@ -130,7 +130,7 @@ export default function WhatWeBuyPage() {
       {/* ── Hero ── */}
       <section className="relative min-h-[600px] sm:min-h-[680px] flex items-center overflow-hidden">
         <Image
-          src="/images/store/DSC03344.jpg"
+          src="/images/store/DSC03344.webp"
           alt="PAMP Suisse gold bars at Levant Gold & Silver"
           fill
           className="object-cover object-center"
@@ -301,19 +301,19 @@ export default function WhatWeBuyPage() {
           <div className="grid grid-cols-12 grid-rows-2 gap-2 h-72 sm:h-96">
             {/* Large left */}
             <div className="col-span-5 row-span-2 relative rounded-xl overflow-hidden">
-              <Image src="/images/store/DSC03392.jpg" alt="Levant Gold & Silver store interior" fill className="object-cover hover:scale-105 transition-transform duration-700" sizes="40vw" />
+              <Image src="/images/store/DSC03392.webp" alt="Levant Gold & Silver store interior" fill className="object-cover hover:scale-105 transition-transform duration-700" sizes="40vw" />
             </div>
             {/* Top middle */}
             <div className="col-span-4 row-span-1 relative rounded-xl overflow-hidden">
-              <Image src="/images/store/DSC03302.jpg" alt="Coins and bars at Levant" fill className="object-cover hover:scale-105 transition-transform duration-700" sizes="33vw" />
+              <Image src="/images/store/DSC03302.webp" alt="Coins and bars at Levant" fill className="object-cover hover:scale-105 transition-transform duration-700" sizes="33vw" />
             </div>
             {/* Bottom middle */}
             <div className="col-span-4 row-span-1 relative rounded-xl overflow-hidden">
-              <Image src="/images/store/DSC03395.jpg" alt="Jewelry on velvet tray" fill className="object-cover hover:scale-105 transition-transform duration-700" sizes="33vw" />
+              <Image src="/images/store/DSC03395.webp" alt="Jewelry on velvet tray" fill className="object-cover hover:scale-105 transition-transform duration-700" sizes="33vw" />
             </div>
             {/* Right tall */}
             <div className="col-span-3 row-span-2 relative rounded-xl overflow-hidden">
-              <Image src="/images/store/DSC03344.jpg" alt="PAMP Suisse gold bars" fill className="object-cover hover:scale-105 transition-transform duration-700" sizes="25vw" />
+              <Image src="/images/store/DSC03344.webp" alt="PAMP Suisse gold bars" fill className="object-cover hover:scale-105 transition-transform duration-700" sizes="25vw" />
             </div>
           </div>
         </div>
@@ -326,7 +326,7 @@ export default function WhatWeBuyPage() {
             {/* Image */}
             <div className="relative min-h-[360px] lg:min-h-[500px]">
               <Image
-                src="/images/store/DSC03411.jpg"
+                src="/images/store/DSC03411.webp"
                 alt="XRF testing machine at Levant Gold & Silver"
                 fill
                 className="object-cover"
@@ -406,7 +406,7 @@ export default function WhatWeBuyPage() {
       {/* ── CTA ── */}
       <section className="relative py-24 overflow-hidden">
         <Image
-          src="/images/store/DSC03307.jpg"
+          src="/images/store/DSC03307.webp"
           alt="Silver dollars and coins at Levant Gold & Silver"
           fill
           className="object-cover object-center"

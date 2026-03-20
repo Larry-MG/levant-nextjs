@@ -95,7 +95,7 @@ const rareMetals = [
     accent: '#C0C0E0',
     accentBorder: '#C0C0E0',
     description: 'Rings, coins, bullion bars, industrial platinum. We pay for exact purity via XRF.',
-    image: '/images/products/platinum-bar.png',
+    image: '/images/products/platinum-bar.webp',
     gradient: null,
   },
   {
@@ -358,7 +358,7 @@ export default function PlatinumPage() {
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="relative min-h-[360px]">
               <Image
-                src="/images/store/DSC03395.jpg"
+                src="/images/store/DSC03395.webp"
                 alt="Precious metals jewelry at Levant Gold & Silver"
                 fill
                 className="object-cover"
@@ -481,7 +481,7 @@ export default function PlatinumPage() {
             </FadeIn>
             <FadeIn direction="left" delay={0.15} className="relative min-h-[400px] order-1 lg:order-2">
               <Image
-                src="/images/store/DSC03302.jpg"
+                src="/images/store/DSC03302.webp"
                 alt="Coins, bars, and precious metals at Levant Gold & Silver"
                 fill
                 className="object-cover"
@@ -513,7 +513,7 @@ export default function PlatinumPage() {
             </FadeIn>
             <FadeIn direction="right" className="relative min-h-[400px] order-1 lg:order-2">
               <Image
-                src="/images/store/DSC03411.jpg"
+                src="/images/store/DSC03411.webp"
                 alt="XRF machine at Levant Gold & Silver"
                 fill
                 className="object-cover"

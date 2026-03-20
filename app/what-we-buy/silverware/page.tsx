@@ -165,7 +165,7 @@ export default function SilverwarePage() {
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="relative min-h-[440px]">
               <Image
-                src="/images/store/DSC03256.jpg"
+                src="/images/store/DSC03256.webp"
                 alt="Silver collectibles and estate silverware at Levant Gold & Silver"
                 fill
                 className="object-cover"
@@ -287,7 +287,7 @@ export default function SilverwarePage() {
             </FadeIn>
             <FadeIn direction="right" className="relative min-h-[440px] order-1 lg:order-2">
               <Image
-                src="/images/store/DSC03307.jpg"
+                src="/images/store/DSC03307.webp"
                 alt="Silver coins and collectibles tested at Levant Gold & Silver"
                 fill
                 className="object-cover"
@@ -324,7 +324,7 @@ export default function SilverwarePage() {
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="relative min-h-[360px]">
               <Image
-                src="/images/store/DSC03395.jpg"
+                src="/images/store/DSC03395.webp"
                 alt="Precious metals and jewelry at Levant Gold & Silver"
                 fill
                 className="object-cover"
@@ -357,9 +357,9 @@ export default function SilverwarePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-3 gap-3">
             {[
-              { src: '/images/store/DSC03256.jpg', alt: 'Silver collectibles display at Levant Gold & Silver' },
-              { src: '/images/store/DSC03302.jpg', alt: 'Mixed coins, bars, and slabs at Levant Gold & Silver' },
-              { src: '/images/store/DSC03395.jpg', alt: 'Jewelry on velvet tray at Levant Gold & Silver' },
+              { src: '/images/store/DSC03256.webp', alt: 'Silver collectibles display at Levant Gold & Silver' },
+              { src: '/images/store/DSC03302.webp', alt: 'Mixed coins, bars, and slabs at Levant Gold & Silver' },
+              { src: '/images/store/DSC03395.webp', alt: 'Jewelry on velvet tray at Levant Gold & Silver' },
             ].map((photo) => (
               <div key={photo.src} className="relative aspect-[4/3] rounded-xl overflow-hidden group">
                 <Image
@@ -439,7 +439,7 @@ export default function SilverwarePage() {
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="relative min-h-[400px]">
               <Image
-                src="/images/store/DSC03302.jpg"
+                src="/images/store/DSC03302.webp"
                 alt="Mixed coins, bars, and sterling silver estate collection at Levant"
                 fill
                 className="object-cover"
@@ -484,7 +484,7 @@ export default function SilverwarePage() {
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="relative min-h-[360px]">
               <Image
-                src="/images/store/DSC03411.jpg"
+                src="/images/store/DSC03411.webp"
                 alt="XRF machine testing silver at Levant Gold & Silver"
                 fill
                 className="object-cover"

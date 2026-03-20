@@ -89,28 +89,28 @@ const showcaseClaims = [
 
 const productGrid = [
   {
-    src: '/images/products/silver-morgan.png',
+    src: '/images/products/silver-morgan.webp',
     alt: 'Morgan Silver Dollar coin',
     label: 'Morgan Dollars',
     desc: 'Classic U.S. numismatic coins valued for metal and collectibility',
     isPng: true,
   },
   {
-    src: '/images/products/silver-buffalo.png',
+    src: '/images/products/silver-buffalo.webp',
     alt: 'Silver Buffalo round',
     label: 'Silver Rounds',
     desc: 'Generic and branded .999 fine silver rounds of any size',
     isPng: true,
   },
   {
-    src: '/images/store/DSC03307.jpg',
+    src: '/images/store/DSC03307.webp',
     alt: 'Junk silver coins — quarters and dimes laid out',
     label: 'Junk Silver Coins',
     desc: 'Pre-1965 dimes, quarters, and half-dollars at full melt value',
     isPng: false,
   },
   {
-    src: '/images/store/DSC03256.jpg',
+    src: '/images/store/DSC03256.webp',
     alt: 'Sterling silverware and collectibles display',
     label: 'Sterling Silverware',
     desc: 'Flatware sets, tea services, candlesticks, and trays',
@@ -344,7 +344,7 @@ export default function SilverPage() {
             {/* Left — store photo */}
             <FadeIn direction="right" className="relative min-h-[420px] order-2 lg:order-1">
               <Image
-                src="/images/store/DSC03307.jpg"
+                src="/images/store/DSC03307.webp"
                 alt="Silver dollars and coins laid out at Levant Gold & Silver"
                 fill
                 className="object-cover"
@@ -384,7 +384,7 @@ export default function SilverPage() {
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="relative min-h-[360px]">
               <Image
-                src="/images/store/DSC03302.jpg"
+                src="/images/store/DSC03302.webp"
                 alt="Coins, silver bars, and bullion at Levant Gold & Silver Orange location"
                 fill
                 className="object-cover"
@@ -420,9 +420,9 @@ export default function SilverPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-3 gap-3">
             {[
-              { src: '/images/store/DSC03256.jpg', alt: 'Silver collectibles display at Levant Gold & Silver' },
-              { src: '/images/store/DSC03302.jpg', alt: 'Mixed coins, bars, and slabs at Levant Gold & Silver' },
-              { src: '/images/store/DSC03307.jpg', alt: 'Silver dollars and coins laid out at Levant Gold & Silver' },
+              { src: '/images/store/DSC03256.webp', alt: 'Silver collectibles display at Levant Gold & Silver' },
+              { src: '/images/store/DSC03302.webp', alt: 'Mixed coins, bars, and slabs at Levant Gold & Silver' },
+              { src: '/images/store/DSC03307.webp', alt: 'Silver dollars and coins laid out at Levant Gold & Silver' },
             ].map((photo) => (
               <div key={photo.src} className="relative aspect-[4/3] rounded-xl overflow-hidden hover:scale-105 transition-transform duration-500">
                 <Image
@@ -531,7 +531,7 @@ export default function SilverPage() {
             {/* Right — photo */}
             <FadeIn direction="left" delay={0.15} className="relative min-h-[420px] order-1 lg:order-2">
               <Image
-                src="/images/store/DSC03302.jpg"
+                src="/images/store/DSC03302.webp"
                 alt="Mixed coins, bars, and slabs — estate silver collection at Levant Gold & Silver"
                 fill
                 className="object-cover"
@@ -562,7 +562,7 @@ export default function SilverPage() {
             </FadeIn>
             <FadeIn direction="right" className="relative min-h-[400px] order-1 lg:order-2">
               <Image
-                src="/images/store/DSC03411.jpg"
+                src="/images/store/DSC03411.webp"
                 alt="XRF testing machine at Levant Gold & Silver"
                 fill
                 className="object-cover"

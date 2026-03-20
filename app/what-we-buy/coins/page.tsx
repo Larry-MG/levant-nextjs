@@ -95,22 +95,22 @@ const steps = [
 
 const coinShowcase = [
   {
-    image: '/images/products/gold-eagle-1oz.png',
+    image: '/images/products/gold-eagle-1oz.webp',
     name: 'American Gold Eagle',
     descriptor: '1 oz | ¼ oz | ½ oz sizes',
   },
   {
-    image: '/images/products/silver-morgan.png',
+    image: '/images/products/silver-morgan.webp',
     name: 'Morgan Silver Dollar',
     descriptor: 'Pre-1921 key dates get premium',
   },
   {
-    image: '/images/products/silver-buffalo.png',
+    image: '/images/products/silver-buffalo.webp',
     name: 'Silver Buffalo Round',
     descriptor: '.999 fine silver',
   },
   {
-    image: '/images/products/gold-eagle-quarter.png',
+    image: '/images/products/gold-eagle-quarter.webp',
     name: 'Gold Eagle Quarter Oz',
     descriptor: 'Fractional gold coins',
   },
@@ -268,7 +268,7 @@ export default function CoinsPage() {
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="relative min-h-[420px]">
               <Image
-                src="/images/store/DSC03302.jpg"
+                src="/images/store/DSC03302.webp"
                 alt="Coins, bars, and slabs in a display case at Levant Gold & Silver"
                 fill
                 className="object-cover"
@@ -336,7 +336,7 @@ export default function CoinsPage() {
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="relative min-h-[360px]">
               <Image
-                src="/images/store/DSC03344.jpg"
+                src="/images/store/DSC03344.webp"
                 alt="PAMP Suisse gold bars and coins at Levant Gold & Silver"
                 fill
                 className="object-cover"
@@ -456,7 +456,7 @@ export default function CoinsPage() {
             </FadeIn>
             <FadeIn direction="left" delay={0.15} className="relative min-h-[400px] order-1 lg:order-2">
               <Image
-                src="/images/store/DSC03302.jpg"
+                src="/images/store/DSC03302.webp"
                 alt="Large coin collection, bars, and slabs at Levant Gold & Silver"
                 fill
                 className="object-cover"
@@ -488,7 +488,7 @@ export default function CoinsPage() {
             </FadeIn>
             <FadeIn direction="right" className="relative min-h-[400px] order-1 lg:order-2">
               <Image
-                src="/images/store/DSC03411.jpg"
+                src="/images/store/DSC03411.webp"
                 alt="XRF machine testing coins at Levant Gold & Silver"
                 fill
                 className="object-cover"

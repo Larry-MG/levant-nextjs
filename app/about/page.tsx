@@ -30,15 +30,15 @@ export const metadata: Metadata = {
 
 const team = [
   {
-    img: '/images/store/DSC03302.jpg',
+    img: '/images/store/DSC03302.webp',
     caption: 'Coins, bars, and bullion at our Orange location',
   },
   {
-    img: '/images/store/DSC03344.jpg',
+    img: '/images/store/DSC03344.webp',
     caption: 'PAMP Suisse gold bars — just some of what we carry',
   },
   {
-    img: '/images/store/DSC03411.jpg',
+    img: '/images/store/DSC03411.webp',
     caption: 'Our XRF machine in action at a Levant location',
   },
 ]
@@ -49,7 +49,7 @@ export default function AboutPage() {
       {/* ── Hero ── */}
       <section className="relative min-h-[440px] flex items-end overflow-hidden">
         <Image
-          src="/images/store/DSC03392.jpg"
+          src="/images/store/DSC03392.webp"
           alt="Levant Gold & Silver store interior"
           fill
           className="object-cover object-center"
@@ -102,7 +102,7 @@ export default function AboutPage() {
             </FadeIn>
             <FadeIn direction="left" delay={0.2} className="relative h-[420px] rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/store/DSC03395.jpg"
+                src="/images/store/DSC03395.webp"
                 alt="Jewelry and precious metals at Levant"
                 fill
                 className="object-cover"
@@ -163,7 +163,7 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="relative min-h-[400px] lg:min-h-0">
               <Image
-                src="/images/store/DSC03411.jpg"
+                src="/images/store/DSC03411.webp"
                 alt="XRF machine at Levant Gold & Silver"
                 fill
                 className="object-cover"

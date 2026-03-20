@@ -11,7 +11,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <Image
-                src="/images/logo/levant-logo.png"
+                src="/images/logo/levant-logo.webp"
                 alt="Levant Gold & Silver"
                 width={48}
                 height={48}

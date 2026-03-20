@@ -277,7 +277,7 @@ export default async function HomePage() {
             <FadeIn direction="left" delay={0.2} className="px-6 pb-6 lg:px-0 lg:pr-8 lg:py-8">
               <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] lg:h-full">
                 <Image
-                  src="/images/store/levant-outside.jpg"
+                  src="/images/store/levant-outside.webp"
                   alt="Levant Gold & Silver storefront in Southern California"
                   fill
                   className="object-cover"
@@ -301,7 +301,7 @@ export default async function HomePage() {
             <FadeIn direction="right" className="order-1 lg:order-1 px-6 pt-8 pb-6 lg:px-0 lg:pl-8 lg:py-8">
               <div className="relative min-h-[400px] overflow-hidden rounded-[2rem] lg:h-full">
                 <Image
-                  src="/images/store/DSC03411.jpg"
+                  src="/images/store/DSC03411.webp"
                   alt="XRF testing machine at Levant Gold & Silver"
                   fill
                   className="object-cover"
@@ -365,12 +365,13 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="px-6 pt-8 pb-6 lg:px-0 lg:pl-8 lg:py-8">
-              <div className="relative min-h-[460px] overflow-hidden rounded-[2rem] lg:h-full">
+              <div className="relative h-[380px] overflow-hidden rounded-[2rem]">
                 <Image
-                  src="/images/store/gold-rand-refinery.jpg"
+                  src="/images/store/gold-rand-refinery.webp"
                   alt="Rand Refinery gold bars and gold coins at Levant Gold & Silver"
                   fill
-                  className="object-cover object-center"
+                  loading="eager"
+                  className="object-cover object-center rotate-90 scale-[1.45]"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>

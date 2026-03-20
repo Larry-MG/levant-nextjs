@@ -76,7 +76,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 flex items-center group">
             <Image
-              src="/images/logo/levant-logo.png"
+              src="/images/logo/levant-logo.webp"
               alt="Levant Gold & Silver"
               width={72}
               height={72}
@@ -184,7 +184,7 @@ export default function Header() {
             <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 flex-shrink-0">
               <Link href="/" className="flex items-center gap-2.5" onClick={() => setMobileOpen(false)}>
                 <Image
-                  src="/images/logo/levant-logo.png"
+                  src="/images/logo/levant-logo.webp"
                   alt="Levant"
                   width={36}
                   height={36}

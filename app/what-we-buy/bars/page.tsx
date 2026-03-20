@@ -92,21 +92,21 @@ const barsShowcase = [
   {
     label: 'Gold Bars',
     sub: '1g — 1kg, all major refiners',
-    img: '/images/store/DSC03344.jpg',
+    img: '/images/store/DSC03344.webp',
     alt: 'PAMP Suisse gold bars at Levant Gold & Silver',
     type: 'photo',
   },
   {
     label: 'Silver Bars',
     sub: '1 oz — 100 oz kilo bars',
-    img: '/images/store/DSC03360.jpg',
+    img: '/images/store/DSC03360.webp',
     alt: 'Gold and silver bars angled display',
     type: 'photo',
   },
   {
     label: 'Platinum Bars',
     sub: 'All assay cards accepted',
-    img: '/images/products/platinum-bar.png',
+    img: '/images/products/platinum-bar.webp',
     alt: 'Platinum bar on dark background',
     type: 'contain',
   },
@@ -277,7 +277,7 @@ export default function BarsPage() {
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="relative min-h-[440px]">
               <Image
-                src="/images/store/DSC03344.jpg"
+                src="/images/store/DSC03344.webp"
                 alt="PAMP Suisse gold bars — major refinery brands accepted at Levant"
                 fill
                 className="object-cover"
@@ -367,7 +367,7 @@ export default function BarsPage() {
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="relative min-h-[400px]">
               <Image
-                src="/images/store/DSC03344.jpg"
+                src="/images/store/DSC03344.webp"
                 alt="PAMP Suisse gold bars at Levant Gold & Silver"
                 fill
                 className="object-cover"
@@ -468,7 +468,7 @@ export default function BarsPage() {
             </FadeIn>
             <FadeIn direction="right" className="relative min-h-[400px] order-1 lg:order-2">
               <Image
-                src="/images/store/DSC03360.jpg"
+                src="/images/store/DSC03360.webp"
                 alt="Gold and silver bars — bulk bar transactions at Levant Gold & Silver"
                 fill
                 className="object-cover"
@@ -500,7 +500,7 @@ export default function BarsPage() {
             </FadeIn>
             <FadeIn direction="right" className="relative min-h-[400px] order-1 lg:order-2">
               <Image
-                src="/images/store/DSC03411.jpg"
+                src="/images/store/DSC03411.webp"
                 alt="XRF machine verifying bullion bars at Levant Gold & Silver"
                 fill
                 className="object-cover"

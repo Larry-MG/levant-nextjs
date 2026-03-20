@@ -96,19 +96,19 @@ const testimonials = [
 
 const showcaseCards = [
   {
-    src: '/images/store/DSC03344.jpg',
+    src: '/images/store/DSC03344.webp',
     alt: 'PAMP Suisse gold bars at Levant Gold & Silver',
     label: 'Bullion & Bars',
     objectFit: 'object-cover',
   },
   {
-    src: '/images/store/gold-rand-refinery.jpg',
+    src: '/images/store/gold-rand-refinery.webp',
     alt: 'Rand Refinery gold bars and coins at Levant Gold & Silver',
     label: 'Gold Coins',
     objectFit: 'object-cover',
   },
   {
-    src: '/images/store/DSC03395.jpg',
+    src: '/images/store/DSC03395.webp',
     alt: 'Gold jewelry on velvet tray at Levant Gold & Silver',
     label: 'Gold Jewelry',
     objectFit: 'object-cover',
@@ -259,7 +259,7 @@ export default function GoldPage() {
             {/* Left — tall */}
             <div className="col-span-1 row-span-2 relative overflow-hidden rounded-xl">
               <Image
-                src="/images/store/DSC03360.jpg"
+                src="/images/store/DSC03360.webp"
                 alt="Gold bars angled display at Levant Gold & Silver"
                 fill
                 sizes="(max-width: 768px) 33vw, 25vw"
@@ -269,7 +269,7 @@ export default function GoldPage() {
             {/* Top right */}
             <div className="col-span-2 relative overflow-hidden rounded-xl">
               <Image
-                src="/images/store/DSC03344.jpg"
+                src="/images/store/DSC03344.webp"
                 alt="PAMP Suisse gold bars collection"
                 fill
                 sizes="(max-width: 768px) 66vw, 50vw"
@@ -279,7 +279,7 @@ export default function GoldPage() {
             {/* Bottom right */}
             <div className="col-span-2 relative overflow-hidden rounded-xl">
               <Image
-                src="/images/store/DSC03302.jpg"
+                src="/images/store/DSC03302.webp"
                 alt="Mixed gold coins, bars, and slabs"
                 fill
                 sizes="(max-width: 768px) 66vw, 50vw"
@@ -296,7 +296,7 @@ export default function GoldPage() {
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="relative min-h-[360px]">
               <Image
-                src="/images/store/DSC03344.jpg"
+                src="/images/store/DSC03344.webp"
                 alt="PAMP Suisse gold bars at Levant Gold & Silver"
                 fill
                 className="object-cover"
@@ -348,7 +348,7 @@ export default function GoldPage() {
             </FadeIn>
             <FadeIn direction="left" className="relative min-h-[380px] order-1 lg:order-2">
               <Image
-                src="/images/store/DSC03395.jpg"
+                src="/images/store/DSC03395.webp"
                 alt="Gold jewelry on velvet tray showing various karats"
                 fill
                 className="object-cover"
@@ -428,7 +428,7 @@ export default function GoldPage() {
           <div className="grid lg:grid-cols-2 items-stretch">
             <FadeIn direction="right" className="relative min-h-[380px]">
               <Image
-                src="/images/store/DSC03302.jpg"
+                src="/images/store/DSC03302.webp"
                 alt="Mixed coins, bars, and slabs — large gold collection"
                 fill
                 className="object-cover"
@@ -493,7 +493,7 @@ export default function GoldPage() {
             </FadeIn>
             <FadeIn direction="right" className="relative min-h-[400px] order-1 lg:order-2">
               <Image
-                src="/images/store/DSC03411.jpg"
+                src="/images/store/DSC03411.webp"
                 alt="XRF X-Ray Fluorescence machine at Levant Gold & Silver"
                 fill
                 className="object-cover"
