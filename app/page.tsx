@@ -297,14 +297,16 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 items-stretch">
             {/* Photo */}
-            <FadeIn direction="right" className="relative min-h-[400px] lg:min-h-0 order-2 lg:order-1">
-              <Image
-                src="/images/store/DSC03411.jpg"
-                alt="XRF testing machine at Levant Gold & Silver"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+            <FadeIn direction="right" className="order-2 lg:order-1 px-6 pb-6 lg:px-0 lg:pb-0 lg:pl-6 lg:py-6">
+              <div className="relative min-h-[400px] overflow-hidden rounded-[2rem] lg:min-h-full">
+                <Image
+                  src="/images/store/DSC03411.jpg"
+                  alt="XRF testing machine at Levant Gold & Silver"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
             </FadeIn>
             {/* Text */}
             <FadeIn direction="left" delay={0.2} className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16 lg:py-20 order-1 lg:order-2">
@@ -343,25 +345,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Gold Bar Photo Break ── */}
-      <div className="relative h-48 sm:h-64 overflow-hidden">
-        <Image
-          src="/images/store/DSC03392.jpg"
-          alt="Gold jewelry on velvet tray"
-          fill
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-charcoal/70" />
-        <FadeIn direction="none" className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center px-4">
-            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-2">Walk in any day</p>
-            <p className="text-white text-2xl sm:text-3xl font-heading font-bold">
-              Same-Day Cash Offers at All 4 Locations
-            </p>
-          </div>
-        </FadeIn>
-      </div>
 
       {/* ── Map ── */}
       <LocationsMap locations={locations} />
