@@ -364,14 +364,16 @@ export default async function HomePage() {
       <section className="bg-charcoal overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 items-stretch">
-            <FadeIn direction="right" className="relative min-h-[460px]">
-              <Image
-                src="/images/store/gold-rand-refinery.jpg"
-                alt="Rand Refinery gold bars and gold coins at Levant Gold & Silver"
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+            <FadeIn direction="right" className="px-6 pt-8 pb-6 lg:px-0 lg:pl-8 lg:py-8">
+              <div className="relative min-h-[460px] overflow-hidden rounded-[2rem] lg:h-full">
+                <Image
+                  src="/images/store/gold-rand-refinery.jpg"
+                  alt="Rand Refinery gold bars and gold coins at Levant Gold & Silver"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
             </FadeIn>
             <FadeIn direction="left" delay={0.15} className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16 lg:py-20">
               <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Gold Bars &amp; Coins</p>
