@@ -12,6 +12,7 @@ import LocationsMap from '@/components/home/LocationsMap'
 import PopularProductsGrid from '@/components/home/PopularProductsGrid'
 import StatsSection from '@/components/home/StatsSection'
 import FAQ from '@/components/home/FAQ'
+import QuoteForm from '@/components/home/QuoteForm'
 import FadeIn from '@/components/ui/FadeIn'
 import JsonLd from '@/components/seo/JsonLd'
 import { locations } from '@/lib/constants/locations'
@@ -464,44 +465,7 @@ export default async function HomePage() {
               </div>
             </FadeIn>
             <FadeIn direction="left" delay={0.15}>
-              <form action="#" method="POST" className="space-y-3">
-                <div className="grid grid-cols-2 gap-3">
-                  <input
-                    type="text"
-                    placeholder="First Name"
-                    className="bg-white/8 border border-white/15 focus:border-gold rounded-lg px-4 py-3.5 text-sm text-cream placeholder-cream/30 focus:outline-none transition-colors"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Last Name"
-                    className="bg-white/8 border border-white/15 focus:border-gold rounded-lg px-4 py-3.5 text-sm text-cream placeholder-cream/30 focus:outline-none transition-colors"
-                  />
-                </div>
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="w-full bg-white/8 border border-white/15 focus:border-gold rounded-lg px-4 py-3.5 text-sm text-cream placeholder-cream/30 focus:outline-none transition-colors"
-                />
-                <input
-                  type="tel"
-                  placeholder="Phone Number"
-                  className="w-full bg-white/8 border border-white/15 focus:border-gold rounded-lg px-4 py-3.5 text-sm text-cream placeholder-cream/30 focus:outline-none transition-colors"
-                />
-                <textarea
-                  rows={4}
-                  placeholder="Describe what you have (gold jewelry, silver coins, etc.)"
-                  className="w-full bg-white/8 border border-white/15 focus:border-gold rounded-lg px-4 py-3.5 text-sm text-cream placeholder-cream/30 focus:outline-none transition-colors resize-none"
-                />
-                <button
-                  type="submit"
-                  className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold py-3.5 rounded-lg transition-colors text-sm"
-                >
-                  Send Quote Request
-                </button>
-                <p className="text-center text-xs text-cream/30">
-                  We respond within 24 hours. Your information is never shared.
-                </p>
-              </form>
+              <QuoteForm />
             </FadeIn>
           </div>
         </div>

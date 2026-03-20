@@ -323,25 +323,32 @@ export async function POST(req: NextRequest) {
   try {
     const body: OrderPayload = await req.json()
 
-    const [customerResult, businessResult] = await Promise.all([
+    const businessSubject = `🛒 New Order #${body.orderNumber} — ${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(body.subtotal)} from ${body.contact.name}`
+
+    const sends = await Promise.allSettled([
       resend.emails.send({
         from: FROM,
         to: body.contact.email,
         subject: `Order Confirmed — #${body.orderNumber} | Levant Gold & Silver`,
         html: customerEmail(body),
       }),
-      resend.emails.send({
-        from: FROM,
-        to: BUSINESS_EMAILS,
-        subject: `🛒 New Order #${body.orderNumber} — ${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(body.subtotal)} from ${body.contact.name}`,
-        html: businessEmail(body),
-      }),
+      ...BUSINESS_EMAILS.map((addr) =>
+        resend.emails.send({
+          from: FROM,
+          to: addr,
+          subject: businessSubject,
+          html: businessEmail(body),
+        })
+      ),
     ])
 
-    if (customerResult.error || businessResult.error) {
-      console.error('Resend error:', customerResult.error ?? businessResult.error)
-      return NextResponse.json({ error: 'Email send failed' }, { status: 500 })
-    }
+    sends.forEach((result, i) => {
+      if (result.status === 'rejected') {
+        console.error(`Order email rejected [${i}]:`, result.reason)
+      } else if (result.value.error) {
+        console.error(`Order email error [${i}]:`, JSON.stringify(result.value.error))
+      }
+    })
 
     return NextResponse.json({ success: true })
   } catch (err) {

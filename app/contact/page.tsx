@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { locations } from '@/lib/constants/locations'
+import ContactForm from '@/components/contact/ContactForm'
 
 export const metadata: Metadata = {
   title: 'Contact Us | Free Gold & Silver Quote — Orange County & Inland Empire',
@@ -42,88 +43,7 @@ export default function ContactPage() {
             {/* Form */}
             <div className="bg-white border border-border rounded-lg p-6">
               <h2 className="font-heading font-bold text-xl text-charcoal mb-5">Request a Quote</h2>
-              {/*
-                Note: Replace the action URL below with your Formspree endpoint.
-                Sign up at formspree.io to get a free endpoint.
-                e.g. action="https://formspree.io/f/YOUR_FORM_ID"
-              */}
-              <form action="#" method="POST" className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-charcoal/70 uppercase tracking-wider mb-1.5">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      className="w-full border border-border rounded px-3 py-2 text-sm text-charcoal focus:outline-none focus:border-gold bg-white"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-charcoal/70 uppercase tracking-wider mb-1.5">
-                      Phone
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      className="w-full border border-border rounded px-3 py-2 text-sm text-charcoal focus:outline-none focus:border-gold bg-white"
-                      placeholder="(555) 555-5555"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-charcoal/70 uppercase tracking-wider mb-1.5">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    className="w-full border border-border rounded px-3 py-2 text-sm text-charcoal focus:outline-none focus:border-gold bg-white"
-                    placeholder="you@example.com"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-charcoal/70 uppercase tracking-wider mb-1.5">
-                    What do you have?
-                  </label>
-                  <select
-                    name="category"
-                    className="w-full border border-border rounded px-3 py-2 text-sm text-charcoal focus:outline-none focus:border-gold bg-white"
-                  >
-                    <option value="">Select a category</option>
-                    <option>Gold coins or bars</option>
-                    <option>Silver coins or bars</option>
-                    <option>Platinum or palladium</option>
-                    <option>Jewelry</option>
-                    <option>Estate or scrap gold</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-charcoal/70 uppercase tracking-wider mb-1.5">
-                    Message
-                  </label>
-                  <textarea
-                    name="message"
-                    rows={4}
-                    className="w-full border border-border rounded px-3 py-2 text-sm text-charcoal focus:outline-none focus:border-gold bg-white resize-none"
-                    placeholder="Describe your items and any questions you have..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold py-3 rounded transition-colors"
-                >
-                  Send Message
-                </button>
-              </form>
+              <ContactForm />
             </div>
 
             {/* Location list */}
