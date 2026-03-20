@@ -3,7 +3,7 @@ import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-const BUSINESS_EMAIL = 'ahmad@motorsportgrowth.com'
+const BUSINESS_EMAILS = ['ahmad@motorsportgrowth.com', 'levantgoldandsilver@gmail.com']
 const FROM = 'Levant Gold & Silver <onboarding@resend.dev>'
 
 interface OrderItem {
@@ -332,7 +332,7 @@ export async function POST(req: NextRequest) {
       }),
       resend.emails.send({
         from: FROM,
-        to: BUSINESS_EMAIL,
+        to: BUSINESS_EMAILS,
         subject: `🛒 New Order #${body.orderNumber} — ${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(body.subtotal)} from ${body.contact.name}`,
         html: businessEmail(body),
       }),
