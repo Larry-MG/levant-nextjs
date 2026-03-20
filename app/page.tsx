@@ -360,6 +360,46 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── Gold Bullion Feature ── */}
+      <section className="bg-charcoal overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 items-stretch">
+            <FadeIn direction="right" className="relative min-h-[460px]">
+              <Image
+                src="/images/store/gold-rand-refinery.jpg"
+                alt="Rand Refinery gold bars and gold coins at Levant Gold & Silver"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </FadeIn>
+            <FadeIn direction="left" delay={0.15} className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16 lg:py-20">
+              <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Gold Bars &amp; Coins</p>
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-cream mb-4 leading-tight">
+                We Buy and Sell<br />Premium Bullion
+              </h2>
+              <p className="text-cream/60 text-sm leading-relaxed mb-7 max-w-md">
+                From 1 oz Rand Refinery bars to American Gold Eagles and Krugerrands — we deal in the world&rsquo;s most trusted gold products. Bring in your bullion for a live-spot offer, or browse our inventory in store.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/what-we-buy/gold"
+                  className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
+                >
+                  Sell Your Gold
+                </Link>
+                <Link
+                  href="/shop"
+                  className="border border-white/20 hover:border-white/40 text-cream font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
+                >
+                  Shop Bullion
+                </Link>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
       {/* ── How It Works ── */}
       <section className="py-20 bg-charcoal text-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

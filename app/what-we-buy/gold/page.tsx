@@ -96,8 +96,8 @@ const testimonials = [
 
 const showcaseCards = [
   {
-    src: '/images/store/DSC03344.jpg',
-    alt: 'PAMP Suisse gold bars at Levant Gold & Silver',
+    src: '/images/store/gold-rand-refinery.jpg',
+    alt: 'Rand Refinery gold bars and gold coins at Levant Gold & Silver',
     label: 'Bullion & Bars',
     objectFit: 'object-cover',
   },
