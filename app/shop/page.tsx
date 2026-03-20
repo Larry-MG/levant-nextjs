@@ -23,7 +23,7 @@ const SPOT_BAR_THEME = {
 }
 
 async function loadShopData() {
-  // Run spot prices, catalog, and prices in parallel
+  // Run spot prices, catalog, and prices in parallel — each has a 5s abort timeout inside fetchWithTimeout
   const [spotPrices, catalog, prices] = await Promise.all([
     getSpotPrices().catch(() => []),
     getProductCatalog(ALL_PRODUCT_CODES).catch(() => []),

@@ -39,7 +39,7 @@ export function SpotPriceBar() {
   useEffect(() => {
     const ctrl = new AbortController()
     fetchPrices(ctrl.signal)
-    const iv = setInterval(() => fetchPrices(ctrl.signal), 30_000)
+    const iv = setInterval(() => fetchPrices(ctrl.signal), 5 * 60_000)
     return () => { ctrl.abort(); clearInterval(iv) }
   }, [fetchPrices])
 
@@ -93,7 +93,7 @@ export default function SpotPriceTicker() {
   useEffect(() => {
     const ctrl = new AbortController()
     fetchPrices(ctrl.signal)
-    const iv = setInterval(() => fetchPrices(ctrl.signal), 30_000)
+    const iv = setInterval(() => fetchPrices(ctrl.signal), 5 * 60_000)
     return () => { ctrl.abort(); clearInterval(iv) }
   }, [fetchPrices])
 
@@ -211,7 +211,7 @@ export default function SpotPriceTicker() {
         )}
 
         <p className="text-center text-cream/20 text-xs mt-6">
-          Prices update every 30 seconds &middot; USD per troy oz
+          Prices update every 5 minutes &middot; USD per troy oz
         </p>
       </div>
     </section>

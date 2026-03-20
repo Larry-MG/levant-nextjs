@@ -11,73 +11,102 @@ import type {
 const BASE_URL = process.env.FIZCONNECT_URL ?? 'https://stage-connect.fiztrade.com'
 const API_TOKEN = process.env.FIZCONNECT_API_TOKEN
 
-async function fetchWithTimeout(input: RequestInfo, init: RequestInit & { next?: { revalidate?: number } } = {}): Promise<Response> {
-  const timeout = new Promise<never>((_, reject) =>
-    setTimeout(() => reject(new Error('FizTrade request timed out')), 5000)
-  )
-  return Promise.race([fetch(input, init), timeout])
+const TTL_PRICES  = 5 * 60 * 1000          // 5 min
+const TTL_CATALOG = 24 * 60 * 60 * 1000    // 24 h
+const FETCH_TIMEOUT = 5000                  // 5 s — abort if FizTrade doesn't respond
+
+// ─── In-memory cache (survives across requests in the same Node process) ──────
+
+interface CacheEntry<T> {
+  data: T
+  expiresAt: number
 }
 
-const REVALIDATE_PRICES  = 300         // 5 min — live prices
-const REVALIDATE_CATALOG = 60 * 60 * 24 // 24 h  — product info / images rarely change
+const cache = {
+  spotPrices:    null as CacheEntry<SpotPrice[]>        | null,
+  catalog:       null as CacheEntry<FizCatalogProduct[]>| null,
+  productPrices: null as CacheEntry<FizProductPrice[]>  | null,
+}
+
+function isFresh<T>(entry: CacheEntry<T> | null): entry is CacheEntry<T> {
+  return entry !== null && Date.now() < entry.expiresAt
+}
+
+// ─── Fetch with real abort ─────────────────────────────────────────────────────
+
+async function fetchWithTimeout(input: RequestInfo, init: RequestInit = {}): Promise<Response> {
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT)
+  try {
+    return await fetch(input, { ...init, signal: controller.signal })
+  } finally {
+    clearTimeout(timeoutId)
+  }
+}
+
+// ─── Spot prices ──────────────────────────────────────────────────────────────
 
 export async function getSpotPrices(): Promise<SpotPrice[]> {
-  if (!API_TOKEN) {
-    throw new Error('FIZCONNECT_API_TOKEN env var is required')
-  }
+  if (isFresh(cache.spotPrices)) return cache.spotPrices.data
 
-  const res = await fetchWithTimeout(`${BASE_URL}/FizServices/GetSpotPriceData/${API_TOKEN}`, {
-    next: { revalidate: REVALIDATE_PRICES },
-  })
+  if (!API_TOKEN) throw new Error('FIZCONNECT_API_TOKEN env var is required')
 
-  if (!res.ok) {
-    throw new Error(`FizTrade spot price fetch failed: ${res.status}`)
-  }
+  const res = await fetchWithTimeout(`${BASE_URL}/FizServices/GetSpotPriceData/${API_TOKEN}`)
 
-  // API returns a flat object: { goldAsk, goldBid, goldChange, ... }
+  if (!res.ok) throw new Error(`FizTrade spot price fetch failed: ${res.status}`)
+
   const d: FizSpotPriceResponse = await res.json()
 
   const dir = (change: number): SpotPrice['direction'] =>
     change > 0 ? 'up' : change < 0 ? 'down' : 'flat'
 
-  return [
+  const data: SpotPrice[] = [
     { metal: 'gold',      bid: d.goldBid,      ask: d.goldAsk,      change: d.goldChange,      changePercent: d.goldChangePercent,      direction: dir(d.goldChange) },
     { metal: 'silver',    bid: d.silverBid,    ask: d.silverAsk,    change: d.silverChange,    changePercent: d.silverChangePercent,    direction: dir(d.silverChange) },
     { metal: 'platinum',  bid: d.platinumBid,  ask: d.platinumAsk,  change: d.platinumChange,  changePercent: d.platinumChangePercent,  direction: dir(d.platinumChange) },
     { metal: 'palladium', bid: d.palladiumBid, ask: d.palladiumAsk, change: d.palladiumChange, changePercent: d.palladiumChangePercent, direction: dir(d.palladiumChange) },
   ]
+
+  cache.spotPrices = { data, expiresAt: Date.now() + TTL_PRICES }
+  return data
 }
 
 // ─── Product catalog ──────────────────────────────────────────────────────────
 
 /** Fetch catalog details (description, purity, family, images) for a list of product codes. */
 export async function getProductCatalog(codes: string[]): Promise<FizCatalogProduct[]> {
+  if (isFresh(cache.catalog)) return cache.catalog.data
+
   if (!API_TOKEN) throw new Error('FIZCONNECT_API_TOKEN env var is required')
   const res = await fetchWithTimeout(`${BASE_URL}/FizServices/GetProductCatalog/${API_TOKEN}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ items: codes }),
-    next: { revalidate: REVALIDATE_CATALOG },
   })
   if (!res.ok) throw new Error(`GetProductCatalog failed: ${res.status}`)
   const data = await res.json()
   if (data.error) throw new Error(`GetProductCatalog error: ${data.error}`)
-  return data as FizCatalogProduct[]
+
+  cache.catalog = { data: data as FizCatalogProduct[], expiresAt: Date.now() + TTL_CATALOG }
+  return cache.catalog.data
 }
 
 /** Fetch live bid/ask prices (all tiers) for a list of product codes. */
 export async function getProductPrices(codes: string[]): Promise<FizProductPrice[]> {
+  if (isFresh(cache.productPrices)) return cache.productPrices.data
+
   if (!API_TOKEN) throw new Error('FIZCONNECT_API_TOKEN env var is required')
   const res = await fetchWithTimeout(`${BASE_URL}/FizServices/GetPricesForProducts/${API_TOKEN}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(codes),
-    next: { revalidate: REVALIDATE_PRICES },
   })
   if (!res.ok) throw new Error(`GetPricesForProducts failed: ${res.status}`)
   const data = await res.json()
   if (data.error) throw new Error(`GetPricesForProducts error: ${data.error}`)
-  return data as FizProductPrice[]
+
+  cache.productPrices = { data: data as FizProductPrice[], expiresAt: Date.now() + TTL_PRICES }
+  return cache.productPrices.data
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
