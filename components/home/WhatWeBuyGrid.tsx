@@ -22,7 +22,7 @@ const whatWeBuy = [
   {
     title: 'Platinum & Other Metals',
     desc: 'Platinum jewelry, palladium, and rhodium items — evaluated with scientific precision.',
-    img: '/images/store/DSC03395.webp',
+    img: '/images/what-we-buy/platinum.jpg',
     imgAlt: 'Jewelry on velvet tray with gold bars',
     href: '/what-we-buy/platinum',
   },
@@ -43,7 +43,7 @@ const whatWeBuy = [
   {
     title: 'Silverware',
     desc: 'Sterling flatware and serving pieces, hollowware, silver tea sets, and antiques.',
-    img: '/images/what-we-buy/4.webp',
+    img: '/images/what-we-buy/silverware.jpg',
     imgAlt: 'Sterling silverware and flatware',
     href: '/what-we-buy/silverware',
   },
