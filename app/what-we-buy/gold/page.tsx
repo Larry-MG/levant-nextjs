@@ -102,10 +102,10 @@ const showcaseCards = [
     objectFit: 'object-cover',
   },
   {
-    src: '/images/products/gold-eagle-1oz.png',
-    alt: 'American Gold Eagle 1 oz coin',
+    src: '/images/store/DSC03392.jpg',
+    alt: 'Gold coins and jewelry on velvet tray at Levant Gold & Silver',
     label: 'Gold Coins',
-    objectFit: 'object-contain',
+    objectFit: 'object-cover',
   },
   {
     src: '/images/store/DSC03395.jpg',
@@ -176,16 +176,6 @@ export default function GoldPage() {
         </div>
       </section>
 
-      {/* ── Live Prices ── */}
-      <div>
-        <div className="bg-charcoal pt-4 pb-2">
-          <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase text-center">
-            Live Gold, Silver, &amp; Platinum Prices
-          </p>
-        </div>
-        <SpotPriceTicker />
-      </div>
-
       {/* ── Product Showcase ── */}
       <section className="py-20 bg-charcoal">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -222,6 +212,16 @@ export default function GoldPage() {
           </StaggerChildren>
         </div>
       </section>
+
+      {/* ── Live Prices ── */}
+      <div>
+        <div className="bg-charcoal pt-4 pb-2">
+          <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase text-center">
+            Live Gold, Silver, &amp; Platinum Prices
+          </p>
+        </div>
+        <SpotPriceTicker />
+      </div>
 
       {/* ── What Gold Items We Buy ── */}
       <section className="py-20 bg-cream">
