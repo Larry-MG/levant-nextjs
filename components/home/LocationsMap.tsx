@@ -24,10 +24,12 @@ export default function LocationsMap({ locations }: Props) {
   useEffect(() => {
     if (!mapRef.current || mapInstance.current) return
 
+    let cancelled = false
     let L: any
 
     async function init() {
       L = (await import('leaflet')).default
+      if (cancelled || !mapRef.current) return
 
       // Fix default marker icon path issue with Next.js
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -114,8 +116,10 @@ export default function LocationsMap({ locations }: Props) {
     init()
 
     return () => {
+      cancelled = true
       mapInstance.current?.remove()
       mapInstance.current = null
+      markersRef.current.clear()
     }
   }, [locations])
 
