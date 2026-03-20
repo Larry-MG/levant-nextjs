@@ -165,10 +165,8 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Live spot price bar — collapses on scroll on mobile */}
-      <div className={`overflow-hidden transition-all duration-300 ${scrolled ? 'max-h-0 lg:max-h-20' : 'max-h-20'}`}>
-        <SpotPriceBar />
-      </div>
+      {/* Live spot price bar — always visible */}
+      <SpotPriceBar />
 
     </header>
 
