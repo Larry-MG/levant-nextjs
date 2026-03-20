@@ -153,7 +153,7 @@ export default function PopularProductsGrid({ products, fallbackCodes }: Popular
 
                     {/* Info */}
                     <div className="px-4 pt-3.5 pb-4">
-                      <p className="text-cream/80 text-[13px] font-semibold leading-snug line-clamp-2 group-hover:text-cream transition-colors mb-2.5">
+                      <p className="text-cream/80 text-[13px] font-semibold leading-snug line-clamp-2 group-hover:text-cream transition-colors mb-2.5 h-9">
                         {p.name}
                       </p>
                       <div className="flex items-end justify-between">
