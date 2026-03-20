@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.gstack/
+
+# raw source photos (web-ready versions are in public/images/store/)
+/levantphotos1/
