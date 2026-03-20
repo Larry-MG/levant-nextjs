@@ -45,6 +45,8 @@ export default function PopularProductsGrid({ products, fallbackCodes, labelOver
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
+  const isPausedRef = useRef(false)
+  const autoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   const updateScrollState = useCallback(() => {
     const el = scrollRef.current
@@ -63,6 +65,21 @@ export default function PopularProductsGrid({ products, fallbackCodes, labelOver
     return () => { el.removeEventListener('scroll', updateScrollState); ro.disconnect() }
   }, [updateScrollState, products])
 
+  useEffect(() => {
+    autoScrollRef.current = setInterval(() => {
+      if (isPausedRef.current) return
+      const el = scrollRef.current
+      if (!el) return
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 8
+      if (atEnd) {
+        el.scrollTo({ left: 0, behavior: 'smooth' })
+      } else {
+        el.scrollBy({ left: 280, behavior: 'smooth' })
+      }
+    }, 3500)
+    return () => { if (autoScrollRef.current) clearInterval(autoScrollRef.current) }
+  }, [products])
+
   function scroll(dir: 'left' | 'right') {
     const el = scrollRef.current
     if (!el) return
@@ -72,7 +89,11 @@ export default function PopularProductsGrid({ products, fallbackCodes, labelOver
   const items = products.length > 0 ? products : []
 
   return (
-    <div className="relative">
+    <div
+      className="relative"
+      onMouseEnter={() => { isPausedRef.current = true }}
+      onMouseLeave={() => { isPausedRef.current = false }}
+    >
       {/* Left fade */}
       <div
         className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 z-10 transition-opacity duration-300"
@@ -114,7 +135,7 @@ export default function PopularProductsGrid({ products, fallbackCodes, labelOver
       >
         {items.length === 0
           ? fallbackCodes.map((code) => <SkeletonCard key={code} />)
-          : items.slice(0, 8).map((p) => {
+          : items.slice(0, 12).map((p) => {
               const accent = METAL_ACCENT[p.metal] ?? METAL_ACCENT.gold
               const displayName = labelOverrides?.[p.code] ?? p.name
               return (

@@ -149,7 +149,10 @@ const homeJsonLd = [
   },
 ]
 
-const POPULAR_CODES = ['1G', '1EAGLE', '90MH', 'SE', '1SEMSB', '1VALPLAT']
+const POPULAR_CODES = [
+  '1G', '1EAGLE', '90MH', 'SE', '1SEMSB', '1VALPLAT',
+  '1B', '1MAP', '1AGMAP', '10AG', '1PE', '1PAL',
+]
 
 const POPULAR_LABEL_OVERRIDES: Record<string, string> = {
   '1G': '1 oz Gold Bar',
@@ -158,6 +161,12 @@ const POPULAR_LABEL_OVERRIDES: Record<string, string> = {
   'SE': '2026 1 oz American Silver Eagle',
   '1SEMSB': '1 oz American Silver Eagle Mint Sealed Box',
   '1VALPLAT': '1 oz Platinum Bar Valcambi',
+  '1B': '1 oz American Gold Buffalo',
+  '1MAP': '1 oz Canadian Gold Maple Leaf',
+  '1AGMAP': '1 oz Canadian Silver Maple Leaf',
+  '10AG': '10 oz Silver Bar',
+  '1PE': '1 oz American Platinum Eagle',
+  '1PAL': '1 oz Palladium Bar',
 }
 
 async function loadPopularProducts() {
@@ -281,8 +290,8 @@ export default async function HomePage() {
             <FadeIn direction="left" delay={0.2} className="px-6 pb-6 lg:px-0 lg:pr-8 lg:py-8">
               <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] lg:h-full">
                 <Image
-                  src="/images/store/DSC03302.jpg"
-                  alt="Coins, bars, and precious metals at Levant Gold & Silver"
+                  src="/images/store/levant-outside.jpg"
+                  alt="Levant Gold & Silver storefront in Southern California"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
