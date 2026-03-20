@@ -176,7 +176,7 @@ export default async function HomePage() {
     <>
       <JsonLd id="schema-home" schema={homeJsonLd as Record<string, unknown>[]} />
       {/* ── Hero ── */}
-      <section className="relative min-h-[580px] flex flex-col justify-center overflow-hidden">
+      <section className="relative overflow-hidden bg-charcoal">
         <Image
           src="/images/hero/home-banner.webp"
           alt="Gold and silver coins and bars"
@@ -184,9 +184,27 @@ export default async function HomePage() {
           className="object-cover object-center"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
-        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <HeroText />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/45" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(201,168,76,0.28),transparent_36%)]" />
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid min-h-[580px] items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,520px)]">
+            <div className="py-24 lg:py-28">
+              <HeroText />
+            </div>
+            <FadeIn direction="left" delay={0.15} className="hidden lg:flex justify-center items-end self-end">
+              <div className="relative w-full max-w-[520px] h-[440px]">
+                <div className="absolute inset-x-12 bottom-8 h-24 rounded-full bg-gold/25 blur-3xl" />
+                <Image
+                  src="/images/what-we-buy/Group-1000008359-1.webp"
+                  alt="Gold jewelry, coins, and bullion bars at Levant Gold & Silver"
+                  fill
+                  className="object-contain object-bottom drop-shadow-[0_28px_60px_rgba(0,0,0,0.4)]"
+                  priority
+                  sizes="520px"
+                />
+              </div>
+            </FadeIn>
+          </div>
         </div>
       </section>
 

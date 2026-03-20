@@ -72,8 +72,18 @@ export default function GoldPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="bg-charcoal overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-charcoal">
+        <Image
+          src="/images/hero/home-banner.webp"
+          alt=""
+          fill
+          className="object-cover object-center opacity-25"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/78 to-black/55" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(201,168,76,0.32),transparent_36%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 items-center min-h-[520px]">
             <FadeIn direction="right" className="py-20 lg:py-28">
               <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">
