@@ -20,9 +20,9 @@ export async function GET() {
       {
         prices: [
           { metal: 'gold',      bid: 2462.88, ask: 2465.19, change: 12.40,  changePercent:  0.53, direction: 'up'   },
-          { metal: 'silver',    bid:   30.92, ask:   30.99, change: -0.18,  changePercent: -0.61, direction: 'down' },
-          { metal: 'platinum',  bid: 1027.11, ask: 1029.42, change:  3.60,  changePercent:  0.37, direction: 'up'   },
-          { metal: 'palladium', bid: 1104.60, ask: 1107.75, change: -8.50,  changePercent: -0.80, direction: 'down' },
+          { metal: 'silver',    bid:   32.40, ask:   32.47, change: -0.18,  changePercent: -0.61, direction: 'down' },
+          { metal: 'platinum',  bid: 1076.02, ask: 1078.44, change:  3.60,  changePercent:  0.37, direction: 'up'   },
+          { metal: 'palladium', bid: 1157.20, ask: 1160.50, change: -8.50,  changePercent: -0.80, direction: 'down' },
         ],
         updatedAt: new Date().toISOString(),
         fallback: true,

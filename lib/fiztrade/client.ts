@@ -11,8 +11,13 @@ import type {
 const BASE_URL = process.env.FIZCONNECT_URL ?? 'https://stage-connect.fiztrade.com'
 const API_TOKEN = process.env.FIZCONNECT_API_TOKEN
 
-/** Retail margin applied on top of all Fiztrade bid/ask prices. */
-const MARGIN = 1.05
+/** Retail margins applied on top of Fiztrade bid/ask prices, by metal. */
+const MARGIN: Record<string, number> = {
+  gold:      1.05,
+  silver:    1.10,
+  platinum:  1.10,
+  palladium: 1.10,
+}
 
 const TTL_PRICES  = 5 * 60 * 1000          // 5 min
 const TTL_CATALOG = 24 * 60 * 60 * 1000    // 24 h
@@ -64,10 +69,10 @@ export async function getSpotPrices(): Promise<SpotPrice[]> {
     change > 0 ? 'up' : change < 0 ? 'down' : 'flat'
 
   const data: SpotPrice[] = [
-    { metal: 'gold',      bid: d.goldBid      * MARGIN, ask: d.goldAsk      * MARGIN, change: d.goldChange,      changePercent: d.goldChangePercent,      direction: dir(d.goldChange) },
-    { metal: 'silver',    bid: d.silverBid    * MARGIN, ask: d.silverAsk    * MARGIN, change: d.silverChange,    changePercent: d.silverChangePercent,    direction: dir(d.silverChange) },
-    { metal: 'platinum',  bid: d.platinumBid  * MARGIN, ask: d.platinumAsk  * MARGIN, change: d.platinumChange,  changePercent: d.platinumChangePercent,  direction: dir(d.platinumChange) },
-    { metal: 'palladium', bid: d.palladiumBid * MARGIN, ask: d.palladiumAsk * MARGIN, change: d.palladiumChange, changePercent: d.palladiumChangePercent, direction: dir(d.palladiumChange) },
+    { metal: 'gold',      bid: d.goldBid      * MARGIN.gold,      ask: d.goldAsk      * MARGIN.gold,      change: d.goldChange,      changePercent: d.goldChangePercent,      direction: dir(d.goldChange) },
+    { metal: 'silver',    bid: d.silverBid    * MARGIN.silver,    ask: d.silverAsk    * MARGIN.silver,    change: d.silverChange,    changePercent: d.silverChangePercent,    direction: dir(d.silverChange) },
+    { metal: 'platinum',  bid: d.platinumBid  * MARGIN.platinum,  ask: d.platinumAsk  * MARGIN.platinum,  change: d.platinumChange,  changePercent: d.platinumChangePercent,  direction: dir(d.platinumChange) },
+    { metal: 'palladium', bid: d.palladiumBid * MARGIN.palladium, ask: d.palladiumAsk * MARGIN.palladium, change: d.palladiumChange, changePercent: d.palladiumChangePercent, direction: dir(d.palladiumChange) },
   ]
 
   cache.spotPrices = { data, expiresAt: Date.now() + TTL_PRICES }
@@ -177,8 +182,8 @@ export function mergeShopProducts(
       availability: price.availability,
       isActiveSell: price.isActiveSell === 'Y',
       isActiveBuy:  price.isActiveBuy  === 'Y',
-      ask:          tier1.ask * MARGIN,
-      bid:          tier1.bid * MARGIN,
+      ask:          tier1.ask * (MARGIN[metal] ?? 1.10),
+      bid:          tier1.bid * (MARGIN[metal] ?? 1.10),
       imageUrl:     pickImage(item.images, ['obv250', 'obverse', 'default']),
       thumbUrl:     pickImage(item.images, ['small', 'obv100', 'default']),
     }]
