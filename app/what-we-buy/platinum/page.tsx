@@ -95,7 +95,7 @@ const rareMetals = [
     accent: '#C0C0E0',
     accentBorder: '#C0C0E0',
     description: 'Rings, coins, bullion bars, industrial platinum. We pay for exact purity via XRF.',
-    image: '/images/products/platinum-bar.webp',
+    image: '/images/products/platinum-eagle-coin.jpg',
     gradient: null,
   },
   {
@@ -103,16 +103,16 @@ const rareMetals = [
     accent: '#C0B8D8',
     accentBorder: '#C0B8D8',
     description: 'Palladium coins, bars, catalytic converters, and scrap palladium accepted.',
-    image: null,
-    gradient: 'linear-gradient(135deg, #2D2840 0%, #3A3254 50%, #28211E 100%)',
+    image: '/images/products/palladium-metal.jpg',
+    gradient: null,
   },
   {
     name: 'Rhodium',
     accent: '#E8E8F0',
     accentBorder: '#E8E8F0',
     description: 'One of the world\'s most valuable metals. We buy rhodium in any form — plating scrap, catalysts, sponge.',
-    image: null,
-    gradient: 'linear-gradient(135deg, #2A2A35 0%, #38384A 50%, #28211E 100%)',
+    image: '/images/products/rhodium-metal.jpg',
+    gradient: null,
   },
 ]
 
@@ -137,7 +137,7 @@ export default function PlatinumPage() {
       {/* ── Hero ── */}
       <section className="relative overflow-hidden bg-charcoal">
         <Image
-          src="/images/metal-platinum.webp"
+          src="/images/metal-platinum-new.jpg"
           alt=""
           fill
           className="object-cover object-center opacity-28"
