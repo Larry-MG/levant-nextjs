@@ -38,11 +38,15 @@
   --foreground: #1C1917;
 }
 
-html,
+html {
+  width: 100%;
+  max-width: 100%;
+}
+
 body {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
