@@ -56,18 +56,22 @@ export function SpotPriceBar() {
   return (
     <div className="bg-charcoal-soft border-b border-white/5 py-2 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="flex w-full min-w-0 gap-x-6 gap-y-1 items-center flex-wrap">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-[11px] sm:flex sm:w-full sm:min-w-0 sm:flex-wrap sm:items-center sm:gap-x-6 sm:text-xs">
           {prices.map((p) => (
-            <div key={p.metal} className="flex items-center gap-2 text-xs flex-shrink-0">
-              <span className="text-gold font-semibold uppercase tracking-wider">{metalLabels[p.metal]}</span>
-              <span className="font-mono text-cream/90">{formatUSD(p.ask)}</span>
+            <div key={p.metal} className="flex min-w-0 items-center gap-1.5 sm:gap-2 sm:flex-shrink-0">
+              <span className="shrink-0 text-gold font-semibold uppercase tracking-[0.18em] sm:tracking-wider">
+                {metalLabels[p.metal]}
+              </span>
+              <span className="min-w-0 truncate font-mono text-cream/90">{formatUSD(p.ask)}</span>
               <span className={`font-mono ${p.direction === 'up' ? 'text-green-400' : p.direction === 'down' ? 'text-red-400' : 'text-cream/30'}`}>
                 {p.direction === 'up' ? '▲' : p.direction === 'down' ? '▼' : '—'}{' '}
                 {formatChange(p.change)}
               </span>
             </div>
           ))}
-          <span className="text-cream/20 text-[10px] ml-auto hidden sm:block flex-shrink-0">Live · 30s</span>
+          <span className="col-span-2 text-center text-[10px] text-cream/20 sm:ml-auto sm:block sm:flex-shrink-0 sm:text-left">
+            Live · 30s
+          </span>
         </div>
       </div>
     </div>

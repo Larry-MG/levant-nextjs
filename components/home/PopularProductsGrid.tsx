@@ -105,7 +105,7 @@ export default function PopularProductsGrid({ products, fallbackCodes, labelOver
 
   return (
     <div
-      className="relative overflow-hidden"
+      className="relative overflow-hidden [contain:paint]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
