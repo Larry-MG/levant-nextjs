@@ -118,7 +118,7 @@ export default function PopularProductsGrid({ products, fallbackCodes }: Popular
               return (
                 <div key={p.code} className="flex-none w-52 sm:w-60 snap-start">
                   <Link
-                    href="/shop"
+                    href={`/shop/${p.code}`}
                     className="group block bg-white/5 hover:bg-white/8 border border-white/10 hover:border-gold/30 rounded-2xl overflow-hidden transition-all duration-300"
                   >
                     {/* Image area */}

@@ -1,5 +1,6 @@
 'use client'
 import Image from 'next/image'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import StaggerChildren, { itemVariants } from '@/components/ui/StaggerChildren'
 
@@ -9,36 +10,42 @@ const whatWeBuy = [
     desc: 'Coins, rings, necklaces, bracelets, earrings, watches, dental gold, and all gold items.',
     img: '/images/store/DSC03344.jpg',
     imgAlt: 'Gold bars in PAMP Suisse packaging',
+    href: '/what-we-buy/gold',
   },
   {
     title: 'Silver',
     desc: 'Sterling silver coins, bullion, flatware, holloware, and silver bars of all sizes.',
     img: '/images/store/DSC03307.jpg',
     imgAlt: 'Silver dollars and coins spread on felt',
+    href: '/what-we-buy/silver',
   },
   {
     title: 'Platinum & Other Metals',
     desc: 'Platinum jewelry, palladium, and rhodium items — evaluated with scientific precision.',
     img: '/images/store/DSC03395.jpg',
     imgAlt: 'Jewelry on velvet tray with gold bars',
+    href: '/what-we-buy/platinum',
   },
   {
     title: 'Coins',
     desc: 'U.S. and foreign collectible coins, rare coins, silver dollars, full coin collections.',
     img: '/images/store/DSC03302.jpg',
     imgAlt: 'Coins, bars, and slabs on green felt table',
+    href: '/what-we-buy/coins',
   },
   {
     title: 'Bars',
     desc: 'Gold, silver, and platinum bars in all sizes from all major refiners worldwide.',
     img: '/images/store/DSC03360.jpg',
     imgAlt: 'Gold bars angled shot',
+    href: '/what-we-buy/bars',
   },
   {
     title: 'Silverware',
     desc: 'Sterling flatware and serving pieces, hollowware, silver tea sets, and antiques.',
     img: '/images/store/DSC03256.jpg',
     imgAlt: 'Silver collectibles on reflective black table',
+    href: '/what-we-buy/silverware',
   },
 ]
 
@@ -49,9 +56,10 @@ export default function WhatWeBuyGrid() {
         <motion.div
           key={item.title}
           variants={itemVariants}
-          className="relative rounded-xl overflow-hidden group cursor-default aspect-[4/3]"
+          className="relative rounded-xl overflow-hidden group aspect-[4/3]"
           whileHover={{ y: -4, transition: { duration: 0.2 } }}
         >
+          <Link href={item.href} className="absolute inset-0 z-10" aria-label={`Shop ${item.title}`} />
           <Image
             src={item.img}
             alt={item.imgAlt}
