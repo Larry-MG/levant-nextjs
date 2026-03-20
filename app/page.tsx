@@ -306,40 +306,12 @@ export default async function HomePage() {
       {/* ── Live Spot Prices ── */}
       <SpotPriceTicker />
 
-      {/* ── Gold Calculator ── */}
-      <GoldCalculator />
-
-      {/* ── What We Buy ── */}
-      <section className="py-18 bg-cream-dark">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <FadeIn className="text-center mb-12">
-            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Immediate Cash Offers</p>
-            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-charcoal">What We Buy</h2>
-          </FadeIn>
-          <WhatWeBuyGrid />
-        </div>
-      </section>
-
-      {/* ── How It Works ── */}
-      <section className="py-20 bg-charcoal text-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="text-center mb-14">
-            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Simple Process</p>
-            <h2 className="text-3xl sm:text-4xl font-heading font-bold">How It Works</h2>
-          </FadeIn>
-          <HowItWorksSteps />
-        </div>
-      </section>
-
-      {/* ── Trust Stats ── */}
-      <StatsSection />
-
       {/* ── XRF Machine ── */}
       <section className="bg-cream overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 items-stretch">
             {/* Photo */}
-            <FadeIn direction="right" className="order-2 lg:order-1 px-6 pb-8 lg:px-0 lg:pl-8 lg:py-8">
+            <FadeIn direction="right" className="order-1 lg:order-1 px-6 pt-8 pb-6 lg:px-0 lg:pl-8 lg:py-8">
               <div className="relative min-h-[400px] overflow-hidden rounded-[2rem] lg:h-full">
                 <Image
                   src="/images/store/DSC03411.jpg"
@@ -351,7 +323,7 @@ export default async function HomePage() {
               </div>
             </FadeIn>
             {/* Text */}
-            <FadeIn direction="left" delay={0.2} className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-16 lg:py-20 order-1 lg:order-2">
+            <FadeIn direction="left" delay={0.2} className="order-2 lg:order-2 flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-12 lg:py-20">
               <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">
                 Scientific Precision
               </p>
@@ -387,6 +359,33 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── Gold Calculator ── */}
+      <GoldCalculator />
+
+      {/* ── What We Buy ── */}
+      <section className="py-18 bg-cream-dark">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <FadeIn className="text-center mb-12">
+            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Immediate Cash Offers</p>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-charcoal">What We Buy</h2>
+          </FadeIn>
+          <WhatWeBuyGrid />
+        </div>
+      </section>
+
+      {/* ── How It Works ── */}
+      <section className="py-20 bg-charcoal text-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center mb-14">
+            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">Simple Process</p>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold">How It Works</h2>
+          </FadeIn>
+          <HowItWorksSteps />
+        </div>
+      </section>
+
+      {/* ── Trust Stats ── */}
+      <StatsSection />
 
       {/* ── Map ── */}
       <LocationsMap locations={locations} />
