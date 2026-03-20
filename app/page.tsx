@@ -363,6 +363,9 @@ export default async function HomePage() {
         </FadeIn>
       </div>
 
+      {/* ── Map ── */}
+      <LocationsMap locations={locations} />
+
       {/* ── Testimonials ── */}
       <section className="py-18 bg-cream-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -450,8 +453,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Map ── */}
-      <LocationsMap locations={locations} />
     </>
   )
 }
