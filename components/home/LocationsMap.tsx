@@ -129,7 +129,7 @@ export default function LocationsMap({ locations }: Props) {
   }
 
   return (
-    <section className="bg-charcoal">
+    <section className="bg-charcoal relative z-0 isolate">
       {/* Section header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
         <div className="text-center">
@@ -200,7 +200,7 @@ export default function LocationsMap({ locations }: Props) {
             </div>
 
             {/* Map */}
-            <div className="relative h-[340px] lg:h-[460px]">
+            <div className="relative h-[340px] lg:h-[460px] overflow-hidden">
               <link
                 rel="stylesheet"
                 href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
