@@ -5,16 +5,28 @@ import FadeIn from '@/components/ui/FadeIn'
 import SpotPriceTicker from '@/components/home/SpotPriceTicker'
 
 export const metadata: Metadata = {
-  title: 'Sell Sterling Silverware & Flatware | Levant Gold & Silver',
+  title: 'Sell Sterling Silverware & Flatware | Best Prices in Southern California',
   description:
-    'Get the best price for your sterling silverware at Levant Gold & Silver. We buy sterling flatware sets, tea sets, and serving pieces — even tarnished or incomplete. Immediate cash payment in Southern California.',
+    'Get the best price for your sterling silverware at Levant Gold & Silver. We buy flatware sets, tea services, and hollowware — tarnished or incomplete sets welcome. Same-day cash at 4 locations: Orange, Pomona, San Bernardino & Walnut.',
   alternates: { canonical: '/what-we-buy/silverware' },
+  keywords: [
+    'sell sterling silverware Southern California', 'sterling flatware buyer near me',
+    'sell silver flatware Orange CA', 'sell silver tea set California',
+    'Gorham silverware buyer', 'Oneida silver buyer', 'Reed Barton buyer',
+    'sterling silver hollowware buyer', 'sell antique silverware California',
+    'tarnished silverware buyer', 'sell inherited silverware',
+    'sterling flatware value', 'old silver set buyer near me',
+  ],
   openGraph: {
-    title: 'Sell Sterling Silverware & Flatware | Levant Gold & Silver',
-    description: 'Turn silver flatware and tea sets into cash today. Tarnished or incomplete sets welcome. Live spot pricing, immediate payment.',
+    title: 'Sell Sterling Silverware & Flatware | Best Prices in Southern California',
+    description:
+      'Top price for sterling flatware sets, tea services & hollowware. Tarnished or incomplete welcome. Live spot pricing, same-day cash at 4 SoCal locations.',
     url: '/what-we-buy/silverware',
   },
-  keywords: ['sell sterling silverware', 'sterling flatware buyer', 'sell silver tea set', 'Gorham silverware buyer', 'sterling silver buyer Southern California'],
+  twitter: {
+    title: 'Sell Sterling Silverware | Best Prices in Southern California',
+    description: 'Flatware, tea sets, hollowware — tarnished or incomplete welcome. Same-day cash, 4 SoCal locations.',
+  },
 }
 
 const items = [

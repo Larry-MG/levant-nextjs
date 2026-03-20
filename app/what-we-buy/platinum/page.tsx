@@ -6,16 +6,28 @@ import SpotPriceTicker from '@/components/home/SpotPriceTicker'
 import GoldCalculator from '@/components/home/GoldCalculator'
 
 export const metadata: Metadata = {
-  title: 'Sell Platinum, Palladium & Rare Metals | Levant Gold & Silver',
+  title: 'Sell Platinum, Palladium & Rhodium | Best Prices in Southern California',
   description:
-    'Sell platinum, palladium, and other precious metals in Southern California. Levant Gold & Silver offers fair pricing, XRF-tested purity, secure transactions, and fast payment in Orange, Pomona, San Bernardino, and Walnut.',
+    'Get top dollar for platinum, palladium & rhodium at Levant Gold & Silver — jewelry, coins, bars, and industrial scrap. XRF-tested purity, live spot pricing, same-day cash at 4 locations: Orange, Pomona, San Bernardino & Walnut, CA.',
   alternates: { canonical: '/what-we-buy/platinum' },
+  keywords: [
+    'sell platinum Southern California', 'sell palladium near me',
+    'platinum buyer Orange CA', 'palladium buyer Inland Empire',
+    'sell platinum jewelry', 'sell platinum bars', 'sell platinum coins',
+    'sell rhodium California', 'rhodium buyer near me',
+    'rare metals buyer Southern California', 'platinum scrap buyer',
+    'sell American Platinum Eagle', 'platinum XRF testing',
+  ],
   openGraph: {
-    title: 'Sell Platinum, Palladium & Rare Metals | Levant Gold & Silver',
-    description: 'We buy platinum, palladium, and rhodium in any form — jewelry, coins, bars, and industrial scrap. Live spot pricing, immediate payment.',
+    title: 'Sell Platinum, Palladium & Rhodium | Best Prices in Southern California',
+    description:
+      'Top-rated platinum & palladium buyer in Southern California. XRF-tested purity, live spot pricing, same-day cash at 4 SoCal locations.',
     url: '/what-we-buy/platinum',
   },
-  keywords: ['sell platinum', 'palladium buyer Southern California', 'rhodium buyer', 'platinum jewelry buyer Orange CA', 'sell rare metals'],
+  twitter: {
+    title: 'Sell Platinum & Palladium | Best Prices in Southern California',
+    description: 'XRF testing, live spot pricing, same-day cash. 4 SoCal locations.',
+  },
 }
 
 const items = [

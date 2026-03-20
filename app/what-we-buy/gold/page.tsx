@@ -6,16 +6,29 @@ import SpotPriceTicker from '@/components/home/SpotPriceTicker'
 import GoldCalculator from '@/components/home/GoldCalculator'
 
 export const metadata: Metadata = {
-  title: 'Buy & Sell Gold Jewelry & Coins | Levant Gold & Silver',
+  title: 'Sell Gold Jewelry, Coins & Bullion | Best Prices in Southern California',
   description:
-    'Sell your gold at Levant Gold & Silver and get the best price for jewelry, coins, or bullion with instant cash payouts. Free XRF testing at our Orange, Pomona, San Bernardino, and Walnut locations.',
+    'Get the best price for your gold jewelry, coins, and bullion bars at Levant Gold & Silver. Free XRF testing, live spot pricing, same-day cash. 4 locations: Orange, Pomona, San Bernardino & Walnut, CA.',
   alternates: { canonical: '/what-we-buy/gold' },
+  keywords: [
+    'sell gold Southern California', 'sell gold jewelry Orange CA',
+    'sell gold coins Pomona', 'sell gold San Bernardino', 'sell gold Walnut CA',
+    'best gold prices Orange County', 'best gold prices Inland Empire',
+    'gold bullion buyer California', 'sell American Gold Eagle',
+    'sell gold Krugerrand', 'gold jewelry buyer near me',
+    'cash for gold near me', '14k gold buyer', '18k gold buyer',
+    'sell scrap gold Southern California',
+  ],
   openGraph: {
-    title: 'Buy & Sell Gold Jewelry & Coins | Levant Gold & Silver',
-    description: 'Get the best price for your gold jewelry, coins, and bullion bars. Free XRF testing, live spot pricing, immediate payment.',
+    title: 'Sell Gold Jewelry, Coins & Bullion | Best Prices in Southern California',
+    description:
+      'Top-rated gold buyer in Southern California. Free XRF testing, live spot pricing, immediate cash. 4 locations — Orange, Pomona, San Bernardino & Walnut.',
     url: '/what-we-buy/gold',
   },
-  keywords: ['sell gold', 'buy gold jewelry', 'gold coins Southern California', 'gold bullion bars', 'sell gold Orange CA', 'gold buyer Pomona'],
+  twitter: {
+    title: 'Sell Your Gold | Best Prices in Southern California',
+    description: 'Free XRF testing, same-day cash. Jewelry, coins, bullion. 4 SoCal locations.',
+  },
 }
 
 const items = [

@@ -6,16 +6,28 @@ import SpotPriceTicker from '@/components/home/SpotPriceTicker'
 import GoldCalculator from '@/components/home/GoldCalculator'
 
 export const metadata: Metadata = {
-  title: 'Sell Silver & Precious Metals in California | Levant Gold',
+  title: 'Sell Silver Coins, Jewelry & Bullion | Best Prices in Southern California',
   description:
-    'Turn your unwanted silver into cash at Levant Gold & Silver. We offer fair prices for silver coins, jewelry, flatware, and bullion bars with immediate payment in Southern California.',
+    'Get the best price for your silver at Levant Gold & Silver — coins, jewelry, flatware, and bullion bars. Free XRF testing, live spot pricing, same-day cash. 4 locations: Orange, Pomona, San Bernardino & Walnut, CA.',
   alternates: { canonical: '/what-we-buy/silver' },
+  keywords: [
+    'sell silver Southern California', 'sell silver coins Orange CA',
+    'sell silver jewelry Pomona', 'sell Morgan dollars San Bernardino',
+    'silver buyer near me', 'junk silver buyer Southern California',
+    'sell American Silver Eagle', 'sterling silver buyer California',
+    'sell silver flatware', 'silver bullion buyer near me',
+    'cash for silver near me', 'best silver prices Southern California',
+  ],
   openGraph: {
-    title: 'Sell Silver & Precious Metals in California | Levant Gold',
-    description: 'We buy all silver — jewelry, coins, flatware, and bullion. Free XRF testing, live spot pricing, instant payment.',
+    title: 'Sell Silver Coins, Jewelry & Bullion | Best Prices in Southern California',
+    description:
+      'Top-rated silver buyer in Southern California. Coins, jewelry, flatware, bullion. Free XRF testing, live spot pricing, same-day cash at 4 SoCal locations.',
     url: '/what-we-buy/silver',
   },
-  keywords: ['sell silver', 'silver coins Southern California', 'sterling silverware buyer', 'sell silver jewelry', 'silver bullion buyer Orange CA'],
+  twitter: {
+    title: 'Sell Your Silver | Best Prices in Southern California',
+    description: 'Coins, jewelry, flatware, bullion. Free XRF testing, same-day cash. 4 SoCal locations.',
+  },
 }
 
 const items = [

@@ -6,16 +6,28 @@ import SpotPriceTicker from '@/components/home/SpotPriceTicker'
 import GoldCalculator from '@/components/home/GoldCalculator'
 
 export const metadata: Metadata = {
-  title: 'Buy & Sell Rare Gold & Silver Coins | Levant Gold & Silver',
+  title: 'Sell Gold & Silver Coins | Bullion, Junk Silver & Numismatic — Southern California',
   description:
-    'Sell gold, silver, and platinum coins at Levant Gold & Silver in Southern California. We buy bullion coins, junk silver, rare numismatic pieces, and PCGS/NGC graded coins with maximum value guaranteed.',
+    'Get maximum value for your coins at Levant Gold & Silver. We buy bullion coins, junk silver, rare numismatic pieces, and PCGS/NGC graded collections. Free XRF testing, live spot pricing at 4 locations: Orange, Pomona, San Bernardino & Walnut.',
   alternates: { canonical: '/what-we-buy/coins' },
+  keywords: [
+    'sell gold coins Southern California', 'sell silver coins near me',
+    'coin buyer Orange CA', 'coin buyer Pomona', 'numismatic coin buyer',
+    'junk silver buyer Southern California', 'sell American Gold Eagle',
+    'sell Morgan dollar', 'sell Peace dollar', 'sell pre-1965 silver coins',
+    'PCGS graded coin buyer', 'NGC graded coin buyer',
+    'gold coin buyer Inland Empire', 'rare coin buyer California',
+  ],
   openGraph: {
-    title: 'Buy & Sell Rare Gold & Silver Coins | Levant Gold & Silver',
-    description: 'Get maximum value for your coin collection. We buy gold, silver & platinum coins including rare numismatic pieces. Live spot pricing.',
+    title: 'Sell Gold & Silver Coins | Best Prices in Southern California',
+    description:
+      'Maximum value for bullion coins, junk silver, and numismatic pieces. PCGS/NGC graded collections welcome. Free XRF testing at 4 SoCal locations.',
     url: '/what-we-buy/coins',
   },
-  keywords: ['sell gold coins', 'sell silver coins Southern California', 'coin buyer Orange CA', 'numismatic coins', 'junk silver buyer', 'American Gold Eagle buyer'],
+  twitter: {
+    title: 'Sell Gold & Silver Coins | Best Prices in Southern California',
+    description: 'Bullion, junk silver, numismatic. PCGS/NGC welcome. Free XRF testing, same-day cash.',
+  },
 }
 
 const categories = [

@@ -6,16 +6,28 @@ import SpotPriceTicker from '@/components/home/SpotPriceTicker'
 import GoldCalculator from '@/components/home/GoldCalculator'
 
 export const metadata: Metadata = {
-  title: 'Gold & Silver Bars Buying & Selling | Levant Gold & Silver',
+  title: 'Sell Gold & Silver Bars | Best Bullion Prices in Southern California',
   description:
-    'Levant Gold & Silver buys gold, silver, platinum, and palladium bullion bars in Southern California. Competitive payouts from 1 gram to kilo, all brands and conditions. Free XRF testing, transparent process, immediate payment.',
+    'Sell your gold, silver, platinum & palladium bars at top dollar at Levant Gold & Silver. 1 gram to kilo bars — all brands, all conditions. Free XRF testing, live spot pricing, same-day cash at 4 SoCal locations.',
   alternates: { canonical: '/what-we-buy/bars' },
+  keywords: [
+    'sell gold bars Southern California', 'sell silver bars near me',
+    'gold bullion buyer Orange CA', 'gold bar buyer Pomona',
+    'sell PAMP Suisse bar', 'sell Credit Suisse bar', 'sell Valcambi bar',
+    'sell Perth Mint bar', 'gold kilo bar buyer California',
+    'bullion buyer near me', 'sell gold bar near me',
+    '1 oz gold bar buyer', 'sell silver bar 10 oz',
+  ],
   openGraph: {
-    title: 'Gold & Silver Bars Buying & Selling | Levant Gold & Silver',
-    description: 'Sell your precious metal bars at top dollar. 1g to kilo, all brands. Free XRF testing, live spot pricing, immediate payment.',
+    title: 'Sell Gold & Silver Bars | Best Bullion Prices in Southern California',
+    description:
+      '1g to kilo bars, all brands. PAMP, Credit Suisse, Valcambi, Perth Mint and more. Free XRF testing, same-day cash at 4 SoCal locations.',
     url: '/what-we-buy/bars',
   },
-  keywords: ['sell gold bars', 'sell silver bars', 'bullion buyer Southern California', 'sell PAMP Suisse', 'sell Credit Suisse bar', 'gold bar buyer Orange CA'],
+  twitter: {
+    title: 'Sell Gold & Silver Bars | Best Prices in Southern California',
+    description: '1g to kilo, all brands. Free XRF testing, same-day cash. 4 SoCal locations.',
+  },
 }
 
 const categories = [

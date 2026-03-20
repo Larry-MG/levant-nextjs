@@ -9,10 +9,26 @@ import ProductCard from '@/components/shop/ProductCard'
 export const revalidate = 300
 
 export const metadata: Metadata = {
-  title: 'Shop Precious Metals — Live Prices',
+  title: 'Buy Gold, Silver & Platinum Bullion Online — Live Prices | Levant Gold & Silver',
   description:
-    'Buy gold, silver, platinum, and palladium bullion at live market prices. ' +
-    'Coins, bars, and rounds from top mints — priced off the FizTrade spot feed.',
+    'Shop gold, silver, platinum & palladium bullion at live market prices. American Eagles, Maple Leafs, PAMP bars, and more from top mints — updated every 5 minutes. Ship or pick up at our 4 Southern California locations.',
+  keywords: [
+    'buy gold bullion online', 'buy silver coins online', 'gold bars for sale California',
+    'American Gold Eagle for sale', 'Silver Eagle coins', 'platinum coins for sale',
+    'buy PAMP Suisse bar', 'buy gold near me Southern California',
+    'live gold prices', 'gold bullion dealer Southern California',
+  ],
+  alternates: { canonical: '/shop' },
+  openGraph: {
+    title: 'Buy Gold, Silver & Platinum Bullion — Live Prices | Levant Gold & Silver',
+    description:
+      'Live-priced gold, silver, platinum & palladium bullion. Coins, bars, rounds. Ship or pick up at 4 Southern California locations.',
+    url: '/shop',
+  },
+  twitter: {
+    title: 'Buy Gold & Silver Bullion — Live Prices | Levant Gold & Silver',
+    description: 'American Eagles, Maple Leafs, PAMP bars — live prices, 4 SoCal locations.',
+  },
 }
 
 const SPOT_BAR_THEME = {
