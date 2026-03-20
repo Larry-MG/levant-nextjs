@@ -43,8 +43,8 @@ const whatWeBuy = [
   {
     title: 'Silverware',
     desc: 'Sterling flatware and serving pieces, hollowware, silver tea sets, and antiques.',
-    img: '/images/store/DSC03256.webp',
-    imgAlt: 'Silver collectibles on reflective black table',
+    img: '/images/what-we-buy/4.webp',
+    imgAlt: 'Sterling silverware and flatware',
     href: '/what-we-buy/silverware',
   },
 ]
