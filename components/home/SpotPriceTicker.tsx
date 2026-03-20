@@ -17,7 +17,7 @@ const metalLabels: Record<string, string> = {
 const metalImages: Record<string, string> = {
   gold: '/images/metal-gold.webp',
   silver: '/images/metal-silver.webp',
-  platinum: '/images/metal-platinum-new.jpg',
+  platinum: '/images/metal-platinum.webp',
 }
 
 // Troy oz per gram
