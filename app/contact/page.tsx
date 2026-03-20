@@ -2,8 +2,25 @@ import type { Metadata } from 'next'
 import { locations } from '@/lib/constants/locations'
 
 export const metadata: Metadata = {
-  title: 'Contact Us | Get a Quote',
-  description: 'Contact Levant Gold & Silver for a quote, appraisal, or general inquiry. Three Southern California locations.',
+  title: 'Contact Us | Free Gold & Silver Quote — Orange County & Inland Empire',
+  description:
+    'Get a free, no-obligation quote for your gold, silver, platinum, or coins. Levant Gold & Silver — 4 Southern California locations in Orange, Pomona, San Bernardino & Walnut. Walk in or reach out online.',
+  keywords: [
+    'gold quote Southern California', 'sell gold quote Orange CA', 'sell gold quote Pomona',
+    'free gold appraisal', 'gold appraisal near me', 'sell gold contact',
+    'precious metals quote Inland Empire', 'sell gold jewelry quote',
+  ],
+  alternates: { canonical: '/contact' },
+  openGraph: {
+    title: 'Contact Levant Gold & Silver | Free Quote — Orange County & Inland Empire',
+    description:
+      'Free, no-obligation gold and silver appraisals. Walk in to any of 4 locations — Orange, Pomona, San Bernardino & Walnut — or request a quote online.',
+    url: '/contact',
+  },
+  twitter: {
+    title: 'Get a Free Gold & Silver Quote | Levant Gold & Silver',
+    description: '4 SoCal locations. Free appraisals, no obligation. Orange, Pomona, San Bernardino & Walnut.',
+  },
 }
 
 export default function ContactPage() {

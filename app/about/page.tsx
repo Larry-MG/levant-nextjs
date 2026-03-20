@@ -7,9 +7,25 @@ import ValuesGrid from '@/components/about/ValuesGrid'
 import LocationsGrid from '@/components/home/LocationsGrid'
 
 export const metadata: Metadata = {
-  title: 'About Us | Levant Gold & Silver',
+  title: 'About Levant Gold & Silver | Trusted Precious Metals Dealer — Southern California',
   description:
-    'Learn about Levant Gold & Silver — Southern California\'s trusted precious metals dealer with four locations in Orange, Pomona, San Bernardino, and Walnut.',
+    "Learn about Levant Gold & Silver — Southern California's trusted precious metals dealer with four locations in Orange, Pomona, San Bernardino, and Walnut. We use industry-grade XRF technology for transparent, accurate appraisals.",
+  keywords: [
+    'Levant Gold Silver about', 'precious metals dealer Southern California',
+    'gold dealer Orange County', 'trusted gold buyer Inland Empire',
+    'XRF testing Southern California', 'gold silver appraisal',
+  ],
+  alternates: { canonical: '/about' },
+  openGraph: {
+    title: 'About Levant Gold & Silver | Trusted Precious Metals Dealer',
+    description:
+      "Southern California's trusted precious metals dealer with 4 locations. Transparent pricing, industry-grade XRF testing, same-day cash. Serving Orange County and the Inland Empire.",
+    url: '/about',
+  },
+  twitter: {
+    title: 'About Levant Gold & Silver | Southern California',
+    description: 'Transparent pricing, XRF testing, same-day cash. 4 locations in Orange County and the Inland Empire.',
+  },
 }
 
 const team = [

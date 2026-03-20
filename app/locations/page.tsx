@@ -3,9 +3,26 @@ import Link from 'next/link'
 import { locations } from '@/lib/constants/locations'
 
 export const metadata: Metadata = {
-  title: 'Locations & Hours | Levant Gold & Silver — Southern California',
+  title: 'Locations & Hours | Orange, Pomona, San Bernardino & Walnut | Levant Gold & Silver',
   description:
-    'Find the Levant Gold & Silver location nearest you. Four convenient locations across Southern California — Orange, Pomona, San Bernardino, and Walnut. No appointment necessary.',
+    'Find a Levant Gold & Silver near you. Four Southern California locations: Orange (714-213-4785), Pomona (909-784-7037), San Bernardino (909-656-2600), and Walnut. No appointment needed — walk in for a free appraisal.',
+  keywords: [
+    'gold dealer Orange CA hours', 'gold dealer Pomona CA hours', 'gold dealer San Bernardino hours',
+    'gold dealer Walnut CA', 'precious metals locations Southern California',
+    'gold buyer near me Orange County', 'gold buyer Inland Empire',
+    'sell gold Orange', 'sell gold Pomona', 'sell gold San Bernardino', 'sell gold Walnut',
+  ],
+  alternates: { canonical: '/locations' },
+  openGraph: {
+    title: 'Locations & Hours | Levant Gold & Silver — 4 Southern California Stores',
+    description:
+      'Orange County and Inland Empire gold dealers. Orange, Pomona, San Bernardino & Walnut locations. Open Mon–Sat, walk-ins welcome, free XRF appraisals.',
+    url: '/locations',
+  },
+  twitter: {
+    title: 'Levant Gold & Silver | 4 Southern California Locations',
+    description: 'Orange, Pomona, San Bernardino & Walnut. Mon–Sat, walk-ins welcome. Free gold appraisals.',
+  },
 }
 
 export default function LocationsPage() {

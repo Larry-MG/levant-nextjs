@@ -3,9 +3,28 @@ import Link from 'next/link'
 import FadeIn from '@/components/ui/FadeIn'
 
 export const metadata: Metadata = {
-  title: 'What We Buy | Levant Gold & Silver — Southern California',
+  title: 'What We Buy | Gold, Silver & Precious Metals — Best Prices in Southern California',
   description:
-    'Levant Gold & Silver buys gold, silver, platinum, palladium, and rhodium in any form — jewelry, coins, bars, scrap, dental, flatware, and more. Top dollar paid at our Orange, Pomona, San Bernardino, and Walnut locations.',
+    'Levant Gold & Silver pays top dollar for gold, silver, platinum, palladium & rhodium in any form — jewelry, coins, bars, scrap, dental gold, flatware, estate pieces. Free XRF testing at our Orange, Pomona, San Bernardino & Walnut locations. Same-day cash.',
+  keywords: [
+    'what we buy gold silver', 'sell gold jewelry Southern California',
+    'sell gold coins Southern California', 'sell silver coins Southern California',
+    'sell platinum Southern California', 'sell palladium Southern California',
+    'sell scrap gold California', 'sell dental gold', 'sell sterling silverware',
+    'estate jewelry buyer Southern California', 'gold bullion buyer California',
+    'sell gold Orange CA', 'sell gold Pomona', 'sell gold San Bernardino',
+  ],
+  alternates: { canonical: '/what-we-buy' },
+  openGraph: {
+    title: 'What We Buy | Gold, Silver & Precious Metals — Best Prices in Southern California',
+    description:
+      'Top dollar for gold, silver, platinum, palladium & rhodium — jewelry, coins, bars, scrap, estate pieces. Free XRF testing, immediate payment at 4 SoCal locations.',
+    url: '/what-we-buy',
+  },
+  twitter: {
+    title: 'What We Buy | Top Dollar for Precious Metals in Southern California',
+    description: 'Gold, silver, platinum, coins, bars, jewelry — free XRF testing, same-day cash. 4 SoCal locations.',
+  },
 }
 
 const categories = [

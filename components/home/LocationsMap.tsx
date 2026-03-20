@@ -142,13 +142,13 @@ export default function LocationsMap({ locations }: Props) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="rounded-xl overflow-hidden border border-white/10">
 
-          {/* Mobile: horizontal pill slider */}
-          <div className="lg:hidden flex overflow-x-auto gap-2 px-4 py-3 bg-charcoal border-b border-white/10 snap-x snap-mandatory scrollbar-none">
+          {/* Mobile: pill grid */}
+          <div className="lg:hidden grid grid-cols-2 gap-2 px-4 py-3 bg-charcoal border-b border-white/10">
             {locations.map((loc) => (
               <button
                 key={loc.slug}
                 onClick={() => flyTo(loc.slug)}
-                className={`flex-none snap-start px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-200 ${
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
                   activeSlug === loc.slug
                     ? 'bg-gold text-charcoal'
                     : 'bg-white/8 text-cream/70 hover:bg-white/15 hover:text-cream'

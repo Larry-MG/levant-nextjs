@@ -5,8 +5,28 @@ import GoldCalculator from '@/components/home/GoldCalculator'
 import WhatWeBuyPriceTable from '@/components/spot-prices/WhatWeBuyPriceTable'
 
 export const metadata: Metadata = {
-  title: 'Live Gold, Silver & Platinum Spot Prices | Levant Gold & Silver',
-  description: 'Track live gold, silver, platinum, and palladium spot prices. See our current buy prices by karat and purity — updated every 30 seconds.',
+  title: 'Live Gold & Silver Spot Prices Today | Current Buy Prices | Levant Gold & Silver',
+  description:
+    'Live gold, silver, platinum & palladium spot prices updated every 30 seconds. See current buy prices by karat and purity — 10K, 14K, 18K, 24K gold and .999 silver. Use our calculator to estimate the value of your items.',
+  keywords: [
+    'live gold price today', 'gold spot price', 'silver spot price today',
+    'platinum spot price', 'palladium price',
+    'gold price per gram', 'gold price per ounce California',
+    '14k gold price today', '18k gold price today', '10k gold price',
+    'how much is my gold worth', 'gold calculator Southern California',
+    'current gold buy price Orange County', 'silver buy price Inland Empire',
+  ],
+  alternates: { canonical: '/spot-prices' },
+  openGraph: {
+    title: 'Live Gold & Silver Spot Prices Today | Levant Gold & Silver',
+    description:
+      'Real-time gold, silver, platinum & palladium prices updated every 30 seconds. Calculate the value of your gold by karat at our 4 Southern California locations.',
+    url: '/spot-prices',
+  },
+  twitter: {
+    title: 'Live Gold & Silver Spot Prices | Updated Every 30 Seconds',
+    description: 'Real-time precious metal prices. Calculate your gold value by karat. 4 SoCal locations.',
+  },
 }
 
 export default function SpotPricesPage() {
