@@ -67,13 +67,13 @@ export default async function ShopPage() {
       <section className="bg-charcoal border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-10">
           <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">
-            Live FizTrade Pricing &mdash; Refreshes Every 5 Minutes
+            Live Pricing &mdash; Refreshes Every 5 Minutes
           </p>
           <h1 className="text-4xl sm:text-5xl font-heading font-bold text-cream mb-3">
             Precious Metals Shop
           </h1>
           <p className="text-cream/45 text-base max-w-xl">
-            Authentic bullion from top mints — priced live off the FizTrade spot feed.
+            Authentic bullion from top mints — priced live off real-time spot feeds.
             All prices shown are retail (1–49 qty) ask prices.
           </p>
         </div>
@@ -120,7 +120,7 @@ export default async function ShopPage() {
           {grouped.length === 0 && (
             <div className="py-20 text-center text-muted">
               <p className="text-lg font-heading font-semibold mb-2">Products loading…</p>
-              <p className="text-sm">Live pricing data is being fetched from FizTrade.</p>
+              <p className="text-sm">Live pricing data is being fetched.</p>
             </div>
           )}
 
@@ -163,7 +163,7 @@ export default async function ShopPage() {
 
         <div className="border-t border-border">
           <p className="text-center text-xs text-muted py-8 max-w-2xl mx-auto px-4 leading-relaxed">
-            Prices are live from the FizTrade/Dillon Gage platform, refreshing every 5 minutes.
+            Prices are live and refresh every 5 minutes.
             Retail ask prices shown (1–49 qty tier). Final price confirmed at time of purchase.
             All products subject to availability. Call or visit any location for larger orders.
           </p>

@@ -13,7 +13,7 @@ const API_TOKEN = process.env.FIZCONNECT_API_TOKEN
 
 const TTL_PRICES  = 5 * 60 * 1000          // 5 min
 const TTL_CATALOG = 24 * 60 * 60 * 1000    // 24 h
-const FETCH_TIMEOUT = 5000                  // 5 s — abort if FizTrade doesn't respond
+const FETCH_TIMEOUT = 5000                  // 5 s — abort if the API doesn't respond
 
 // ─── In-memory cache (survives across requests in the same Node process) ──────
 
@@ -53,7 +53,7 @@ export async function getSpotPrices(): Promise<SpotPrice[]> {
 
   const res = await fetchWithTimeout(`${BASE_URL}/FizServices/GetSpotPriceData/${API_TOKEN}`)
 
-  if (!res.ok) throw new Error(`FizTrade spot price fetch failed: ${res.status}`)
+  if (!res.ok) throw new Error(`Spot price fetch failed: ${res.status}`)
 
   const d: FizSpotPriceResponse = await res.json()
 
@@ -115,7 +115,7 @@ const METAL_MAP: Record<number, ShopProduct['metal']> = {
   1: 'gold', 2: 'silver', 3: 'platinum', 4: 'palladium',
 }
 
-/** Parse FizTrade weight strings ("1 oz", "1/2 oz", "10 oz", "100 oz") to decimal troy oz. */
+/** Parse weight strings ("1 oz", "1/2 oz", "10 oz", "100 oz") to decimal troy oz. */
 export function parseWeightOzt(weight: string): number {
   const s = weight.trim().replace(/\s*oz.*$/i, '')
   if (s.includes('/')) {
@@ -125,7 +125,7 @@ export function parseWeightOzt(weight: string): number {
   return parseFloat(s) || 1
 }
 
-/** Pick the best image URL from a FizTrade images array. */
+/** Pick the best image URL from a product images array. */
 function pickImage(images: FizProductImage[], preferred: string[]): string | null {
   for (const type of preferred) {
     const img = images.find(i => i.imgType === type)

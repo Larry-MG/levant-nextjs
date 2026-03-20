@@ -286,17 +286,27 @@ export default async function HomePage() {
                 </Link>
               </div>
             </FadeIn>
-            {/* Photo */}
-            <FadeIn direction="left" delay={0.2} className="px-6 pb-6 lg:px-0 lg:pr-8 lg:py-8">
-              <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] lg:h-full">
-                <Image
-                  src="/images/store/levant-outside.jpg"
-                  alt="Levant Gold & Silver storefront in Southern California"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-cream/30 via-transparent to-transparent lg:block hidden" />
+            {/* Photos — side by side */}
+            <FadeIn direction="left" delay={0.2} className="px-6 pb-6 lg:px-0 lg:pr-8 lg:py-8 flex items-stretch">
+              <div className="grid grid-cols-2 gap-3 w-full">
+                <div className="relative min-h-[360px] overflow-hidden rounded-[1.5rem] lg:h-full">
+                  <Image
+                    src="/images/store/levant-outside.jpg"
+                    alt="Levant Gold & Silver storefront"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                  />
+                </div>
+                <div className="relative min-h-[360px] overflow-hidden rounded-[1.5rem] lg:h-full mt-6">
+                  <Image
+                    src="/images/store/xrf-machine.jpg"
+                    alt="XRF testing machine at Levant Gold & Silver"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                  />
+                </div>
               </div>
             </FadeIn>
           </div>
@@ -338,30 +348,16 @@ export default async function HomePage() {
       <section className="bg-cream overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 items-stretch">
-            {/* Photos — staggered stack */}
-            <FadeIn direction="right" className="order-2 lg:order-1 px-6 pb-8 lg:px-0 lg:pl-8 lg:py-10">
-              <div className="flex flex-col gap-4">
-                {/* Top photo — XRF machine, full width */}
-                <div className="relative h-[260px] overflow-hidden rounded-[1.5rem] shadow-xl">
-                  <Image
-                    src="/images/store/xrf-machine.jpg"
-                    alt="XRF testing machine at Levant Gold & Silver"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
-                {/* Bottom photo — storefront, inset right for stagger */}
-                <div className="relative h-[200px] overflow-hidden rounded-[1.5rem] shadow-lg ml-auto w-[88%]">
-                  <Image
-                    src="/images/store/levant-outside.jpg"
-                    alt="Levant Gold & Silver storefront"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 88vw, 44vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/25 to-transparent" />
-                </div>
+            {/* Photo */}
+            <FadeIn direction="right" className="order-2 lg:order-1 px-6 pb-8 lg:px-0 lg:pl-8 lg:py-8">
+              <div className="relative min-h-[400px] overflow-hidden rounded-[2rem] lg:h-full">
+                <Image
+                  src="/images/store/DSC03411.jpg"
+                  alt="XRF testing machine at Levant Gold & Silver"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               </div>
             </FadeIn>
             {/* Text */}

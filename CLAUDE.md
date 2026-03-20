@@ -2,7 +2,7 @@
 
 # Levant Gold & Silver — Web Project
 
-Next.js storefront for Levant Gold & Silver, a precious metals dealer with 3 Southern California locations (Orange, Pomona, San Bernardino). Staging environment — live FizTrade/Dillon Gage API for product data, but checkout is a quote-request flow (no real payment processing).
+Next.js storefront for Levant Gold & Silver, a precious metals dealer with 3 Southern California locations (Orange, Pomona, San Bernardino). Staging environment — live pricing API for product data, but checkout is a quote-request flow (no real payment processing).
 
 ---
 
@@ -16,7 +16,7 @@ Next.js storefront for Levant Gold & Silver, a precious metals dealer with 3 Sou
 | State | Zustand v5 with localStorage persistence |
 | Fonts | Playfair Display (headings), Inter (body), Geist Mono (prices) |
 | Email | Resend SDK (`resend` package) |
-| Product data | FizTrade/Dillon Gage API (server-only) |
+| Product data | Live pricing API (server-only) |
 | Animation | Framer Motion |
 
 ---
@@ -56,10 +56,10 @@ components/
 lib/
   store/cart.ts           # Zustand cart store (items, isOpen, openCart, closeCart)
   fiztrade/
-    client.ts             # Server-only FizTrade API client
+    client.ts             # Server-only live pricing API client
     types.ts              # ShopProduct, CartItem, etc.
   constants/
-    products.ts           # Curated FizTrade product codes by metal
+    products.ts           # Curated product codes by metal
     locations.ts          # Store location data
   utils/currency.ts       # formatUSD helper
 ```
@@ -137,18 +137,18 @@ Both are fully inline HTML (no React Email dependency) in a Shopify-style layout
 
 ---
 
-## FizTrade / Product Data
+## Live Pricing / Product Data
 
 Products are **not stored in a database**. Flow:
 
 1. Curated product codes in `lib/constants/products.ts` (grouped by metal: gold, silver, platinum, palladium)
-2. Server fetches live catalog + prices from FizTrade API at request time
+2. Server fetches live catalog + prices from the pricing API at request time
 3. ISR cache: prices = 5 min, catalog = 24 h
 4. Falls back to demo data if API is down
 
 Env vars required:
 ```
-FIZCONNECT_URL=https://stage-connect.fiztrade.com
+FIZCONNECT_URL=...
 FIZCONNECT_API_TOKEN=...
 NEXT_PUBLIC_FIZCONNECT_CHART_TOKEN=...
 ```
@@ -163,9 +163,6 @@ FIZCONNECT_API_TOKEN
 NEXT_PUBLIC_FIZCONNECT_CHART_TOKEN
 NEXT_PUBLIC_SITE_URL
 RESEND_API_KEY
-FIZTRADE_EMAIL          # legacy, may be unused
-FIZTRADE_PASSWORD       # legacy, may be unused
-FIZTRADE_AUTH_GUID      # legacy, may be unused
 ```
 
 ---
@@ -175,7 +172,7 @@ FIZTRADE_AUTH_GUID      # legacy, may be unused
 - **No card processing** — ever. This is intentional. The business only takes wire/direct deposit due to fraud risk in the precious metals industry.
 - **Checkout is a quote request** — prices shown are indicative (live spot-based), locked by the team at time of payment confirmation.
 - **Cart drawer is the UX, not the cart page** — don't add navigation that sends users to `/cart`; open the drawer instead.
-- **Server components for product data** — `lib/fiztrade/client.ts` is `server-only`. Never import it in client components.
+- **Server components for product data** — `lib/fiztrade/client.ts` is `server-only` (live pricing API client). Never import it in client components.
 - **Zustand with `skipHydration: true`** — always call `useCartStore.persist.rehydrate()` inside a `useEffect` on any client component that reads cart state, to avoid SSR mismatch.
 - **Tailwind v4** — config lives in `globals.css` `@theme` block, not `tailwind.config.js`. Token names map directly to class names (`--color-gold` → `bg-gold`).
 - **Metal-specific accent colours** in `ProductCard.tsx` — gold (#C9A84C), silver (#C0C0C0), platinum (#C0C0E0), palladium (#C0B8D8).

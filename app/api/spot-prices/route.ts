@@ -15,7 +15,7 @@ export async function GET() {
       { headers: { 'Cache-Control': CACHE_HEADER } },
     )
   } catch (err) {
-    console.error('FizTrade spot price error:', err)
+    console.error('Spot price error:', err)
     return NextResponse.json(
       {
         prices: [

@@ -1,9 +1,8 @@
 /**
  * Curated product codes to display in the shop.
- * These are Dillon Gage / FizTrade product codes — details, images, and live
- * prices are fetched dynamically via the FizConnect API.
+ * Details, images, and live prices are fetched dynamically via the live pricing API.
  *
- * To add a product: look up its code at connect.fiztrade.com → Product Catalog,
+ * To add a product: look up its code in the Product Catalog,
  * then add it to the appropriate group below.
  *
  * Swap in GetCustomProducts/sell when the live dealer token is configured —
