@@ -8,19 +8,146 @@ import WhatWeBuyGrid from '@/components/home/WhatWeBuyGrid'
 import HowItWorksSteps from '@/components/home/HowItWorksSteps'
 import TestimonialsGrid from '@/components/home/TestimonialsGrid'
 import LocationsGrid from '@/components/home/LocationsGrid'
+import LocationsMap from '@/components/home/LocationsMap'
 import PopularProductsGrid from '@/components/home/PopularProductsGrid'
 import StatsSection from '@/components/home/StatsSection'
 import FAQ from '@/components/home/FAQ'
 import FadeIn from '@/components/ui/FadeIn'
+import JsonLd from '@/components/seo/JsonLd'
 import { locations } from '@/lib/constants/locations'
 import { getProductCatalog, getProductPrices, mergeShopProducts } from '@/lib/fiztrade/client'
 
 export const revalidate = 300
 
 export const metadata: Metadata = {
-  title: 'Buy & Sell Gold & Silver in Southern California | Levant Gold & Silver',
-  description: 'Southern California\'s trusted precious metals dealer. 4 locations in Orange, Pomona, San Bernardino, and Walnut. Honest prices, immediate payment, XRF testing.',
+  title: 'Buy & Sell Gold & Silver Near Me | Orange County & Inland Empire | Levant Gold & Silver',
+  description:
+    "Buy and sell gold, silver, platinum & palladium at Levant Gold & Silver — 4 Southern California locations in Orange, Pomona, San Bernardino & Walnut. Best prices, free XRF testing, same-day cash. No appointment needed.",
+  keywords: [
+    'buy gold near me', 'sell gold near me', 'gold dealer near me',
+    'buy gold Orange County', 'sell gold Orange County',
+    'buy gold Inland Empire', 'sell gold Inland Empire',
+    'cash for gold Orange CA', 'cash for gold Pomona CA', 'cash for gold San Bernardino',
+    'gold coins buyer Southern California', 'sell gold jewelry Southern California',
+    'precious metals dealer near me', 'sell silver near me',
+    'gold buyer Orange', 'gold buyer Pomona', 'gold buyer San Bernardino', 'gold buyer Walnut',
+    'best gold prices Southern California', 'XRF gold testing',
+  ],
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: 'Buy & Sell Gold & Silver | Best Prices in Orange County & Inland Empire',
+    description:
+      "Southern California's top-rated precious metals dealer. Walk in to any of 4 locations — Orange, Pomona, San Bernardino & Walnut — for a free appraisal and same-day cash offer.",
+    url: '/',
+  },
+  twitter: {
+    title: 'Buy & Sell Gold & Silver | Orange County & Inland Empire',
+    description:
+      "4 SoCal locations. Free XRF testing, same-day cash, no appointment. Orange, Pomona, San Bernardino & Walnut.",
+  },
 }
+
+const homeJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Levant Gold & Silver',
+    url: 'https://levantgold.com',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://levantgold.com/shop?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': 'https://levantgold.com/#business',
+    name: 'Levant Gold & Silver',
+    description:
+      "Southern California's trusted precious metals dealer. We buy and sell gold, silver, platinum, and palladium at four convenient locations.",
+    url: 'https://levantgold.com',
+    logo: 'https://levantgold.com/images/logo/levant-logo.png',
+    image: 'https://levantgold.com/images/store/DSC03302.jpg',
+    priceRange: '$$',
+    telephone: '+17142134785',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '419 N Tustin St',
+      addressLocality: 'Orange',
+      addressRegion: 'CA',
+      postalCode: '92867',
+      addressCountry: 'US',
+    },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        opens: '10:00',
+        closes: '20:00',
+      },
+    ],
+    hasMap: 'https://maps.google.com/?q=419+N+Tustin+St+Orange+CA+92867',
+    sameAs: ['https://levantgold.com'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Do I need an appointment to sell my gold?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'No appointment needed. Walk in to any of our four Southern California locations — Orange, Pomona, San Bernardino, or Walnut — any time during business hours for a free, immediate appraisal.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How do you determine the value of my gold or silver?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'We test every item with our XRF (X-Ray Fluorescence) machine to determine exact purity, weigh it on a certified scale, and calculate your offer using the live spot price at the time of your visit. We show you the math.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What forms of payment do you offer when buying my gold?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'We pay cash, check, wire transfer, Zelle, or CashApp on the spot — whichever you prefer. There is no waiting period.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What types of gold and precious metals do you buy?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'We buy all forms of gold, silver, platinum, palladium, and rhodium — including jewelry (any karat), bullion coins and bars, scrap metal, estate pieces, dental gold, sterling silverware, and collector coins.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Where are your Southern California locations?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'We have four locations: Orange (419 N Tustin St), Pomona (1565 W Holt Ave), San Bernardino (1292 W Mill St), and Walnut (386 N Lemon Ave). All open Monday through Saturday, no appointment needed.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Do you buy gold without hallmarks or stamps?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. Our XRF machine determines the exact purity of any metal directly — no stamps or hallmarks required.',
+        },
+      },
+    ],
+  },
+]
 
 const POPULAR_CODES = ['1EAGLE', 'SE', '1B', '1MAP', '1PE', '1PAL']
 
@@ -47,6 +174,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <JsonLd id="schema-home" schema={homeJsonLd as Record<string, unknown>[]} />
       {/* ── Hero ── */}
       <section className="relative min-h-[580px] flex flex-col justify-center overflow-hidden">
         <Image
@@ -322,16 +450,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Visit Us ── */}
-      <section className="py-16 bg-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="text-center mb-12">
-            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">4 Locations</p>
-            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-charcoal">Visit Us</h2>
-          </FadeIn>
-          <LocationsGrid locations={locations} />
-        </div>
-      </section>
+      {/* ── Map ── */}
+      <LocationsMap locations={locations} />
     </>
   )
 }

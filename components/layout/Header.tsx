@@ -72,25 +72,21 @@ export default function Header() {
         : 'bg-charcoal'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-[70px] gap-8">
-          {/* Logo + Brand name */}
-          <Link href="/" className="flex-shrink-0 flex items-center gap-3 group">
+        <div className="flex items-center h-[80px]">
+          {/* Logo */}
+          <Link href="/" className="flex-shrink-0 flex items-center group">
             <Image
               src="/images/logo/levant-logo.png"
               alt="Levant Gold & Silver"
-              width={46}
-              height={46}
+              width={72}
+              height={72}
               className="rounded-full group-hover:opacity-90 transition-opacity"
               priority
             />
-            <div className="flex flex-col leading-tight">
-              <span className="text-gold font-bold text-base tracking-wide font-playfair">Levant</span>
-              <span className="text-cream/60 text-[11px] tracking-widest uppercase">Gold &amp; Silver</span>
-            </div>
           </Link>
 
-          {/* Desktop nav — left-bound after logo */}
-          <nav className="hidden lg:flex items-center gap-0.5 flex-1">
+          {/* Desktop nav — centered */}
+          <nav className="hidden lg:flex items-center gap-0.5 flex-1 justify-center">
             {navLinks.map((link) => {
               if (link.children) {
                 return (
