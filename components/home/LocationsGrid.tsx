@@ -22,7 +22,7 @@ interface LocationsGridProps {
 
 export default function LocationsGrid({ locations }: LocationsGridProps) {
   return (
-    <StaggerChildren className="grid md:grid-cols-3 gap-6" staggerDelay={0.1}>
+    <StaggerChildren className="grid sm:grid-cols-2 gap-6" staggerDelay={0.1}>
       {locations.map((loc) => (
         <motion.div
           key={loc.slug}

@@ -155,7 +155,7 @@ export default function CartDrawer() {
                 onClick={closeCart}
                 className="block w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold py-3 px-4 rounded-lg text-center text-sm transition-colors"
               >
-                Request a Quote →
+                Proceed to Checkout →
               </Link>
             </div>
           </>
