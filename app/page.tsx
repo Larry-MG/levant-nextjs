@@ -172,7 +172,7 @@ const POPULAR_LABEL_OVERRIDES: Record<string, string> = {
 async function loadPopularProducts() {
   try {
     const timeout = new Promise<never>((_, reject) =>
-      setTimeout(() => reject(new Error('FizTrade timeout')), 4000)
+      setTimeout(() => reject(new Error('Pricing API timeout')), 4000)
     )
     const [catalog, prices] = await Promise.race([
       Promise.all([
