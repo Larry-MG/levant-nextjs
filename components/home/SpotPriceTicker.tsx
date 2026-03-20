@@ -56,9 +56,12 @@ export function SpotPriceBar() {
   return (
     <div className="bg-charcoal-soft border-b border-white/5 py-2 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-[11px] sm:flex sm:w-full sm:min-w-0 sm:flex-wrap sm:items-center sm:gap-x-6 sm:text-xs">
+        <div className="flex gap-3 overflow-x-auto pb-1 -mb-1 snap-x snap-mandatory scrollbar-none sm:w-full sm:min-w-0 sm:flex-wrap sm:items-center sm:justify-start sm:gap-x-6 sm:gap-y-1 sm:overflow-visible sm:pb-0 sm:mb-0">
           {prices.map((p) => (
-            <div key={p.metal} className="flex min-w-0 items-center gap-1.5 sm:gap-2 sm:flex-shrink-0">
+            <div
+              key={p.metal}
+              className="flex min-w-[158px] snap-start items-center gap-1.5 rounded-full border border-white/8 bg-white/4 px-3 py-1.5 text-[11px] sm:min-w-0 sm:rounded-none sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:text-xs sm:flex-shrink-0"
+            >
               <span className="shrink-0 text-gold font-semibold uppercase tracking-[0.18em] sm:tracking-wider">
                 {metalLabels[p.metal]}
               </span>
@@ -69,9 +72,6 @@ export function SpotPriceBar() {
               </span>
             </div>
           ))}
-          <span className="col-span-2 text-center text-[10px] text-cream/20 sm:ml-auto sm:block sm:flex-shrink-0 sm:text-left">
-            Live · 30s
-          </span>
         </div>
       </div>
     </div>
