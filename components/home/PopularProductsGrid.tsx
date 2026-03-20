@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef, useState, useEffect, useCallback } from 'react'
+import { useState } from 'react'
 import { formatUSD } from '@/lib/utils/currency'
 
 interface Product {
@@ -27,7 +27,7 @@ const METAL_ACCENT: Record<string, { badge: string; glow: string; label: string 
 
 function SkeletonCard() {
   return (
-    <div className="flex-none w-52 sm:w-60 snap-start">
+    <div className="flex-none w-52 sm:w-60">
       <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
         <div className="h-44 bg-white/5 animate-pulse" />
         <div className="p-4 space-y-2">
@@ -41,160 +41,107 @@ function SkeletonCard() {
   )
 }
 
+function ProductCard({ p, labelOverrides }: { p: Product; labelOverrides?: Record<string, string> }) {
+  const accent = METAL_ACCENT[p.metal] ?? METAL_ACCENT.gold
+  const displayName = labelOverrides?.[p.code] ?? p.name
+  return (
+    <div className="flex-none w-52 sm:w-60">
+      <Link
+        href={`/shop/${p.code}`}
+        className="group block bg-white/5 hover:bg-white/8 border border-white/10 hover:border-gold/30 rounded-2xl overflow-hidden transition-all duration-300"
+      >
+        <div
+          className="relative h-44 flex items-center justify-center"
+          style={{
+            background: `radial-gradient(ellipse at center, ${accent.glow} 0%, transparent 70%), #111110`,
+          }}
+        >
+          {p.imageUrl ? (
+            <div className="relative w-28 h-28 group-hover:scale-[1.07] transition-transform duration-500 ease-out">
+              <Image
+                src={p.imageUrl}
+                alt={displayName}
+                fill
+                className="object-contain drop-shadow-[0_6px_20px_rgba(0,0,0,0.5)]"
+                sizes="112px"
+                unoptimized={false}
+              />
+            </div>
+          ) : (
+            <span className="text-5xl text-white/10">
+              {p.metal === 'gold' ? '◈' : p.metal === 'silver' ? '◇' : '◆'}
+            </span>
+          )}
+          <span className={`absolute top-3 left-3 px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${accent.badge}`}>
+            {accent.label}
+          </span>
+        </div>
+        <div className="px-4 pt-3.5 pb-4">
+          <p className="text-cream/80 text-[13px] font-semibold leading-snug line-clamp-2 group-hover:text-cream transition-colors mb-2.5 h-9">
+            {displayName}
+          </p>
+          <div className="flex items-end justify-between">
+            <div>
+              <p className="text-[9px] text-cream/30 uppercase tracking-widest font-semibold mb-0.5">Ask</p>
+              <p className="font-mono font-bold text-lg text-gold leading-none">
+                {formatUSD(p.ask)}
+              </p>
+            </div>
+            <span className="text-[10px] text-cream/30 group-hover:text-gold/60 transition-colors font-medium">
+              View →
+            </span>
+          </div>
+        </div>
+      </Link>
+    </div>
+  )
+}
+
 export default function PopularProductsGrid({ products, fallbackCodes, labelOverrides }: PopularProductsGridProps) {
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [canScrollLeft, setCanScrollLeft] = useState(false)
-  const [canScrollRight, setCanScrollRight] = useState(true)
-  const isPausedRef = useRef(false)
-  const autoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null)
-
-  const updateScrollState = useCallback(() => {
-    const el = scrollRef.current
-    if (!el) return
-    setCanScrollLeft(el.scrollLeft > 8)
-    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 8)
-  }, [])
-
-  useEffect(() => {
-    const el = scrollRef.current
-    if (!el) return
-    updateScrollState()
-    el.addEventListener('scroll', updateScrollState, { passive: true })
-    const ro = new ResizeObserver(updateScrollState)
-    ro.observe(el)
-    return () => { el.removeEventListener('scroll', updateScrollState); ro.disconnect() }
-  }, [updateScrollState, products])
-
-  useEffect(() => {
-    autoScrollRef.current = setInterval(() => {
-      if (isPausedRef.current) return
-      const el = scrollRef.current
-      if (!el) return
-      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 8
-      if (atEnd) {
-        el.scrollTo({ left: 0, behavior: 'smooth' })
-      } else {
-        el.scrollBy({ left: 280, behavior: 'smooth' })
-      }
-    }, 3500)
-    return () => { if (autoScrollRef.current) clearInterval(autoScrollRef.current) }
-  }, [products])
-
-  function scroll(dir: 'left' | 'right') {
-    const el = scrollRef.current
-    if (!el) return
-    el.scrollBy({ left: dir === 'left' ? -280 : 280, behavior: 'smooth' })
-  }
-
-  const items = products.length > 0 ? products : []
+  const [paused, setPaused] = useState(false)
+  const items = products.length > 0 ? products.slice(0, 12) : []
+  // Duration: ~80px/s. Each card is 256px (w-60 240px + gap 16px)
+  const duration = Math.max(20, items.length * 256 / 80)
 
   return (
     <div
-      className="relative"
-      onMouseEnter={() => { isPausedRef.current = true }}
-      onMouseLeave={() => { isPausedRef.current = false }}
+      className="relative overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
     >
-      {/* Left fade */}
+      <style>{`
+        @keyframes carousel-scroll {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+      `}</style>
+
+      {/* Edge fades */}
       <div
-        className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 z-10 transition-opacity duration-300"
-        style={{
-          background: 'linear-gradient(to right, #1C1917, transparent)',
-          opacity: canScrollLeft ? 1 : 0,
-        }}
+        className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 z-10"
+        style={{ background: 'linear-gradient(to right, #1C1917, transparent)' }}
       />
-      {/* Right fade */}
       <div
-        className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 z-10 transition-opacity duration-300"
-        style={{
-          background: 'linear-gradient(to left, #1C1917, transparent)',
-          opacity: canScrollRight ? 1 : 0,
-        }}
+        className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 z-10"
+        style={{ background: 'linear-gradient(to left, #1C1917, transparent)' }}
       />
 
-      {/* Arrow buttons */}
-      <button
-        onClick={() => scroll('left')}
-        aria-label="Scroll left"
-        className={`hidden sm:flex absolute -left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 items-center justify-center rounded-full bg-white/10 hover:bg-gold/20 border border-white/15 hover:border-gold/40 text-cream hover:text-gold transition-all duration-200 ${canScrollLeft ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-      >
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
-      </button>
-      <button
-        onClick={() => scroll('right')}
-        aria-label="Scroll right"
-        className={`hidden sm:flex absolute -right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 items-center justify-center rounded-full bg-white/10 hover:bg-gold/20 border border-white/15 hover:border-gold/40 text-cream hover:text-gold transition-all duration-200 ${canScrollRight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-      >
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
-      </button>
-
-      {/* Scroll track */}
+      {/* Track — items duplicated for seamless loop */}
       <div
-        ref={scrollRef}
-        className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 -mb-2"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        className="flex gap-4 pb-2 -mb-2"
+        style={{
+          width: 'max-content',
+          animation: items.length > 0
+            ? `carousel-scroll ${duration}s linear infinite`
+            : undefined,
+          animationPlayState: paused ? 'paused' : 'running',
+        }}
       >
         {items.length === 0
-          ? fallbackCodes.map((code) => <SkeletonCard key={code} />)
-          : items.slice(0, 12).map((p) => {
-              const accent = METAL_ACCENT[p.metal] ?? METAL_ACCENT.gold
-              const displayName = labelOverrides?.[p.code] ?? p.name
-              return (
-                <div key={p.code} className="flex-none w-52 sm:w-60 snap-start">
-                  <Link
-                    href={`/shop/${p.code}`}
-                    className="group block bg-white/5 hover:bg-white/8 border border-white/10 hover:border-gold/30 rounded-2xl overflow-hidden transition-all duration-300"
-                  >
-                    {/* Image area */}
-                    <div
-                      className="relative h-44 flex items-center justify-center"
-                      style={{
-                        background: `radial-gradient(ellipse at center, ${accent.glow} 0%, transparent 70%), #111110`,
-                      }}
-                    >
-                      {p.imageUrl ? (
-                        <div className="relative w-28 h-28 group-hover:scale-[1.07] transition-transform duration-500 ease-out">
-                          <Image
-                            src={p.imageUrl}
-                            alt={displayName}
-                            fill
-                            className="object-contain drop-shadow-[0_6px_20px_rgba(0,0,0,0.5)]"
-                            sizes="112px"
-                            unoptimized={false}
-                          />
-                        </div>
-                      ) : (
-                        <span className="text-5xl text-white/10">
-                          {p.metal === 'gold' ? '◈' : p.metal === 'silver' ? '◇' : '◆'}
-                        </span>
-                      )}
-
-                      {/* Metal badge */}
-                      <span className={`absolute top-3 left-3 px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${accent.badge}`}>
-                        {accent.label}
-                      </span>
-                    </div>
-
-                    {/* Info */}
-                    <div className="px-4 pt-3.5 pb-4">
-                      <p className="text-cream/80 text-[13px] font-semibold leading-snug line-clamp-2 group-hover:text-cream transition-colors mb-2.5 h-9">
-                        {displayName}
-                      </p>
-                      <div className="flex items-end justify-between">
-                        <div>
-                          <p className="text-[9px] text-cream/30 uppercase tracking-widest font-semibold mb-0.5">Ask</p>
-                          <p className="font-mono font-bold text-lg text-gold leading-none">
-                            {formatUSD(p.ask)}
-                          </p>
-                        </div>
-                        <span className="text-[10px] text-cream/30 group-hover:text-gold/60 transition-colors font-medium">
-                          View →
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              )
-            })}
+          ? [...fallbackCodes, ...fallbackCodes].map((code, i) => <SkeletonCard key={`${code}-${i}`} />)
+          : [...items, ...items].map((p, i) => (
+              <ProductCard key={`${p.code}-${i}`} p={p} labelOverrides={labelOverrides} />
+            ))}
       </div>
     </div>
   )
