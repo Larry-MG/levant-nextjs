@@ -209,19 +209,6 @@ export default async function HomePage() {
             <div className="py-24 lg:py-28">
               <HeroText />
             </div>
-            <FadeIn direction="left" delay={0.15} className="hidden lg:flex justify-center items-center">
-              <div className="relative w-full max-w-[520px] h-[420px]">
-                <div className="absolute inset-x-12 bottom-8 h-24 rounded-full bg-gold/25 blur-3xl" />
-                <Image
-                  src="/images/what-we-buy/Group-1000008359-1.webp"
-                  alt="Gold jewelry, coins, and bullion bars at Levant Gold & Silver"
-                  fill
-                  className="object-contain object-bottom drop-shadow-[0_28px_60px_rgba(0,0,0,0.4)]"
-                  priority
-                  sizes="520px"
-                />
-              </div>
-            </FadeIn>
           </div>
         </div>
       </section>
