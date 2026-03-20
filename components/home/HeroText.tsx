@@ -30,7 +30,7 @@ export default function HeroText() {
       >
         Gold and silver are too valuable for guesswork. We test every piece with
         XRF technology, price it from live spot rates, and put the math in front
-        of you — same-day cash at any of our four Southern California locations.
+        of you for same-day cash at any of our four Southern California locations.
       </motion.p>
       <motion.div
         initial={{ opacity: 0, y: 16 }}
