@@ -4,7 +4,7 @@ import { Resend } from 'resend'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 const BUSINESS_EMAILS = ['ahmad@motorsportgrowth.com', 'levantgoldandsilver@gmail.com']
-const FROM = 'Levant Gold & Silver <onboarding@resend.dev>'
+const FROM = 'Levant Gold & Silver <orders@levantgold.com>'
 
 interface OrderItem {
   name: string
