@@ -54,6 +54,23 @@ async function fetchWithTimeout(input: RequestInfo, init: RequestInit = {}): Pro
 
 // ─── Spot prices ──────────────────────────────────────────────────────────────
 
+function normalizeChangePercent(ask: number, change: number, changePercent: number): number {
+  if (Number.isFinite(change) && change === 0) return 0
+
+  const needsFallback =
+    !Number.isFinite(changePercent) ||
+    (changePercent === 0 && Number.isFinite(change) && change !== 0)
+
+  if (!needsFallback) return changePercent
+  if (!Number.isFinite(ask) || !Number.isFinite(change)) return 0
+
+  const previous = ask - change
+  if (!Number.isFinite(previous) || previous === 0) return 0
+
+  const normalized = (change / previous) * 100
+  return Number.isFinite(normalized) ? normalized : 0
+}
+
 export async function getSpotPrices(): Promise<SpotPrice[]> {
   if (isFresh(cache.spotPrices)) return cache.spotPrices.data
 
@@ -69,10 +86,10 @@ export async function getSpotPrices(): Promise<SpotPrice[]> {
     change > 0 ? 'up' : change < 0 ? 'down' : 'flat'
 
   const data: SpotPrice[] = [
-    { metal: 'gold',      bid: d.goldBid,      ask: d.goldAsk,      change: d.goldChange,      changePercent: d.goldChangePercent,      direction: dir(d.goldChange) },
-    { metal: 'silver',    bid: d.silverBid,    ask: d.silverAsk,    change: d.silverChange,    changePercent: d.silverChangePercent,    direction: dir(d.silverChange) },
-    { metal: 'platinum',  bid: d.platinumBid,  ask: d.platinumAsk,  change: d.platinumChange,  changePercent: d.platinumChangePercent,  direction: dir(d.platinumChange) },
-    { metal: 'palladium', bid: d.palladiumBid, ask: d.palladiumAsk, change: d.palladiumChange, changePercent: d.palladiumChangePercent, direction: dir(d.palladiumChange) },
+    { metal: 'gold',      bid: d.goldBid,      ask: d.goldAsk,      change: d.goldChange,      changePercent: normalizeChangePercent(d.goldAsk, d.goldChange, d.goldChangePercent),      direction: dir(d.goldChange) },
+    { metal: 'silver',    bid: d.silverBid,    ask: d.silverAsk,    change: d.silverChange,    changePercent: normalizeChangePercent(d.silverAsk, d.silverChange, d.silverChangePercent),    direction: dir(d.silverChange) },
+    { metal: 'platinum',  bid: d.platinumBid,  ask: d.platinumAsk,  change: d.platinumChange,  changePercent: normalizeChangePercent(d.platinumAsk, d.platinumChange, d.platinumChangePercent),  direction: dir(d.platinumChange) },
+    { metal: 'palladium', bid: d.palladiumBid, ask: d.palladiumAsk, change: d.palladiumChange, changePercent: normalizeChangePercent(d.palladiumAsk, d.palladiumChange, d.palladiumChangePercent), direction: dir(d.palladiumChange) },
   ]
 
   cache.spotPrices = { data, expiresAt: Date.now() + TTL_PRICES }
