@@ -28,8 +28,19 @@ async function loadProduct(code: string): Promise<{ product: ShopProduct | null;
 
 export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
   const { code } = await params
+
+  if (!ALL_PRODUCT_CODES.includes(code)) {
+    return { title: 'Product Not Found — Levant Gold & Silver' }
+  }
+
   const { product } = await loadProduct(code)
-  if (!product) return { title: 'Product Not Found — Levant Gold & Silver' }
+  if (!product) {
+    return {
+      title: 'Product Temporarily Unavailable — Levant Gold & Silver',
+      description: 'This bullion item is part of our catalog, but live pricing is temporarily unavailable. Please call for current pricing and availability.',
+    }
+  }
+
   return {
     title: `${product.name} — Levant Gold & Silver`,
     description: `Buy ${product.name} at live market price. ${product.weight}${product.purity ? ` · ${product.purity}` : ''}.`,
@@ -54,9 +65,55 @@ const AVAILABILITY_COLOR: Record<string, string> = {
 
 export default async function ProductPage({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params
+
+  if (!ALL_PRODUCT_CODES.includes(code)) notFound()
+
   const { product, spot } = await loadProduct(code)
 
-  if (!product) notFound()
+  if (!product) {
+    return (
+      <div className="bg-[#F4F1EB] min-h-screen">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <Link
+            href="/shop"
+            className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-charcoal transition-colors mb-10 group"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M9 11L5 7l4-4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Back to Shop
+          </Link>
+
+          <div className="rounded-3xl border border-border bg-white p-8 sm:p-10 shadow-sm">
+            <p className="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">
+              Live Feed Temporary Issue
+            </p>
+            <h1 className="font-heading font-bold text-charcoal text-3xl sm:text-4xl leading-tight mb-4">
+              Product details are temporarily unavailable.
+            </h1>
+            <p className="text-muted leading-relaxed mb-6">
+              This product is part of the curated Levant catalog, but the live pricing feed did not return it just now.
+              Please call or contact the team for current pricing and availability while the feed refreshes.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/contact"
+                className="bg-gold hover:bg-gold-dark text-charcoal font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
+              >
+                Contact Levant
+              </Link>
+              <Link
+                href="/shop"
+                className="border border-border hover:border-gold text-charcoal hover:text-gold font-semibold px-6 py-3 rounded-lg transition-all duration-200 text-sm"
+              >
+                Browse Shop
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   const theme = METAL_THEME[product.metal] ?? METAL_THEME.gold
   const availColor = AVAILABILITY_COLOR[product.availability] ?? 'text-muted'

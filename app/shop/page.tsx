@@ -119,8 +119,8 @@ export default async function ShopPage() {
 
           {grouped.length === 0 && (
             <div className="py-20 text-center text-muted">
-              <p className="text-lg font-heading font-semibold mb-2">Products loading…</p>
-              <p className="text-sm">Live pricing data is being fetched.</p>
+              <p className="text-lg font-heading font-semibold mb-2">Inventory is temporarily unavailable.</p>
+              <p className="text-sm">The live product feed did not return inventory just now. Please refresh shortly or contact Levant for current pricing.</p>
             </div>
           )}
 
