@@ -11,7 +11,7 @@ import type {
 const BASE_URL = process.env.FIZCONNECT_URL ?? 'https://stage-connect.fiztrade.com'
 const API_TOKEN = process.env.FIZCONNECT_API_TOKEN
 
-/** Retail margins applied on top of Fiztrade bid/ask prices, by metal. */
+/** Retail margins applied to product sell pricing, by metal. */
 const MARGIN: Record<string, number> = {
   gold:      1.05,
   silver:    1.10,
@@ -69,10 +69,10 @@ export async function getSpotPrices(): Promise<SpotPrice[]> {
     change > 0 ? 'up' : change < 0 ? 'down' : 'flat'
 
   const data: SpotPrice[] = [
-    { metal: 'gold',      bid: d.goldBid,      ask: d.goldAsk      * MARGIN.gold,      change: d.goldChange,      changePercent: d.goldChangePercent,      direction: dir(d.goldChange) },
-    { metal: 'silver',    bid: d.silverBid,    ask: d.silverAsk    * MARGIN.silver,    change: d.silverChange,    changePercent: d.silverChangePercent,    direction: dir(d.silverChange) },
-    { metal: 'platinum',  bid: d.platinumBid,  ask: d.platinumAsk  * MARGIN.platinum,  change: d.platinumChange,  changePercent: d.platinumChangePercent,  direction: dir(d.platinumChange) },
-    { metal: 'palladium', bid: d.palladiumBid, ask: d.palladiumAsk * MARGIN.palladium, change: d.palladiumChange, changePercent: d.palladiumChangePercent, direction: dir(d.palladiumChange) },
+    { metal: 'gold',      bid: d.goldBid,      ask: d.goldAsk,      change: d.goldChange,      changePercent: d.goldChangePercent,      direction: dir(d.goldChange) },
+    { metal: 'silver',    bid: d.silverBid,    ask: d.silverAsk,    change: d.silverChange,    changePercent: d.silverChangePercent,    direction: dir(d.silverChange) },
+    { metal: 'platinum',  bid: d.platinumBid,  ask: d.platinumAsk,  change: d.platinumChange,  changePercent: d.platinumChangePercent,  direction: dir(d.platinumChange) },
+    { metal: 'palladium', bid: d.palladiumBid, ask: d.palladiumAsk, change: d.palladiumChange, changePercent: d.palladiumChangePercent, direction: dir(d.palladiumChange) },
   ]
 
   cache.spotPrices = { data, expiresAt: Date.now() + TTL_PRICES }
