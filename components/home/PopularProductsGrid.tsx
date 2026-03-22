@@ -98,48 +98,101 @@ function ProductCard({ p, labelOverrides }: { p: Product; labelOverrides?: Recor
 }
 
 export default function PopularProductsGrid({ products, fallbackCodes, labelOverrides }: PopularProductsGridProps) {
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [userInteracting, setUserInteracting] = useState(false)
-  const interactionTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const [paused, setPaused] = useState(false)
+  const pauseTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const items = products.length > 0 ? products.slice(0, 12) : []
+  const cardWidth = 256 // w-60 (240) + gap (16)
+  const totalWidth = items.length * cardWidth
 
-  // Auto-scroll: slowly advance the scroll position
+  // Touch/drag handling for manual scroll
+  const dragState = useRef({ startX: 0, scrollLeft: 0, dragging: false })
+
+  const handleInteractionStart = useCallback(() => {
+    setPaused(true)
+    if (pauseTimer.current) clearTimeout(pauseTimer.current)
+  }, [])
+
+  const handleInteractionEnd = useCallback(() => {
+    if (pauseTimer.current) clearTimeout(pauseTimer.current)
+    pauseTimer.current = setTimeout(() => setPaused(false), 5000)
+  }, [])
+
+  // Touch events for mobile swipe
+  const onTouchStart = useCallback((e: React.TouchEvent) => {
+    handleInteractionStart()
+    const el = wrapperRef.current
+    if (!el) return
+    dragState.current.startX = e.touches[0].clientX
+    dragState.current.scrollLeft = el.scrollLeft
+  }, [handleInteractionStart])
+
+  const onTouchMove = useCallback((e: React.TouchEvent) => {
+    const el = wrapperRef.current
+    if (!el) return
+    const dx = e.touches[0].clientX - dragState.current.startX
+    el.scrollLeft = dragState.current.scrollLeft - dx
+  }, [])
+
+  const onTouchEnd = useCallback(() => {
+    handleInteractionEnd()
+  }, [handleInteractionEnd])
+
+  // Mouse drag for desktop
+  const onMouseDown = useCallback((e: React.MouseEvent) => {
+    handleInteractionStart()
+    const el = wrapperRef.current
+    if (!el) return
+    dragState.current = { startX: e.clientX, scrollLeft: el.scrollLeft, dragging: true }
+    el.style.cursor = 'grabbing'
+  }, [handleInteractionStart])
+
+  const onMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!dragState.current.dragging) return
+    const el = wrapperRef.current
+    if (!el) return
+    e.preventDefault()
+    const dx = e.clientX - dragState.current.startX
+    el.scrollLeft = dragState.current.scrollLeft - dx
+  }, [])
+
+  const onMouseUp = useCallback(() => {
+    dragState.current.dragging = false
+    const el = wrapperRef.current
+    if (el) el.style.cursor = 'grab'
+    handleInteractionEnd()
+  }, [handleInteractionEnd])
+
+  // Auto-scroll via requestAnimationFrame
   useEffect(() => {
     if (items.length === 0) return
-    const el = scrollRef.current
+    const el = wrapperRef.current
     if (!el) return
 
     let raf: number
-    let lastTime = 0
-    const speed = 0.5 // px per frame at 60fps
+    let prev = 0
+    const pxPerSec = 30 // slow, smooth drift
 
-    const tick = (time: number) => {
-      if (!userInteracting && el) {
-        const dt = lastTime ? (time - lastTime) : 16
-        lastTime = time
-        el.scrollLeft += speed * (dt / 16)
+    const tick = (ts: number) => {
+      if (!paused && el) {
+        const dt = prev ? Math.min(ts - prev, 50) : 16
+        prev = ts
+        el.scrollLeft += pxPerSec * (dt / 1000)
 
-        // Loop: when we've scrolled past the first set, jump back
-        const halfWidth = el.scrollWidth / 2
-        if (el.scrollLeft >= halfWidth) {
-          el.scrollLeft -= halfWidth
+        // Seamless loop: jump back when past the first copy
+        if (el.scrollLeft >= totalWidth) {
+          el.scrollLeft -= totalWidth
         }
       } else {
-        lastTime = 0
+        prev = 0
       }
       raf = requestAnimationFrame(tick)
     }
 
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
-  }, [items.length, userInteracting])
-
-  const pauseAutoScroll = useCallback(() => {
-    setUserInteracting(true)
-    if (interactionTimer.current) clearTimeout(interactionTimer.current)
-    // Resume auto-scroll after 4 seconds of no interaction
-    interactionTimer.current = setTimeout(() => setUserInteracting(false), 4000)
-  }, [])
+  }, [items.length, paused, totalWidth])
 
   return (
     <div className="relative">
@@ -153,20 +206,21 @@ export default function PopularProductsGrid({ products, fallbackCodes, labelOver
         style={{ background: 'linear-gradient(to left, #1C1917, transparent)' }}
       />
 
-      {/* Scrollable track */}
+      {/* Scrollable + auto-scrolling track */}
       <div
-        ref={scrollRef}
-        className="flex gap-4 pb-2 -mb-2 overflow-x-auto snap-x snap-mandatory scrollbar-none"
-        style={{ WebkitOverflowScrolling: 'touch' }}
-        onTouchStart={pauseAutoScroll}
-        onTouchMove={pauseAutoScroll}
-        onMouseDown={pauseAutoScroll}
-        onWheel={pauseAutoScroll}
-        onMouseEnter={() => setUserInteracting(true)}
-        onMouseLeave={() => {
-          if (interactionTimer.current) clearTimeout(interactionTimer.current)
-          interactionTimer.current = setTimeout(() => setUserInteracting(false), 2000)
+        ref={wrapperRef}
+        className="flex gap-4 pb-2 -mb-2 overflow-x-scroll snap-x snap-mandatory scrollbar-none"
+        style={{
+          WebkitOverflowScrolling: 'touch',
+          cursor: 'grab',
         }}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseUp}
       >
         {items.length === 0
           ? [...fallbackCodes, ...fallbackCodes].map((code, i) => <SkeletonCard key={`${code}-${i}`} />)
