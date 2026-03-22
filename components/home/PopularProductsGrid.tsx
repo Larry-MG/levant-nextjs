@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import { formatUSD } from '@/lib/utils/currency'
 
 interface Product {
@@ -27,7 +27,7 @@ const METAL_ACCENT: Record<string, { badge: string; glow: string; label: string 
 
 function SkeletonCard() {
   return (
-    <div className="flex-none w-52 sm:w-60">
+    <div className="flex-none w-52 sm:w-60 snap-start">
       <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
         <div className="h-44 bg-white/5 animate-pulse" />
         <div className="p-4 space-y-2">
@@ -45,7 +45,7 @@ function ProductCard({ p, labelOverrides }: { p: Product; labelOverrides?: Recor
   const accent = METAL_ACCENT[p.metal] ?? METAL_ACCENT.gold
   const displayName = labelOverrides?.[p.code] ?? p.name
   return (
-    <div className="flex-none w-52 sm:w-60">
+    <div className="flex-none w-52 sm:w-60 snap-start">
       <Link
         href={`/shop/${p.code}`}
         className="group block bg-white/5 hover:bg-white/8 border border-white/10 hover:border-gold/30 rounded-2xl overflow-hidden transition-all duration-300"
@@ -98,24 +98,51 @@ function ProductCard({ p, labelOverrides }: { p: Product; labelOverrides?: Recor
 }
 
 export default function PopularProductsGrid({ products, fallbackCodes, labelOverrides }: PopularProductsGridProps) {
-  const [paused, setPaused] = useState(false)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [userInteracting, setUserInteracting] = useState(false)
+  const interactionTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const items = products.length > 0 ? products.slice(0, 12) : []
-  // Duration: ~80px/s. Each card is 256px (w-60 240px + gap 16px)
-  const duration = Math.max(20, items.length * 256 / 80)
+
+  // Auto-scroll: slowly advance the scroll position
+  useEffect(() => {
+    if (items.length === 0) return
+    const el = scrollRef.current
+    if (!el) return
+
+    let raf: number
+    let lastTime = 0
+    const speed = 0.5 // px per frame at 60fps
+
+    const tick = (time: number) => {
+      if (!userInteracting && el) {
+        const dt = lastTime ? (time - lastTime) : 16
+        lastTime = time
+        el.scrollLeft += speed * (dt / 16)
+
+        // Loop: when we've scrolled past the first set, jump back
+        const halfWidth = el.scrollWidth / 2
+        if (el.scrollLeft >= halfWidth) {
+          el.scrollLeft -= halfWidth
+        }
+      } else {
+        lastTime = 0
+      }
+      raf = requestAnimationFrame(tick)
+    }
+
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [items.length, userInteracting])
+
+  const pauseAutoScroll = useCallback(() => {
+    setUserInteracting(true)
+    if (interactionTimer.current) clearTimeout(interactionTimer.current)
+    // Resume auto-scroll after 4 seconds of no interaction
+    interactionTimer.current = setTimeout(() => setUserInteracting(false), 4000)
+  }, [])
 
   return (
-    <div
-      className="relative overflow-hidden [contain:paint]"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <style>{`
-        @keyframes carousel-scroll {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
-        }
-      `}</style>
-
+    <div className="relative">
       {/* Edge fades */}
       <div
         className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 z-10"
@@ -126,15 +153,19 @@ export default function PopularProductsGrid({ products, fallbackCodes, labelOver
         style={{ background: 'linear-gradient(to left, #1C1917, transparent)' }}
       />
 
-      {/* Track — items duplicated for seamless loop */}
+      {/* Scrollable track */}
       <div
-        className="flex gap-4 pb-2 -mb-2"
-        style={{
-          width: 'max-content',
-          animation: items.length > 0
-            ? `carousel-scroll ${duration}s linear infinite`
-            : undefined,
-          animationPlayState: paused ? 'paused' : 'running',
+        ref={scrollRef}
+        className="flex gap-4 pb-2 -mb-2 overflow-x-auto snap-x snap-mandatory scrollbar-none"
+        style={{ WebkitOverflowScrolling: 'touch' }}
+        onTouchStart={pauseAutoScroll}
+        onTouchMove={pauseAutoScroll}
+        onMouseDown={pauseAutoScroll}
+        onWheel={pauseAutoScroll}
+        onMouseEnter={() => setUserInteracting(true)}
+        onMouseLeave={() => {
+          if (interactionTimer.current) clearTimeout(interactionTimer.current)
+          interactionTimer.current = setTimeout(() => setUserInteracting(false), 2000)
         }}
       >
         {items.length === 0
