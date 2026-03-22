@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { Playfair_Display, Inter, Geist_Mono } from 'next/font/google'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
@@ -100,6 +101,20 @@ const orgSchema = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable} ${geistMono.variable} h-full`}>
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-TRVF6D9E8C"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-TRVF6D9E8C');
+          `}
+        </Script>
+      </head>
       <body className="min-h-full flex flex-col antialiased">
         <JsonLd id="schema-org" schema={orgSchema} />
         <Header />
