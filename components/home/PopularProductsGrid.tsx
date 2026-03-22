@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef, useState, useEffect, useCallback } from 'react'
+import { useRef, useState, useCallback, useEffect } from 'react'
 import { formatUSD } from '@/lib/utils/currency'
 
 interface Product {
@@ -27,7 +27,7 @@ const METAL_ACCENT: Record<string, { badge: string; glow: string; label: string 
 
 function SkeletonCard() {
   return (
-    <div className="flex-none w-52 sm:w-60 snap-start">
+    <div className="flex-none w-52 sm:w-60">
       <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
         <div className="h-44 bg-white/5 animate-pulse" />
         <div className="p-4 space-y-2">
@@ -45,7 +45,7 @@ function ProductCard({ p, labelOverrides }: { p: Product; labelOverrides?: Recor
   const accent = METAL_ACCENT[p.metal] ?? METAL_ACCENT.gold
   const displayName = labelOverrides?.[p.code] ?? p.name
   return (
-    <div className="flex-none w-52 sm:w-60 snap-start">
+    <div className="flex-none w-52 sm:w-60">
       <Link
         href={`/shop/${p.code}`}
         className="group block bg-white/5 hover:bg-white/8 border border-white/10 hover:border-gold/30 rounded-2xl overflow-hidden transition-all duration-300"
@@ -98,104 +98,69 @@ function ProductCard({ p, labelOverrides }: { p: Product; labelOverrides?: Recor
 }
 
 export default function PopularProductsGrid({ products, fallbackCodes, labelOverrides }: PopularProductsGridProps) {
-  const trackRef = useRef<HTMLDivElement>(null)
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const [paused, setPaused] = useState(false)
-  const pauseTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const items = products.length > 0 ? products.slice(0, 12) : []
-  const cardWidth = 256 // w-60 (240) + gap (16)
-  const totalWidth = items.length * cardWidth
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const [mode, setMode] = useState<'auto' | 'manual'>('auto')
+  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  // Touch/drag handling for manual scroll
-  const dragState = useRef({ startX: 0, scrollLeft: 0, dragging: false })
+  // Calculate animation duration based on item count
+  const duration = Math.max(20, items.length * 256 / 50)
 
-  const handleInteractionStart = useCallback(() => {
-    setPaused(true)
-    if (pauseTimer.current) clearTimeout(pauseTimer.current)
-  }, [])
+  // When user starts swiping: switch to manual scroll mode
+  const switchToManual = useCallback(() => {
+    if (mode === 'auto' && trackRef.current && wrapperRef.current) {
+      // Capture current visual scroll offset from the CSS animation
+      const trackEl = trackRef.current
+      const computed = getComputedStyle(trackEl)
+      const matrix = new DOMMatrix(computed.transform)
+      const currentOffset = Math.abs(matrix.m41)
 
-  const handleInteractionEnd = useCallback(() => {
-    if (pauseTimer.current) clearTimeout(pauseTimer.current)
-    pauseTimer.current = setTimeout(() => setPaused(false), 5000)
-  }, [])
+      // Stop the CSS animation
+      setMode('manual')
 
-  // Touch events for mobile swipe
-  const onTouchStart = useCallback((e: React.TouchEvent) => {
-    handleInteractionStart()
-    const el = wrapperRef.current
-    if (!el) return
-    dragState.current.startX = e.touches[0].clientX
-    dragState.current.scrollLeft = el.scrollLeft
-  }, [handleInteractionStart])
-
-  const onTouchMove = useCallback((e: React.TouchEvent) => {
-    const el = wrapperRef.current
-    if (!el) return
-    const dx = e.touches[0].clientX - dragState.current.startX
-    el.scrollLeft = dragState.current.scrollLeft - dx
-  }, [])
-
-  const onTouchEnd = useCallback(() => {
-    handleInteractionEnd()
-  }, [handleInteractionEnd])
-
-  // Mouse drag for desktop
-  const onMouseDown = useCallback((e: React.MouseEvent) => {
-    handleInteractionStart()
-    const el = wrapperRef.current
-    if (!el) return
-    dragState.current = { startX: e.clientX, scrollLeft: el.scrollLeft, dragging: true }
-    el.style.cursor = 'grabbing'
-  }, [handleInteractionStart])
-
-  const onMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!dragState.current.dragging) return
-    const el = wrapperRef.current
-    if (!el) return
-    e.preventDefault()
-    const dx = e.clientX - dragState.current.startX
-    el.scrollLeft = dragState.current.scrollLeft - dx
-  }, [])
-
-  const onMouseUp = useCallback(() => {
-    dragState.current.dragging = false
-    const el = wrapperRef.current
-    if (el) el.style.cursor = 'grab'
-    handleInteractionEnd()
-  }, [handleInteractionEnd])
-
-  // Auto-scroll via requestAnimationFrame
-  useEffect(() => {
-    if (items.length === 0) return
-    const el = wrapperRef.current
-    if (!el) return
-
-    let raf: number
-    let prev = 0
-    const pxPerSec = 30 // slow, smooth drift
-
-    const tick = (ts: number) => {
-      if (!paused && el) {
-        const dt = prev ? Math.min(ts - prev, 50) : 16
-        prev = ts
-        el.scrollLeft += pxPerSec * (dt / 1000)
-
-        // Seamless loop: jump back when past the first copy
-        if (el.scrollLeft >= totalWidth) {
-          el.scrollLeft -= totalWidth
-        }
-      } else {
-        prev = 0
-      }
-      raf = requestAnimationFrame(tick)
+      // Set scroll position to match where the animation was
+      wrapperRef.current.scrollLeft = currentOffset
+    } else if (mode === 'manual') {
+      // Already manual, just reset the resume timer
     }
 
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [items.length, paused, totalWidth])
+    // Resume auto-scroll after 5 seconds of no interaction
+    if (resumeTimer.current) clearTimeout(resumeTimer.current)
+    resumeTimer.current = setTimeout(() => {
+      setMode('auto')
+      if (wrapperRef.current) wrapperRef.current.scrollLeft = 0
+    }, 5000)
+  }, [mode])
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (resumeTimer.current) clearTimeout(resumeTimer.current)
+    }
+  }, [])
+
+  const renderCards = () => {
+    if (items.length === 0) {
+      return [...fallbackCodes, ...fallbackCodes].map((code, i) => (
+        <SkeletonCard key={`${code}-${i}`} />
+      ))
+    }
+    return [...items, ...items].map((p, i) => (
+      <ProductCard key={`${p.code}-${i}`} p={p} labelOverrides={labelOverrides} />
+    ))
+  }
 
   return (
     <div className="relative">
+      {/* Keyframes for auto-scroll */}
+      <style>{`
+        @keyframes levant-carousel {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+      `}</style>
+
       {/* Edge fades */}
       <div
         className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 z-10"
@@ -206,28 +171,39 @@ export default function PopularProductsGrid({ products, fallbackCodes, labelOver
         style={{ background: 'linear-gradient(to left, #1C1917, transparent)' }}
       />
 
-      {/* Scrollable + auto-scrolling track */}
-      <div
-        ref={wrapperRef}
-        className="flex gap-4 pb-2 -mb-2 overflow-x-scroll snap-x snap-mandatory scrollbar-none"
-        style={{
-          WebkitOverflowScrolling: 'touch',
-          cursor: 'grab',
-        }}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
-        onMouseDown={onMouseDown}
-        onMouseMove={onMouseMove}
-        onMouseUp={onMouseUp}
-        onMouseLeave={onMouseUp}
-      >
-        {items.length === 0
-          ? [...fallbackCodes, ...fallbackCodes].map((code, i) => <SkeletonCard key={`${code}-${i}`} />)
-          : [...items, ...items].map((p, i) => (
-              <ProductCard key={`${p.code}-${i}`} p={p} labelOverrides={labelOverrides} />
-            ))}
-      </div>
+      {mode === 'auto' ? (
+        /* AUTO MODE: CSS animation for reliable auto-scroll on all devices including iOS */
+        <div
+          ref={wrapperRef}
+          className="overflow-hidden [contain:paint]"
+          onTouchStart={switchToManual}
+          onMouseDown={switchToManual}
+        >
+          <div
+            ref={trackRef}
+            className="flex gap-4 pb-2 -mb-2"
+            style={{
+              width: 'max-content',
+              animation: items.length > 0
+                ? `levant-carousel ${duration}s linear infinite`
+                : undefined,
+            }}
+          >
+            {renderCards()}
+          </div>
+        </div>
+      ) : (
+        /* MANUAL MODE: native overflow scroll with snap for swipe/drag */
+        <div
+          ref={wrapperRef}
+          className="flex gap-4 pb-2 -mb-2 overflow-x-auto snap-x snap-mandatory scrollbar-none"
+          style={{ WebkitOverflowScrolling: 'touch' }}
+          onTouchStart={switchToManual}
+          onMouseDown={switchToManual}
+        >
+          {renderCards()}
+        </div>
+      )}
     </div>
   )
 }
