@@ -104,34 +104,77 @@ export default function PopularProductsGrid({ products, fallbackCodes, labelOver
   const [mode, setMode] = useState<'auto' | 'manual'>('auto')
   const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  // Mouse drag-to-scroll state (desktop)
+  const isDragging = useRef(false)
+  const dragStartX = useRef(0)
+  const dragScrollLeft = useRef(0)
+  const dragMoved = useRef(false)
+
   // Calculate animation duration based on item count
   const duration = Math.max(20, items.length * 256 / 50)
 
-  // When user starts swiping: switch to manual scroll mode
-  const switchToManual = useCallback(() => {
-    if (mode === 'auto' && trackRef.current && wrapperRef.current) {
-      // Capture current visual scroll offset from the CSS animation
-      const trackEl = trackRef.current
-      const computed = getComputedStyle(trackEl)
-      const matrix = new DOMMatrix(computed.transform)
-      const currentOffset = Math.abs(matrix.m41)
-
-      // Stop the CSS animation
-      setMode('manual')
-
-      // Set scroll position to match where the animation was
-      wrapperRef.current.scrollLeft = currentOffset
-    } else if (mode === 'manual') {
-      // Already manual, just reset the resume timer
-    }
-
-    // Resume auto-scroll after 5 seconds of no interaction
+  // Reset the auto-resume timer
+  const resetResumeTimer = useCallback(() => {
     if (resumeTimer.current) clearTimeout(resumeTimer.current)
     resumeTimer.current = setTimeout(() => {
       setMode('auto')
       if (wrapperRef.current) wrapperRef.current.scrollLeft = 0
     }, 5000)
-  }, [mode])
+  }, [])
+
+  // When user starts swiping: switch to manual scroll mode
+  const switchToManual = useCallback(() => {
+    if (mode === 'auto' && trackRef.current && wrapperRef.current) {
+      const trackEl = trackRef.current
+      const computed = getComputedStyle(trackEl)
+      const matrix = new DOMMatrix(computed.transform)
+      const currentOffset = Math.abs(matrix.m41)
+
+      setMode('manual')
+      wrapperRef.current.scrollLeft = currentOffset
+    }
+
+    resetResumeTimer()
+  }, [mode, resetResumeTimer])
+
+  // Desktop mouse drag handlers
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    switchToManual()
+
+    // Start drag tracking
+    isDragging.current = true
+    dragMoved.current = false
+    dragStartX.current = e.pageX
+    dragScrollLeft.current = wrapperRef.current?.scrollLeft ?? 0
+
+    // Prevent text selection while dragging
+    e.preventDefault()
+  }, [switchToManual])
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isDragging.current || !wrapperRef.current) return
+    const dx = e.pageX - dragStartX.current
+    if (Math.abs(dx) > 3) dragMoved.current = true
+    wrapperRef.current.scrollLeft = dragScrollLeft.current - dx
+    resetResumeTimer()
+  }, [resetResumeTimer])
+
+  const handleMouseUp = useCallback(() => {
+    isDragging.current = false
+  }, [])
+
+  const handleMouseLeave = useCallback(() => {
+    isDragging.current = false
+  }, [])
+
+  // Block link clicks if user was dragging (not a tap)
+  const handleClickCapture = useCallback((e: React.MouseEvent) => {
+    if (dragMoved.current) {
+      e.preventDefault()
+      e.stopPropagation()
+      dragMoved.current = false
+    }
+  }, [])
 
   // Cleanup timer on unmount
   useEffect(() => {
@@ -177,7 +220,7 @@ export default function PopularProductsGrid({ products, fallbackCodes, labelOver
           ref={wrapperRef}
           className="overflow-hidden [contain:paint]"
           onTouchStart={switchToManual}
-          onMouseDown={switchToManual}
+          onMouseDown={handleMouseDown}
         >
           <div
             ref={trackRef}
@@ -193,13 +236,17 @@ export default function PopularProductsGrid({ products, fallbackCodes, labelOver
           </div>
         </div>
       ) : (
-        /* MANUAL MODE: native overflow scroll with snap for swipe/drag */
+        /* MANUAL MODE: native overflow scroll with snap + desktop mouse drag */
         <div
           ref={wrapperRef}
-          className="flex gap-4 pb-2 -mb-2 overflow-x-auto snap-x snap-mandatory scrollbar-none"
-          style={{ WebkitOverflowScrolling: 'touch' }}
+          className="flex gap-4 pb-2 -mb-2 overflow-x-auto snap-x snap-mandatory scrollbar-none select-none"
+          style={{ WebkitOverflowScrolling: 'touch', cursor: 'grab' }}
           onTouchStart={switchToManual}
-          onMouseDown={switchToManual}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+          onClickCapture={handleClickCapture}
         >
           {renderCards()}
         </div>
