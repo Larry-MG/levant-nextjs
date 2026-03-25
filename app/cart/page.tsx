@@ -3,9 +3,12 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useCartStore } from '@/lib/store/cart'
 import { formatUSD } from '@/lib/utils/currency'
+import MarketHoursNotice from '@/components/shop/MarketHoursNotice'
+import { useMarketHoursStatus } from '@/lib/hooks/useMarketHoursStatus'
 
 export default function CartPage() {
   const [mounted, setMounted] = useState(false)
+  const { isOpen: isMarketOpen } = useMarketHoursStatus()
   const items = useCartStore((s) => s.items)
   const removeItem = useCartStore((s) => s.removeItem)
   const updateQty = useCartStore((s) => s.updateQty)
@@ -105,6 +108,7 @@ export default function CartPage() {
 
         {/* Summary */}
         <div className="bg-white border border-border rounded-lg p-5">
+          {!isMarketOpen && <MarketHoursNotice compact className="mb-4" />}
           <div className="flex justify-between text-sm mb-2">
             <span className="text-muted">Subtotal</span>
             <span className="font-mono font-medium">{formatUSD(subtotal())}</span>

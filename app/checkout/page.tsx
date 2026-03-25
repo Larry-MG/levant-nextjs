@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useCartStore } from '@/lib/store/cart'
 import { formatUSD } from '@/lib/utils/currency'
+import MarketHoursNotice from '@/components/shop/MarketHoursNotice'
+import { useMarketHoursStatus } from '@/lib/hooks/useMarketHoursStatus'
 
 type Step = 'contact' | 'review'
 
@@ -82,6 +84,7 @@ export default function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false)
 
   const router = useRouter()
+  const { isOpen: isMarketOpen } = useMarketHoursStatus()
   const items = useCartStore((s) => s.items)
   const subtotal = useCartStore((s) => s.subtotal)
   const clearCart = useCartStore((s) => s.clearCart)
@@ -126,10 +129,16 @@ export default function CheckoutPage() {
   }
 
   async function handleSubmit() {
+    if (!isMarketOpen) {
+      setErrors(['The market is currently closed. We are open from 9:00 AM to 2:00 PM Pacific Standard Time, Monday through Friday.'])
+      return
+    }
+
     setSubmitting(true)
     const orderNumber = Math.floor(10_000_000 + Math.random() * 90_000_000).toString()
+
     try {
-      await fetch('/api/order', {
+      const response = await fetch('/api/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -139,11 +148,20 @@ export default function CheckoutPage() {
           subtotal: subtotal(),
         }),
       })
+
+      if (!response.ok) {
+        const payload = await response.json().catch(() => null)
+        setErrors([payload?.error ?? 'Unable to submit your order request right now. Please try again shortly.'])
+        return
+      }
+
+      clearCart()
+      router.push(`/checkout/success?order=${orderNumber}`)
     } catch {
-      // Non-blocking — proceed regardless
+      setErrors(['Unable to submit your order request right now. Please try again shortly.'])
+    } finally {
+      setSubmitting(false)
     }
-    clearCart()
-    router.push(`/checkout/success?order=${orderNumber}`)
   }
 
   return (
@@ -155,6 +173,8 @@ export default function CheckoutPage() {
         </p>
 
         <StepIndicator current={step} />
+
+        {!isMarketOpen && <MarketHoursNotice className="mb-6" />}
 
         {/* Payment method banner */}
         <div className="flex items-start gap-3 bg-gold/10 border border-gold/20 rounded-lg px-4 py-3 mb-6">
@@ -277,8 +297,8 @@ export default function CheckoutPage() {
               </button>
               <button
                 onClick={handleSubmit}
-                disabled={submitting}
-                className="flex-[2] bg-gold hover:bg-gold-dark disabled:opacity-60 text-charcoal font-bold py-3 rounded-lg transition-colors"
+                disabled={submitting || !isMarketOpen}
+                className="flex-[2] bg-gold hover:bg-gold-dark disabled:cursor-not-allowed disabled:opacity-60 text-charcoal font-bold py-3 rounded-lg transition-colors"
               >
                 {submitting ? 'Submitting…' : 'Submit Order Request'}
               </button>

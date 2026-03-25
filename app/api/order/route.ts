@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { getMarketHoursStatus } from '@/lib/market-hours'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -321,6 +322,12 @@ function businessEmail(o: OrderPayload): string {
 // ─── Route handler ─────────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
   try {
+    const marketStatus = getMarketHoursStatus()
+
+    if (!marketStatus.isOpen) {
+      return NextResponse.json({ error: marketStatus.notice }, { status: 403 })
+    }
+
     const body: OrderPayload = await req.json()
 
     const businessSubject = `🛒 New Order #${body.orderNumber} — ${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(body.subtotal)} from ${body.contact.name}`

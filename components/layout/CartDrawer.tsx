@@ -3,9 +3,12 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useCartStore } from '@/lib/store/cart'
 import { formatUSD } from '@/lib/utils/currency'
+import MarketHoursNotice from '@/components/shop/MarketHoursNotice'
+import { useMarketHoursStatus } from '@/lib/hooks/useMarketHoursStatus'
 
 export default function CartDrawer() {
   const isOpen = useCartStore((s) => s.isOpen)
+  const { isOpen: isMarketOpen } = useMarketHoursStatus()
   const closeCart = useCartStore((s) => s.closeCart)
   const items = useCartStore((s) => s.items)
   const removeItem = useCartStore((s) => s.removeItem)
@@ -143,6 +146,8 @@ export default function CartDrawer() {
                 </svg>
                 <span>We accept <strong>wire transfer</strong> and <strong>direct deposit</strong> only. Our team will contact you with payment instructions.</span>
               </div>
+
+              {!isMarketOpen && <MarketHoursNotice compact />}
 
               {/* Subtotal */}
               <div className="flex items-center justify-between">
