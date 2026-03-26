@@ -155,13 +155,23 @@ export default function CartDrawer() {
                 <span className="font-mono font-bold text-charcoal text-lg">{formatUSD(subtotal())}</span>
               </div>
 
-              <Link
-                href="/checkout"
-                onClick={closeCart}
-                className="block w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold py-3 px-4 rounded-lg text-center text-sm transition-colors"
-              >
-                Proceed to Checkout →
-              </Link>
+              {isMarketOpen ? (
+                <Link
+                  href="/checkout"
+                  onClick={closeCart}
+                  className="block w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold py-3 px-4 rounded-lg text-center text-sm transition-colors"
+                >
+                  Proceed to Checkout →
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  disabled
+                  className="block w-full cursor-not-allowed rounded-lg bg-gold/50 py-3 px-4 text-center text-sm font-semibold text-charcoal/70"
+                >
+                  Checkout Unavailable
+                </button>
+              )}
             </div>
           </>
         )}

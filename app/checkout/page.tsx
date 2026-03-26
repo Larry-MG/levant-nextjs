@@ -108,6 +108,36 @@ export default function CheckoutPage() {
     )
   }
 
+  if (!isMarketOpen) {
+    return (
+      <div className="bg-cream min-h-screen py-10">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6">
+          <div className="bg-white border border-border rounded-xl p-6 sm:p-8 text-center">
+            <h1 className="text-2xl font-heading font-bold text-charcoal mb-3">Checkout is currently unavailable</h1>
+            <p className="text-sm text-muted mb-6">
+              Orders can only be placed during active market hours.
+            </p>
+            <MarketHoursNotice className="mb-6 text-left" />
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link
+                href="/cart"
+                className="border border-border bg-white hover:border-gold text-charcoal font-semibold py-3 rounded-lg transition-colors text-sm"
+              >
+                Back to Cart
+              </Link>
+              <Link
+                href="/shop"
+                className="bg-gold hover:bg-gold-dark text-charcoal font-semibold py-3 rounded-lg transition-colors text-sm"
+              >
+                Continue Shopping
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   function validate() {
     const errs: string[] = []
     if (!contact.name.trim()) errs.push('Full name is required')

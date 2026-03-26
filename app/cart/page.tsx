@@ -122,12 +122,22 @@ export default function CartPage() {
             <span className="font-mono font-bold text-charcoal text-lg">{formatUSD(subtotal())}</span>
           </div>
 
-          <Link
-            href="/checkout"
-            className="mt-4 block w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold py-3 px-4 rounded text-center transition-colors"
-          >
-            Proceed to Checkout
-          </Link>
+          {isMarketOpen ? (
+            <Link
+              href="/checkout"
+              className="mt-4 block w-full bg-gold hover:bg-gold-dark text-charcoal font-semibold py-3 px-4 rounded text-center transition-colors"
+            >
+              Proceed to Checkout
+            </Link>
+          ) : (
+            <button
+              type="button"
+              disabled
+              className="mt-4 block w-full cursor-not-allowed rounded bg-gold/50 py-3 px-4 text-center font-semibold text-charcoal/70"
+            >
+              Checkout Unavailable
+            </button>
+          )}
           <Link
             href="/shop"
             className="mt-2 block w-full text-center text-sm text-muted hover:text-charcoal transition-colors py-2"
