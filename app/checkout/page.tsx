@@ -6,6 +6,7 @@ import { useCartStore } from '@/lib/store/cart'
 import { formatUSD } from '@/lib/utils/currency'
 import MarketHoursNotice from '@/components/shop/MarketHoursNotice'
 import { useMarketHoursStatus } from '@/lib/hooks/useMarketHoursStatus'
+import { MARKET_HOURS_NOTICE } from '@/lib/market-hours'
 
 type Step = 'contact' | 'review'
 
@@ -160,7 +161,7 @@ export default function CheckoutPage() {
 
   async function handleSubmit() {
     if (!isMarketOpen) {
-      setErrors(['The market is currently closed. We are open from 9:00 AM to 2:00 PM Pacific Standard Time, Monday through Friday.'])
+      setErrors([MARKET_HOURS_NOTICE])
       return
     }
 
